@@ -9,11 +9,7 @@ class MaestrosConfig(AppConfig):
         # Importamos explícitamente cada archivo de modelos
         import apps.maestros.models.base_gen_models
         import apps.maestros.models.base_models
-        import apps.maestros.models.cliente_models
-        import apps.maestros.models.empresa_models
-        import apps.maestros.models.numero_models
-        import apps.maestros.models.parametro_models
-        import apps.maestros.models.producto_models
-        import apps.maestros.models.proveedor_models
-        import apps.maestros.models.sucursal_models
-        import apps.maestros.models.vendedor_models
+        import apps.maestros.models.comercio_models
+        import apps.maestros.models.compra_models
+        import apps.maestros.models.liquidacion_models
+        import apps.maestros.models.tarjeta_models
