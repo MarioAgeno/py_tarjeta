@@ -46,8 +46,7 @@ class TipoIva(ModeloBaseGenerico):
     id_tipo_iva = models.AutoField(primary_key=True)
     estatus_tipo_iva = models.BooleanField("Estatus", db_column="estatus", 
                                            default=True, choices=ESTATUS_GEN)    
-    codigo_iva = models.CharField("Codigo", db_column="codigo", 
-                                  primary_key=True, max_length=4)
+    codigo_iva = models.CharField("Codigo", db_column="codigo",  max_length=4)
     nombre_iva = models.CharField("Nombre", db_column="nombre", 
                                   max_length=20, blank=True)
     discrimina_iva = models.BooleanField(blank=True)
@@ -92,7 +91,7 @@ class TarjetaEstado(ModeloBaseGenerico):
         db_table = 'tarjeta_estado'
         verbose_name = ('Estado Tarjeta')
         verbose_name_plural = ('Estados Tarjetas')
-        ordering = ['nombre_estado']
+        ordering = ['descripcion_tarjeta_estado']
 
 
 class Plan(ModeloBaseGenerico):
@@ -100,7 +99,7 @@ class Plan(ModeloBaseGenerico):
     estatus_plan = models.BooleanField("Estatus", db_column="estatus", 
                                        default=True, choices=ESTATUS_GEN)
     nombre_plan = models.CharField("Nombre", max_length=30, db_column="nombre")
-    cuotas_plan = models.IntegerField("Cuotas*", max_digits=4, db_column="cuotas")
+    cuotas_plan = models.IntegerField("Cuotas*", db_column="cuotas")
     interes_plan = models.DecimalField("Interes(%)", db_column="interes", max_digits=4, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
@@ -132,7 +131,7 @@ class Titulo(ModeloBaseGenerico):
         db_table = 'titulo'
         verbose_name = ('Titulo')
         verbose_name_plural = ('Titulos')
-        ordering = ['nombre_titulo']
+        ordering = ['titulo']
 
 
 class Sucursal(ModeloBaseGenerico):
@@ -183,9 +182,9 @@ class Empresa(ModeloBaseGenerico):
     
     class Meta:
         db_table = 'empresa'
-        verbose_name = _('Empresa')
-        verbose_name_plural = _('Empresas')
-        ordering = ['empresa']
+        verbose_name = ('Empresa')
+        verbose_name_plural = ('Empresas')
+        ordering = ['nombre_empresa']
 
 
 class Parametro(ModeloBaseGenerico):

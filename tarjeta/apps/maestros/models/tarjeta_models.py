@@ -33,7 +33,7 @@ class Socio(ModeloBaseGenerico):
     nacionalidad = models.CharField(max_length=20, blank=True)
     id_actividad = models.ForeignKey(Actividad, on_delete=models.PROTECT, 
                                      verbose_name="Actividad*")
-    tipo_persona = models.CharField("Tipo de Persona*", default="F", choices=TIPO_PERSONA)
+    tipo_persona = models.CharField("Tipo de Persona*", max_length=1, default="F", choices=TIPO_PERSONA)
     pep = models.BooleanField("PEPs*", default=True, choices=PEP)
     fecha_ingreso = models.DateField(blank=True)
 

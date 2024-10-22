@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = getenv('SECRET_KEY')
 
 
-# DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = []
 

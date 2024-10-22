@@ -48,4 +48,4 @@ class Operacion(ModeloBaseGenerico):
         db_table = 'operacion'
         verbose_name = ('Operacion')
         verbose_name_plural = ('Operaciones')
-        ordering = ['fecha_compra']
+        ordering = ['fecha_operacion']

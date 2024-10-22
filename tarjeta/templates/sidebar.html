@@ -1,0 +1,175 @@
+<div id="layoutSidenav_nav">
+	{% comment %} <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion"> {% endcomment %}
+	<nav class="sb-sidenav accordion sb-sidenav-blue" id="sidenavAccordion">
+		<div class="sb-sidenav-menu">
+			<div class="nav">
+				<div class="sb-sidenav-menu-heading">Core</div>
+				
+				<a class="nav-link" href="{% url 'home' %}">
+					<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+					Panel
+				</a>
+				
+				<div class="sb-sidenav-menu-heading">Ventas</div>
+				
+				<!-- Opciones del Módulo Ventas Start -->
+				
+				<!-- Archivos Start -->
+				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseFiles" aria-expanded="false" aria-controls="collapseFiles">
+					<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+					Archivos
+					<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+				</a>
+				
+				<div class="collapse" id="collapseFiles" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+					<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+						
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseTarjeta" aria-expanded="false" aria-controls="pagesCollapseTarjeta">
+							Tarjetas
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseTarjeta" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="#">Tarjetas</a>
+								<a class="nav-link" href="#">Limites de Tarjetas</a>
+								<a class="nav-link" href="#">Socios</a>
+								<a class="nav-link" href="#">Liquidaciones de Socios</a>
+								<a class="nav-link" href="#">Cuotas de Socios</a>
+								<a class="nav-link" href="#">Titulos</a>
+								<a class="nav-link" href="#">Estados Tarjetas</a>
+							</nav>
+						</div>
+
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseComercio" aria-expanded="false" aria-controls="pagesCollapseComercio">
+							Comercios
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseComercio" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="#">Comercios</a>
+								<a class="nav-link" href="#">Liquidaciones Comercios</a>
+								<a class="nav-link" href="#">Planes</a>
+								<a class="nav-link" href="#">Planes Comercios</a>
+								<a class="nav-link" href="#">Compras</a>
+								<a class="nav-link" href="#">Operaciones</a>
+							</nav>
+						</div>
+
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseTabla" aria-expanded="false" aria-controls="pagesCollapseTabla">
+							Tablas
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseTabla" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="#">Actividad</a>
+								<a class="nav-link" href="#">Provincia</a>
+								<a class="nav-link" href="#">Localidad</a>
+								<a class="nav-link" href="#">Tipo Documento</a>
+								<a class="nav-link" href="#">Tipo IVA</a>
+								<a class="nav-link" href="#">Parámetros</a>
+								<a class="nav-link" href="#">Números</a>
+								<a class="nav-link" href="#">Empresa</a> 
+								<a class="nav-link" href="#">Sucursales</a>
+							</nav>
+						</div>
+					</nav>
+				</div>
+				<!-- Archivos End -->
+				
+				<!-- Comprobantes Start -->
+				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProcesses" aria-expanded="false" aria-controls="collapseProcesses">
+					<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+					Comprobantes
+					<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+				</a>
+				
+				<div class="collapse" id="collapseProcesses" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+					<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+						
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseSocio" aria-expanded="false" aria-controls="pagesCollapseSocio">
+							Tarjetas
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseSocio" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="#">Liquidacion Tarjetas</a>
+								<a class="nav-link" href="#">Liquidacion de Saldos</a>
+							</nav>
+						</div>
+						
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseCompra" aria-expanded="false" aria-controls="pagesCollapseCompra">
+							Comercios
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseCompra" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="#">Ingresar Cupones de Compras</a>
+								<a class="nav-link" href="#">Procesar Cupones</a>
+								<a class="nav-link" href="#">Acreditar Cupones</a>
+							</nav>
+						</div>
+
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseSiro" aria-expanded="false" aria-controls="pagesCollapseSiro">
+							SIRO
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseSiro" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="#">Exportar Liquidacion</a>
+								<a class="nav-link" href="#">Cobranza Electronica</a>
+							</nav>
+						</div>
+
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseCobro" aria-expanded="false" aria-controls="pagesCollapseCobro">
+							Cobranza
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseCobro" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="#">Cobro por Caja</a>
+							</nav>
+						</div>
+
+					</nav>
+				</div>
+				<!-- Comprobantes End -->
+				
+				
+				<!-- Informes Start -->
+				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
+					<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+					Informes
+					<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+				</a>
+				<!-- Informes End -->
+				
+				<!-- Mantenimiento Start -->
+				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOptions" aria-expanded="false" aria-controls="collapseOptions">
+					<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+					Mantenimiento
+					<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+				</a>
+				<!-- Mantenimiento End -->
+				
+				<!-- Mantenimiento del Módulo Ventas Start -->
+				
+				<!-- Mantenimiento de Estadísticas Start -->
+				<div class="sb-sidenav-menu-heading">Estadísticas</div>
+				
+				<a class="nav-link" href="charts.html">
+					<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+					Gráficos
+				</a>
+				<a class="nav-link" href="tables.html">
+					<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+					Tablas
+				</a>
+				<!-- Opciones de Estadísticas End -->
+			</div>
+		</div>
+		<div class="sb-sidenav-footer">
+			<div class="small">Logged in as:</div>
+			Start Bootstrap
+		</div>
+	</nav>
+</div>
