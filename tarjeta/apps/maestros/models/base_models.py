@@ -69,6 +69,9 @@ class TipoDocumentoIdentidad(ModeloBaseGenerico):
     descripcion_documento_identidad = models.CharField(max_length=25, db_column="descripcion")
     codigo_afip = models.CharField(max_length=2, db_column="codigo_afip")
 
+    def __str__(self):
+        return self.tipo_documento_identidad
+    
     class Meta:
         db_table = 'tipo_documento_identidad'
         verbose_name = ('Tipo de Documento de Identidad')
