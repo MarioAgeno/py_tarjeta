@@ -1,16 +1,16 @@
-# tarjeta\apps\maestros\views\actividad_views.py
+# tarjeta\apps\maestros\views\empresa_views.py
 from django.urls import reverse_lazy
 from ..views.cruds_views_generics import *
-from ..models.base_models import Actividad
-from ..forms.actividad_forms import ActividadForm
+from ..models.base_models import Empresa
+from ..forms.empresa_forms import EmpresaForm
 
 
 class ConfigViews():
 	# Modelo
-	model = Actividad
+	model = Empresa
 	
 	# Formulario asociado al modelo
-	form_class = ActividadForm
+	form_class = EmpresaForm
 	
 	# Aplicación asociada al modelo
 	app_label = model._meta.app_label
@@ -56,28 +56,28 @@ class ConfigViews():
 
 
 class DataViewList():
-	search_fields = ['nombre_actividad']
+	search_fields = ['razon_social']
 	
-	ordering = ['nombre_actividad']
+	ordering = ['razon_social']
 	
 	paginate_by = 8
 	  
 	table_headers = {
-		'nombre_actividad': (4, 'Descripción'),
-		'interes_actividad': (2, 'Interes'),
-		'codigo_afip': (2, 'AFIP'),
+		'razon_social': (4, 'Descripción'),
+		'nombre_empresa': (4, 'Interes'),
+		'domicilio': (2, 'AFIP'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
-		{'field_name': 'nombre_actividad', 'date_format': None},
-		{'field_name': 'interes_actividad', 'date_format': None},
-		{'field_name': 'codigo_afip', 'date_format': None},
+		{'field_name': 'razon_social', 'date_format': None},
+		{'field_name': 'nombre_empresa', 'date_format': None},
+		{'field_name': 'domicilio', 'date_format': None},
 	]
 
 
-# ActividadListView - Inicio
-class ActividadListView(MaestroListView):
+# EmpresaListView - Inicio
+class EmpresaListView(MaestroListView):
 	model = ConfigViews.model
 	template_name = ConfigViews.template_list
 	context_object_name = ConfigViews.context_object_name
@@ -97,8 +97,8 @@ class ActividadListView(MaestroListView):
 	}
 
 
-# ActividadCreateView - Inicio
-class ActividadCreateView(MaestroCreateView):
+# EmpresaCreateView - Inicio
+class EmpresaCreateView(MaestroCreateView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	form_class = ConfigViews.form_class
@@ -115,8 +115,8 @@ class ActividadCreateView(MaestroCreateView):
 	}
 
 
-# ActividadUpdateView
-class ActividadUpdateView(MaestroUpdateView):
+# EmpresaUpdateView
+class EmpresaUpdateView(MaestroUpdateView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	form_class = ConfigViews.form_class
@@ -132,8 +132,8 @@ class ActividadUpdateView(MaestroUpdateView):
 	}
 
 
-# ActividadDeleteView
-class ActividadDeleteView (MaestroDeleteView):
+# EmpresaDeleteView
+class EmpresaDeleteView (MaestroDeleteView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	template_name = ConfigViews.template_delete

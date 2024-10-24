@@ -1,16 +1,16 @@
-# tarjeta\apps\maestros\views\actividad_views.py
+# tarjeta\apps\maestros\views\parametro_views.py
 from django.urls import reverse_lazy
 from ..views.cruds_views_generics import *
-from ..models.base_models import Actividad
-from ..forms.actividad_forms import ActividadForm
+from ..models.base_models import Parametro
+from ..forms.parametro_forms import ParametroForm
 
 
 class ConfigViews():
 	# Modelo
-	model = Actividad
+	model = Parametro
 	
 	# Formulario asociado al modelo
-	form_class = ActividadForm
+	form_class = ParametroForm
 	
 	# Aplicación asociada al modelo
 	app_label = model._meta.app_label
@@ -56,28 +56,28 @@ class ConfigViews():
 
 
 class DataViewList():
-	search_fields = ['nombre_actividad']
+	search_fields = ['vencimiento_actual']
 	
-	ordering = ['nombre_actividad']
+	ordering = ['vencimiento_actual']
 	
 	paginate_by = 8
-	  
+
 	table_headers = {
-		'nombre_actividad': (4, 'Descripción'),
-		'interes_actividad': (2, 'Interes'),
-		'codigo_afip': (2, 'AFIP'),
+		'vencimiento_ultimo': (3, 'Vencimiento Anterior'),
+		'vencimiento_actual': (3, 'Vencimiento Actual'),
+		'vencimiento_proximo': (3, 'Vencimiento Proximo'),
 		'acciones': (2, 'Acciones'),
 	}
-	
+
 	table_data = [
-		{'field_name': 'nombre_actividad', 'date_format': None},
-		{'field_name': 'interes_actividad', 'date_format': None},
-		{'field_name': 'codigo_afip', 'date_format': None},
+		{'field_name': 'vencimiento_ultimo', 'date_format': 'd/m/Y'},
+		{'field_name': 'vencimiento_actual', 'date_format': 'd/m/Y'},
+		{'field_name': 'vencimiento_proximo', 'date_format': 'd/m/Y'},
 	]
 
 
-# ActividadListView - Inicio
-class ActividadListView(MaestroListView):
+# ParametroListView - Inicio
+class ParametroListView(MaestroListView):
 	model = ConfigViews.model
 	template_name = ConfigViews.template_list
 	context_object_name = ConfigViews.context_object_name
@@ -97,8 +97,8 @@ class ActividadListView(MaestroListView):
 	}
 
 
-# ActividadCreateView - Inicio
-class ActividadCreateView(MaestroCreateView):
+# ParametroCreateView - Inicio
+class ParametroCreateView(MaestroCreateView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	form_class = ConfigViews.form_class
@@ -115,8 +115,8 @@ class ActividadCreateView(MaestroCreateView):
 	}
 
 
-# ActividadUpdateView
-class ActividadUpdateView(MaestroUpdateView):
+# ParametroUpdateView
+class ParametroUpdateView(MaestroUpdateView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	form_class = ConfigViews.form_class
@@ -132,8 +132,8 @@ class ActividadUpdateView(MaestroUpdateView):
 	}
 
 
-# ActividadDeleteView
-class ActividadDeleteView (MaestroDeleteView):
+# ParametroDeleteView
+class ParametroDeleteView (MaestroDeleteView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	template_name = ConfigViews.template_delete
