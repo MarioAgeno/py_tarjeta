@@ -12,7 +12,7 @@ class Numero(ModeloBaseGenerico):
     cupon = models.IntegerField()
 
     def __str__(self):
-        return self.cupon
+        return str(self.cupon)
 
     class Meta:
         db_table = 'numero'
@@ -256,7 +256,7 @@ class Parametro(ModeloBaseGenerico):
     codigo_roela = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
-        return self.id_parametro
+        return str(self.id_parametro)
     
     class Meta:
         db_table = 'parametro'

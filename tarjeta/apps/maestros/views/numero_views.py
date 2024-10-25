@@ -64,6 +64,7 @@ class DataViewList():
 	  
 	table_headers = {
 		'cupon': (4, 'Numero Cupon'),
+		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
