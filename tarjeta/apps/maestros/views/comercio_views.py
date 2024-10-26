@@ -1,16 +1,16 @@
-# tarjeta\apps\maestros\views\tipo_documento_identidad_views.py
+# tarjeta\apps\maestros\views\comercio_views.py
 from django.urls import reverse_lazy
 from ..views.cruds_views_generics import *
-from ..models.base_models import TipoDocumentoIdentidad
-from ..forms.tipo_documento_identidad_forms import TipoDocumentoIdentidadForm
+from ..models.comercio_models import Comercio
+from ..forms.comercio_forms import ComercioForm
 
 
 class ConfigViews():
 	# Modelo
-	model = TipoDocumentoIdentidad
+	model = Comercio
 	
 	# Formulario asociado al modelo
-	form_class = TipoDocumentoIdentidadForm
+	form_class = ComercioForm
 	
 	# Aplicación asociada al modelo
 	app_label = model._meta.app_label
@@ -20,10 +20,10 @@ class ConfigViews():
 	# master_title = model._meta.verbose_name_plural
 	
 	#-- Usar esta forma cuando el modelo esté compuesto de una sola palabra: Ej. Color.
-	# model_string = model.__name__.lower()  #-- Usar esta forma cuando el modelo esté compuesto de una sola palabra: Ej. Color.
+	model_string = model.__name__.lower()  #-- Usar esta forma cuando el modelo esté compuesto de una sola palabra: Ej. Color.
 	
 	#-- Usar esta forma cuando el modelo esté compuesto por más de una palabra: Ej. TipoCambio colocar "tipo_cambio".
-	model_string = "tipo_documento_identidad"
+	#model_string = "tipo_cambio"
 	
 	# Permisos
 	permission_add = f"{app_label}.add_{model_string}"
@@ -56,30 +56,28 @@ class ConfigViews():
 
 
 class DataViewList():
-	search_fields = ['descripcion_documento_identidad', 
-				  	 'tipo_documento_identidad', 
-					 'codigo_afip']
+	search_fields = ['razon_social_comercio', 'nombre_titular']
 	
-	ordering = ['descripcion_documento_identidad']
+	ordering = ['razon_social_comercio']
 	
 	paginate_by = 8
-	
+	  
 	table_headers = {
-		'descripcion_documento_identidad': (4, 'Nombre'),
-		'tipo_documento_identidad': (2, 'Tipo'),
-		'codigo_afip': (2, 'Código AFIP'),
+		'razon_social_comercio': (4, 'Descripción'),
+		'nombre_titular': (4, 'Interes'),
+		'id_sucursal_comercio': (2, 'AFIP'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
-		{'field_name': 'descripcion_documento_identidad', 'date_format': None},
-		{'field_name': 'tipo_documento_identidad', 'date_format': None},
-		{'field_name': 'codigo_afip', 'date_format': None},
+		{'field_name': 'razon_social_comercio', 'date_format': None},
+		{'field_name': 'nombre_titular', 'date_format': None},
+		{'field_name': 'id_sucursal_comercio', 'date_format': None},
 	]
 
 
-# TipoDocumentoIdentidadList - Inicio
-class TipoDocumentoIdentidadListView(MaestroListView):
+# ComercioListView - Inicio
+class ComercioListView(MaestroListView):
 	model = ConfigViews.model
 	template_name = ConfigViews.template_list
 	context_object_name = ConfigViews.context_object_name
@@ -99,8 +97,8 @@ class TipoDocumentoIdentidadListView(MaestroListView):
 	}
 
 
-# TipoDocumentoIdentidadCreateView - Inicio
-class TipoDocumentoIdentidadCreateView(MaestroCreateView):
+# ComercioCreateView - Inicio
+class ComercioCreateView(MaestroCreateView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	form_class = ConfigViews.form_class
@@ -117,8 +115,8 @@ class TipoDocumentoIdentidadCreateView(MaestroCreateView):
 	}
 
 
-# class TipoDocumentoIdentidadUpdateView
-class TipoDocumentoIdentidadUpdateView(MaestroUpdateView):
+# ComercioUpdateView
+class ComercioUpdateView(MaestroUpdateView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	form_class = ConfigViews.form_class
@@ -134,8 +132,8 @@ class TipoDocumentoIdentidadUpdateView(MaestroUpdateView):
 	}
 
 
-# class TipoDocumentoIdentidadDeleteView
-class TipoDocumentoIdentidadDeleteView (MaestroDeleteView):
+# ComercioDeleteView
+class ComercioDeleteView (MaestroDeleteView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	template_name = ConfigViews.template_delete

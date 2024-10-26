@@ -1,16 +1,16 @@
-# tarjeta\apps\maestros\views\tipo_documento_identidad_views.py
+# tarjeta\apps\maestros\views\tarjeta_estado_views.py
 from django.urls import reverse_lazy
 from ..views.cruds_views_generics import *
-from ..models.base_models import TipoDocumentoIdentidad
-from ..forms.tipo_documento_identidad_forms import TipoDocumentoIdentidadForm
+from ..models.base_models import TarjetaEstado
+from ..forms.tarjeta_estado_forms import TarjetaEstadoForm
 
 
 class ConfigViews():
 	# Modelo
-	model = TipoDocumentoIdentidad
+	model = TarjetaEstado
 	
 	# Formulario asociado al modelo
-	form_class = TipoDocumentoIdentidadForm
+	form_class = TarjetaEstadoForm
 	
 	# Aplicación asociada al modelo
 	app_label = model._meta.app_label
@@ -23,7 +23,7 @@ class ConfigViews():
 	# model_string = model.__name__.lower()  #-- Usar esta forma cuando el modelo esté compuesto de una sola palabra: Ej. Color.
 	
 	#-- Usar esta forma cuando el modelo esté compuesto por más de una palabra: Ej. TipoCambio colocar "tipo_cambio".
-	model_string = "tipo_documento_identidad"
+	model_string = "tarjeta_estado"
 	
 	# Permisos
 	permission_add = f"{app_label}.add_{model_string}"
@@ -56,30 +56,26 @@ class ConfigViews():
 
 
 class DataViewList():
-	search_fields = ['descripcion_documento_identidad', 
-				  	 'tipo_documento_identidad', 
-					 'codigo_afip']
+	search_fields = ['descripcion_tarjeta_estado']
 	
-	ordering = ['descripcion_documento_identidad']
+	ordering = ['descripcion_tarjeta_estado']
 	
 	paginate_by = 8
 	
 	table_headers = {
-		'descripcion_documento_identidad': (4, 'Nombre'),
-		'tipo_documento_identidad': (2, 'Tipo'),
-		'codigo_afip': (2, 'Código AFIP'),
+		'descripcion_tarjeta_estado': (4, 'Nombre'),
+		'mensaje': (6, 'Tipo'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
-		{'field_name': 'descripcion_documento_identidad', 'date_format': None},
-		{'field_name': 'tipo_documento_identidad', 'date_format': None},
-		{'field_name': 'codigo_afip', 'date_format': None},
+		{'field_name': 'descripcion_tarjeta_estado', 'date_format': None},
+		{'field_name': 'mensaje', 'date_format': None},
 	]
 
 
-# TipoDocumentoIdentidadList - Inicio
-class TipoDocumentoIdentidadListView(MaestroListView):
+# TarjetaEstadoList - Inicio
+class TarjetaEstadoListView(MaestroListView):
 	model = ConfigViews.model
 	template_name = ConfigViews.template_list
 	context_object_name = ConfigViews.context_object_name
@@ -99,8 +95,8 @@ class TipoDocumentoIdentidadListView(MaestroListView):
 	}
 
 
-# TipoDocumentoIdentidadCreateView - Inicio
-class TipoDocumentoIdentidadCreateView(MaestroCreateView):
+# TarjetaEstadoCreateView - Inicio
+class TarjetaEstadoCreateView(MaestroCreateView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	form_class = ConfigViews.form_class
@@ -117,8 +113,8 @@ class TipoDocumentoIdentidadCreateView(MaestroCreateView):
 	}
 
 
-# class TipoDocumentoIdentidadUpdateView
-class TipoDocumentoIdentidadUpdateView(MaestroUpdateView):
+# class TarjetaEstadoUpdateView
+class TarjetaEstadoUpdateView(MaestroUpdateView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	form_class = ConfigViews.form_class
@@ -134,8 +130,8 @@ class TipoDocumentoIdentidadUpdateView(MaestroUpdateView):
 	}
 
 
-# class TipoDocumentoIdentidadDeleteView
-class TipoDocumentoIdentidadDeleteView (MaestroDeleteView):
+# class TarjetaEstadoDeleteView
+class TarjetaEstadoDeleteView (MaestroDeleteView):
 	model = ConfigViews.model
 	list_view_name = ConfigViews.list_view_name
 	template_name = ConfigViews.template_delete

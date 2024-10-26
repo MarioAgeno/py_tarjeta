@@ -12,6 +12,12 @@ from .views.plan_views import *
 from .views.empresa_views import *
 from .views.numero_views import *
 from .views.parametro_views import *
+from .views.tarjeta_estado_views import *
+from .views.titulo_views import *
+from .views.plan_comercio_views import *
+from .views.comercio_views import *
+from .views.socio_views import *
+
 
 #-- Catálogos
 
@@ -76,4 +82,34 @@ urlpatterns = [
 	path('parametro/nueva/', ParametroCreateView.as_view(), name='parametro_create'),
 	path('parametro/<int:pk>/editar/', ParametroUpdateView.as_view(), name='parametro_update'),
 	path('parametro/<int:pk>/eliminar/', ParametroDeleteView.as_view(), name='parametro_delete'),
+    
+	#-- Tarjetas Estados.
+	path('tarjetaestado/', TarjetaEstadoListView.as_view(), name='tarjeta_estado_list'),
+	path('tarjetaestado/nueva/', TarjetaEstadoCreateView.as_view(), name='tarjeta_estado_create'),
+	path('tarjetaestado/<int:pk>/editar/', TarjetaEstadoUpdateView.as_view(), name='tarjeta_estado_update'),
+	path('tarjetaestado/<int:pk>/eliminar/', TarjetaEstadoDeleteView.as_view(), name='tarjeta_estado_delete'),
+
+	#-- Titulo.
+	path('titulo/', TituloListView.as_view(), name='titulo_list'),
+	path('titulo/nueva/', TituloCreateView.as_view(), name='titulo_create'),
+	path('titulo/<int:pk>/editar/', TituloUpdateView.as_view(), name='titulo_update'),
+	path('titulo/<int:pk>/eliminar/', TituloDeleteView.as_view(), name='titulo_delete'),
+    
+	#-- Comercios.
+	path('comercio/', ComercioListView.as_view(), name='comercio_list'),
+	path('comercio/nueva/', ComercioCreateView.as_view(), name='comercio_create'),
+	path('comercio/<int:pk>/editar/', ComercioUpdateView.as_view(), name='comercio_update'),
+	path('comercio/<int:pk>/eliminar/', ComercioDeleteView.as_view(), name='comercio_delete'),
+
+	#-- Socios.
+	path('socio/', SocioListView.as_view(), name='socio_list'),
+	path('socio/nueva/', SocioCreateView.as_view(), name='socio_create'),
+	path('socio/<int:pk>/editar/', SocioUpdateView.as_view(), name='socio_update'),
+	path('socio/<int:pk>/eliminar/', SocioDeleteView.as_view(), name='socio_delete'),
+    
+	#-- Plan Comercios.
+	path('plancomercio/', PlanComercioListView.as_view(), name='plan_comercio_list'),
+	path('plancomercio/nueva/', PlanComercioCreateView.as_view(), name='plan_comercio_create'),
+	path('plancomercio/<int:pk>/editar/', PlanComercioUpdateView.as_view(), name='plan_comercio_update'),
+	path('plancomercio/<int:pk>/eliminar/', PlanComercioDeleteView.as_view(), name='plan_comercio_delete'),
 ]

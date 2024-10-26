@@ -15,21 +15,27 @@ class Socio(ModeloBaseGenerico):
     id_sucursal_socio = models.ForeignKey(Sucursal, on_delete=models.PROTECT, 
                                           verbose_name="Sucursal*")
     codigo_socio = models.IntegerField()
-    nombre_socio = models.CharField(max_length=40)
-    domicilio_socio = models.CharField(max_length=30, blank=True)
+    nombre_socio = models.CharField(max_length=40, verbose_name="Nombre")
+    domicilio_socio = models.CharField(max_length=30, blank=True, 
+                                        verbose_name="Domicilio")
     id_localidad_socio = models.ForeignKey(Localidad, on_delete=models.PROTECT, 
                                            verbose_name="Localidad*")
     id_provincia_socio = models.ForeignKey(Provincia, on_delete=models.PROTECT, 
-                                           verbose_name="Provincia*")
-    telefono_socio = models.CharField(max_length=15, blank=True)
-    telefono2_socio = models.CharField(max_length=15, blank=True)
-    movil_socio = models.EmailField(max_length=15, blank=True)
-    mail_socio = models.EmailField(max_length=50, blank=True)
+                                        verbose_name="Provincia*")
+    telefono_socio = models.CharField(max_length=15, blank=True, 
+                                    verbose_name="Telefono")
+    telefono2_socio = models.CharField(max_length=15, blank=True, 
+                                    verbose_name="Telefono")
+    movil_socio = models.EmailField(max_length=15, blank=True, 
+                                    verbose_name="Telefono Movil")
+    mail_socio = models.EmailField(max_length=50, blank=True, 
+                                   verbose_name="eMail")
     id_tipo_documento_identidad = models.ForeignKey(TipoDocumentoIdentidad, 
                                                     on_delete=models.PROTECT, verbose_name="Documento*")
     numero_documento = models.DecimalField(max_digits=9, decimal_places=0, blank=True)
-    fecha_nacimiento = models.DateTimeField(blank=True)
-    cuit_socio = models.DecimalField(max_digits=11, decimal_places=0, blank=True)
+    fecha_nacimiento = models.DateField(blank=True)
+    cuit_socio = models.DecimalField(max_digits=11, decimal_places=0, blank=True, 
+                                     verbose_name="CUIT")
     nacionalidad = models.CharField(max_length=20, blank=True)
     id_actividad = models.ForeignKey(Actividad, on_delete=models.PROTECT, 
                                      verbose_name="Actividad*")

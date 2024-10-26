@@ -128,7 +128,7 @@ class Titulo(ModeloBaseGenerico):
     titulo = models.CharField("Nombre*", max_length=30, blank=True)
 
     def __str__(self):
-        return self.nombre_titulo
+        return self.titulo
     
     class Meta:
         db_table = 'titulo'

@@ -86,7 +86,7 @@ class PlanComercio(ModeloBaseGenerico):
     id_comercio = models.ForeignKey(Comercio, on_delete=models.CASCADE, verbose_name="Comercio*")
 
     def __str__(self):
-        return self.id_plan
+        return str(self.id_plan)
     
     class Meta:
         db_table = 'plan_comercio'

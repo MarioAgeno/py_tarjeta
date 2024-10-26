@@ -3,6 +3,8 @@ from django.contrib import admin
 # Register your models here.
 
 from .models.base_models import *
+from .models.comercio_models import *
+from .models.tarjeta_models import *
 
 # Registramos los modelos independientes
 
@@ -17,4 +19,9 @@ admin.site.register(Plan)
 admin.site.register(Empresa)
 admin.site.register(Numero)
 admin.site.register(Parametro)
+admin.site.register(TarjetaEstado)
+admin.site.register(Titulo)
+admin.site.register(PlanComercio)
+admin.site.register(Comercio)
+admin.site.register(Socio)
 

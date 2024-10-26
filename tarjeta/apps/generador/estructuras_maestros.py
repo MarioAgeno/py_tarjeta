@@ -238,4 +238,130 @@ estructura_campos = {
 
         }
     },
+
+    'tarjeta_estado': {
+        'Información Estados Tarjetas': {
+            'fila_1': [
+                {'field_name': 'estatus_tarjeta_estado', 'columna': 2},
+                {'field_name': 'descripcion_tarjeta_estado', 'columna': 4},
+            ],
+            'fila_2': [
+                {'field_name': 'mensaje', 'columna': 6},
+            ],
+        }
+    },
+
+    'titulo': {
+        'Información Titulos': {
+            'fila_1': [
+                {'field_name': 'estatus_titulo', 'columna': 2},
+                {'field_name': 'titulo', 'columna': 4},
+            ]
+        }
+    },
+
+    'plan_comercio': {
+        'Información Planes de Comercios': {
+            'fila_1': [
+                {'field_name': 'estatus_plan_comercio', 'columna': 2},
+                {'field_name': 'id_plan', 'columna': 4},
+            ],
+            'fila_2': [
+                {'field_name': 'id_comercio', 'columna': 4},
+            ],
+        }
+    },
+
+    'comercio': {
+        'Información Comercios': {
+            'fila_1': [
+                {'field_name': 'estatus_comercio', 'columna': 2},
+                {'field_name': 'codigo_comercio', 'columna': 3},
+                {'field_name': 'pin', 'columna': 2},
+            ],
+            'fila_2': [
+                {'field_name': 'razon_social_comercio', 'columna': 4},
+                {'field_name': 'nombre_titular', 'columna': 4},
+            ],
+            'fila_3': [
+                {'field_name': 'domicilio_comercio', 'columna': 4},
+                {'field_name': 'id_localidad_comercio', 'columna': 3},
+                {'field_name': 'id_provincia_comercio', 'columna': 3},
+            ],
+            'fila_4': [
+                {'field_name': 'telefono_comercio', 'columna': 3},
+                {'field_name': 'telefono2_comercio', 'columna': 3},
+                {'field_name': 'movil_comercio', 'columna': 3},
+            ],
+            'fila_5': [
+                {'field_name': 'mail_comercio', 'columna': 4},
+            ],
+            'fila_6': [
+                {'field_name': 'id_actividad', 'columna': 4},
+                {'field_name': 'id_sucursal_comercio', 'columna': 3},
+                {'field_name': 'id_socio', 'columna': 4},
+            ],
+            'fila_7': [
+                {'field_name': 'id_iva_comercio', 'columna': 3},
+                {'field_name': 'cuit_comercio', 'columna': 2},
+                {'field_name': 'ingreso_bruto', 'columna': 2},
+            ],
+            'fila_8': [
+                {'field_name': 'monto_fijo', 'columna': 2},
+                {'field_name': 'exento_ganancias', 'columna': 2},
+                {'field_name': 'estacion_servicio', 'columna': 2},
+                {'field_name': 'debito_credito', 'columna': 2},
+                {'field_name': 'acreditar_cuenta', 'columna': 2},
+            ],
+            'fila_9': [
+                {'field_name': 'leido', 'columna': 2},
+                {'field_name': 'mensaje', 'columna': 6},
+            ],
+            'fila_10': [
+                {'field_name': 'porcentaje_consumo', 'columna': 3},
+                {'field_name': 'porcentaje_retencion_ib', 'columna': 3},
+            ],
+        }
+    },
+
+    'socio': {
+        'Información Socios': {
+            'fila_1': [
+                {'field_name': 'estatus_socio', 'columna': 2},
+            ],
+            'fila_2': [
+                {'field_name': 'id_sucursal_socio', 'columna': 3},
+                {'field_name': 'codigo_socio', 'columna': 2},
+                {'field_name': 'nombre_socio', 'columna': 4},
+            ],
+            'fila_3': [
+                {'field_name': 'domicilio_socio', 'columna': 4},
+                {'field_name': 'id_localidad_socio', 'columna': 3},
+                {'field_name': 'id_provincia_socio', 'columna': 3},
+            ],
+            'fila_4': [
+                {'field_name': 'telefono_socio', 'columna': 3},
+                {'field_name': 'telefono2_socio', 'columna': 3},
+                {'field_name': 'movil_socio', 'columna': 3},
+            ],
+            'fila_5': [
+                {'field_name': 'mail_socio', 'columna': 4},
+            ],
+            'fila_6': [
+                {'field_name': 'id_tipo_documento_identidad', 'columna': 2},
+                {'field_name': 'numero_documento', 'columna': 3},
+                {'field_name': 'cuit_socio', 'columna': 3},
+            ],
+            'fila_7': [
+                {'field_name': 'fecha_nacimiento', 'columna': 3},
+                {'field_name': 'nacionalidad', 'columna': 3},
+            ],
+            'fila_8': [
+                {'field_name': 'id_actividad', 'columna': 3},
+                {'field_name': 'tipo_persona', 'columna': 3},
+                {'field_name': 'pep', 'columna': 2},
+                {'field_name': 'fecha_ingreso', 'columna': 3},
+            ],
+        }
+    },
 }

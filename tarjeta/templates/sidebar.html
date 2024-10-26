@@ -32,11 +32,11 @@
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="#">Tarjetas</a>
 								<a class="nav-link" href="#">Limites de Tarjetas</a>
-								<a class="nav-link" href="#">Socios</a>
+								<a class="nav-link" href="{% url 'socio_list' %}">Socios</a>
 								<a class="nav-link" href="#">Liquidaciones de Socios</a>
 								<a class="nav-link" href="#">Cuotas de Socios</a>
-								<a class="nav-link" href="#">Titulos</a>
-								<a class="nav-link" href="#">Estados Tarjetas</a>
+								<a class="nav-link" href="{% url 'titulo_list' %}">Titulos</a>
+								<a class="nav-link" href="{% url 'tarjeta_estado_list' %}">Estados Tarjetas</a>
 							</nav>
 						</div>
 
@@ -46,10 +46,10 @@
 						</a>
 						<div class="collapse" id="pagesCollapseComercio" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="#">Comercios</a>
+								<a class="nav-link" href="{% url 'comercio_list' %}">Comercios</a>
 								<a class="nav-link" href="#">Liquidaciones Comercios</a>
 								<a class="nav-link" href="{% url 'plan_list' %}">Planes</a>
-								<a class="nav-link" href="#">Planes Comercios</a>
+								<a class="nav-link" href="{% url 'plan_comercio_list' %}">Planes Comercios</a>
 								<a class="nav-link" href="#">Compras</a>
 								<a class="nav-link" href="#">Operaciones</a>
 							</nav>
