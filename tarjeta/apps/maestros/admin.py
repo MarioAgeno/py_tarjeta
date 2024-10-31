@@ -24,4 +24,6 @@ admin.site.register(Titulo)
 admin.site.register(PlanComercio)
 admin.site.register(Comercio)
 admin.site.register(Socio)
+admin.site.register(Tarjeta)
+admin.site.register(RegitroLimite)
 

@@ -17,6 +17,8 @@ from .views.titulo_views import *
 from .views.plan_comercio_views import *
 from .views.comercio_views import *
 from .views.socio_views import *
+from .views.tarjeta_views import *
+from .views.registro_limite_views import *
 
 
 #-- Catálogos
@@ -106,7 +108,19 @@ urlpatterns = [
 	path('socio/nueva/', SocioCreateView.as_view(), name='socio_create'),
 	path('socio/<int:pk>/editar/', SocioUpdateView.as_view(), name='socio_update'),
 	path('socio/<int:pk>/eliminar/', SocioDeleteView.as_view(), name='socio_delete'),
+
+ 	#-- Tarjetas.
+	path('tarjeta/', TarjetaListView.as_view(), name='tarjeta_list'),
+	path('tarjeta/nueva/', TarjetaCreateView.as_view(), name='tarjeta_create'),
+	path('tarjeta/<int:pk>/editar/', TarjetaUpdateView.as_view(), name='tarjeta_update'),
+	path('tarjeta/<int:pk>/eliminar/', TarjetaDeleteView.as_view(), name='tarjeta_delete'),
     
+ 	#-- Limites de Tarjetas.
+	path('registrolimite/', RegitroLimiteListView.as_view(), name='registro_limite_list'),
+	path('registrolimite/nueva/', RegitroLimiteCreateView.as_view(), name='registro_limite_create'),
+	path('registrolimite/<int:pk>/editar/', RegitroLimiteUpdateView.as_view(), name='registro_limite_update'),
+	path('registrolimite/<int:pk>/eliminar/', RegitroLimiteDeleteView.as_view(), name='registro_limite_delete'),
+
 	#-- Plan Comercios.
 	path('plancomercio/', PlanComercioListView.as_view(), name='plan_comercio_list'),
 	path('plancomercio/nueva/', PlanComercioCreateView.as_view(), name='plan_comercio_create'),

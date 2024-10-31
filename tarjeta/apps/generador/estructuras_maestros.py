@@ -364,4 +364,64 @@ estructura_campos = {
             ],
         }
     },
+
+    'tarjeta': {
+        'Información Tarjeta': {
+            'fila_1': [
+                {'field_name': 'estatus_tarjeta', 'columna': 2},
+                {'field_name': 'id_sucursal_tarjeta', 'columna': 3},
+            ],
+            'fila_2': [
+                {'field_name': 'id_socio', 'columna': 2},
+                {'field_name': 'adicional', 'columna': 2},
+                {'field_name': 'digito_verificador', 'columna': 2},
+            ],
+            'fila_3': [
+                {'field_name': 'id_titulo', 'columna': 3},
+                {'field_name': 'id_tarjeta_estado', 'columna': 3},
+                {'field_name': 'fecha_alta', 'columna': 2},
+            ],
+            'fila_4': [
+                {'field_name': 'nombre_titular', 'columna': 3},
+                {'field_name': 'domicilio', 'columna': 3},
+                {'field_name': 'id_localidad_tarjeta', 'columna': 3},
+                {'field_name': 'id_provincia_tarjeta', 'columna': 3},
+            ],
+            'fila_5': [
+                {'field_name': 'telefono_tarjeta', 'columna': 2},
+                {'field_name': 'telefono2_tarjeta', 'columna': 2},
+                {'field_name': 'movil_tarjeta', 'columna': 2},
+            ],
+            'fila_6': [
+                {'field_name': 'mail_tarjeta', 'columna': 4},
+                {'field_name': 'nombre_garantia', 'columna': 4},
+            ],
+            'fila_7': [
+                {'field_name': 'limite_maximo_tarjeta', 'columna': 3},
+                {'field_name': 'saldo_disponible', 'columna': 3},
+            ],
+            'fila_8': [
+                {'field_name': 'fecha_baja', 'columna': 2},
+                {'field_name': 'vencimiento', 'columna': 2},
+                {'field_name': 'observacion', 'columna': 5},
+            ],
+            'fila_9': [
+                {'field_name': 'liquidacion_mail', 'columna': 2},
+                {'field_name': 'seguro', 'columna': 2},
+            ],
+        }
+    },
+
+    'registro_limite': {
+        'Información Limites de tarjetas': {
+            'fila_1': [
+                {'field_name': 'estatus_registro_limite', 'columna': 2},
+                {'field_name': 'id_tarjeta', 'columna': 4},
+            ],
+            'fila_2': [
+                {'field_name': 'maximo_limite', 'columna': 3},
+                {'field_name': 'fecha_limite', 'columna': 2},
+            ],
+        }
+    },
 }

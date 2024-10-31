@@ -1,7 +1,8 @@
 # tarjeta\apps\maestros\models\tarjeta_models.py
 from django.db import models
-from django.core.exceptions import ValidationError
-import re
+from datetime import date
+#from django.core.exceptions import ValidationError
+#import re
 from .base_gen_models import ModeloBaseGenerico
 from .base_models import (Actividad, Sucursal, Localidad, Provincia, 
 						  TipoDocumentoIdentidad, Titulo, TarjetaEstado)
@@ -15,9 +16,9 @@ class Socio(ModeloBaseGenerico):
     id_sucursal_socio = models.ForeignKey(Sucursal, on_delete=models.PROTECT, 
                                           verbose_name="Sucursal*")
     codigo_socio = models.IntegerField()
-    nombre_socio = models.CharField(max_length=40, verbose_name="Nombre")
+    nombre_socio = models.CharField(max_length=40, verbose_name="Nombre*")
     domicilio_socio = models.CharField(max_length=30, blank=True, 
-                                        verbose_name="Domicilio")
+                                        verbose_name="Domicilio*")
     id_localidad_socio = models.ForeignKey(Localidad, on_delete=models.PROTECT, 
                                            verbose_name="Localidad*")
     id_provincia_socio = models.ForeignKey(Provincia, on_delete=models.PROTECT, 
@@ -59,27 +60,33 @@ class Tarjeta(ModeloBaseGenerico):
     id_sucursal_tarjeta = models.ForeignKey(Sucursal, on_delete=models.PROTECT, 
                                             verbose_name="Sucursal*")
     id_socio = models.ForeignKey(Socio, on_delete=models.PROTECT, verbose_name="Socio*")
-    adicional = models.IntegerField(blank=True)
-    digito_verificador = models.IntegerField(blank=True)
-    nombre_titular = models.CharField(max_length=40, blank=True)
+    adicional = models.IntegerField("Adicional*")
+    digito_verificador = models.IntegerField("Digito Verificador*")
+    nombre_titular = models.CharField("Titular*", max_length=40, blank=True)
     domicilio = models.CharField(max_length=40, blank=True)
     id_localidad_tarjeta = models.ForeignKey(Localidad, on_delete=models.PROTECT, 
                                            verbose_name="Localidad*")
     id_provincia_tarjeta = models.ForeignKey(Provincia, on_delete=models.PROTECT, 
                                            verbose_name="Provincia*")
-    telefono_tarjeta = models.CharField(max_length=15, blank=True)
-    telefono2_tarjeta = models.CharField(max_length=15, blank=True)
-    movil_tarjeta = models.CharField(max_length=15, blank=True)
-    mail_tarjeta = models.EmailField(max_length=50, blank=True)
+    telefono_tarjeta = models.CharField(max_length=15, blank=True,
+                                        verbose_name="Telefono*")
+    telefono2_tarjeta = models.CharField(max_length=15, blank=True, 
+                                         verbose_name="Telefono")
+    movil_tarjeta = models.CharField(max_length=15, blank=True, 
+                                     verbose_name="Telefono Movil")
+    mail_tarjeta = models.EmailField(max_length=50, blank=True, 
+                                     verbose_name="eMail")
     nombre_garantia = models.CharField(max_length=40, blank=True)
-    limite_maximo_tarjeta = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
-    saldo_disponible = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    limite_maximo_tarjeta = models.DecimalField(max_digits=10, decimal_places=2, default=0,
+                                                verbose_name="Limite de Compra*")
+    saldo_disponible = models.DecimalField(max_digits=10, decimal_places=2, default=0,
+                                           verbose_name="Disponible*")
     id_titulo = models.ForeignKey(Titulo, on_delete=models.PROTECT, verbose_name="Titulo*")
     id_tarjeta_estado = models.ForeignKey(TarjetaEstado, on_delete=models.PROTECT, 
                                           verbose_name="Estado*")
-    fecha_alta = models.DateTimeField(blank=True)
-    fecha_baja = models.DateTimeField(blank=True)
-    vencimiento = models.DateTimeField(blank=True)
+    fecha_alta = models.DateField("Fecha Alta", default=date.today())
+    fecha_baja = models.DateField(blank=True, null=True)
+    vencimiento = models.DateField("Vencimiento*")
     liquidacion_mail = models.BooleanField(blank=True)
     seguro = models.BooleanField("Seguro*", default=True, choices=SEGURO)
     observacion = models.CharField(max_length=50, blank=True)
@@ -98,11 +105,11 @@ class RegitroLimite(ModeloBaseGenerico):
     id_registro_limite = models.AutoField(primary_key=True)
     estatus_registro_limite = models.BooleanField("Estatus", default=True, choices=ESTATUS_GEN)
     id_tarjeta = models.ForeignKey(Tarjeta, on_delete=models.PROTECT, verbose_name="Tarjeta*")
-    fecha_limite = models.DateTimeField()
+    fecha_limite = models.DateField()
     maximo_limite = models.DecimalField(max_digits=14, decimal_places=2)
 
     def __str__(self):
-        return self.id_tarjeta
+        return str(self.id_tarjeta)
     
     class Meta:
         db_table = 'registro_limite'
