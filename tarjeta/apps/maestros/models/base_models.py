@@ -109,7 +109,7 @@ class Plan(ModeloBaseGenerico):
     costo_financiero_plan = models.DecimalField("Costo Financiero(%)", db_column="costo_financiero", max_digits=4, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    vencimiento_plan = models.DateTimeField(db_column="vencimiento")
+    vencimiento_plan = models.DateField(db_column="vencimiento")
     
     def __str__(self):
         return self.nombre_plan
@@ -202,12 +202,12 @@ class Parametro(ModeloBaseGenerico):
     minimo = models.DecimalField("Pago Minimo(%)", max_digits=4, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    cierre_ultimo = models.DateTimeField(blank=True)
-    cierre_actual = models.DateTimeField(blank=True)
-    cierre_proximo = models.DateTimeField(blank=True)
-    vencimiento_ultimo = models.DateTimeField(blank=True)
-    vencimiento_actual = models.DateTimeField(blank=True)
-    vencimiento_proximo = models.DateTimeField(blank=True)
+    cierre_ultimo = models.DateField(blank=True)
+    cierre_actual = models.DateField(blank=True)
+    cierre_proximo = models.DateField(blank=True)
+    vencimiento_ultimo = models.DateField(blank=True)
+    vencimiento_actual = models.DateField(blank=True)
+    vencimiento_proximo = models.DateField(blank=True)
     retencion_debito_credito = models.DecimalField("Retencion DB/CD(%)", max_digits=4, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
