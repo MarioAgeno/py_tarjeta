@@ -372,9 +372,10 @@ estructura_campos = {
                 {'field_name': 'id_sucursal_tarjeta', 'columna': 3},
             ],
             'fila_2': [
-                {'field_name': 'id_socio', 'columna': 2},
+                {'field_name': 'id_socio', 'columna': 4},
                 {'field_name': 'adicional', 'columna': 2},
                 {'field_name': 'digito_verificador', 'columna': 2},
+                {'field_name': 'numero_tarjeta', 'columna': 3},
             ],
             'fila_3': [
                 {'field_name': 'id_titulo', 'columna': 3},

@@ -5,7 +5,6 @@ from ..models.tarjeta_models import Tarjeta
 from diseno_base.diseno_bootstrap import (formclassdate,
 	formclasstext, formclassselect, formclasscheck)
 
-
 class TarjetaForm(CrudGenericForm):
 	
 	class Meta:
@@ -25,6 +24,8 @@ class TarjetaForm(CrudGenericForm):
 			'digito_verificador': 
 				forms.NumberInput(attrs={**formclasstext, 
 							'min': 0, 'max': 9}),
+			'numero_tarjeta':  
+				forms.NumberInput(attrs={**formclasstext}), 
 			'nombre_titular': 
 				forms.TextInput(attrs={**formclasstext}),
 			'domicilio': 
@@ -54,7 +55,7 @@ class TarjetaForm(CrudGenericForm):
 			'id_tarjeta_estado': 
 				forms.Select(attrs={**formclassselect}), 
 			'fecha_alta': 
-				forms.DateTimeInput(attrs={'readonly':'readonly'}),
+				forms.TextInput(attrs={'type':'date', **formclassdate}),
 			'fecha_baja': 
 				forms.TextInput(attrs={'type':'date', **formclassdate}),
 			'vencimiento': 
@@ -65,10 +66,5 @@ class TarjetaForm(CrudGenericForm):
 				forms.CheckboxInput(attrs={**formclasscheck}),
 			'observacion': 
 				forms.TextInput(attrs={**formclasstext}),
+		
 		}
-
-'''
-			'fecha_alta': 
-				forms.TextInput(attrs={'type':'date', **formclassdate}),
-
-'''

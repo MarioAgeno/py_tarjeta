@@ -56,20 +56,22 @@ class ConfigViews():
 
 
 class DataViewList():
-	search_fields = ['nombre_titular']
+	search_fields = ['nombre_titular', 'numero_tarjeta']
 
 	ordering = ['nombre_titular']
 	
 	paginate_by = 8
 	  
 	table_headers = {
-		'nombre_titular': (4, 'Titular'),
-		'id_socio': (4, 'Socio'),
+		'numero_tarjeta': (2, 'Numero'),
+		'nombre_titular': (3, 'Titular'),
+		'id_socio': (3, 'Socio'),
 		'id_localidad_tarjeta': (2, 'Localidad'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
+		{'field_name': 'numero_tarjeta', 'date_format': None},
 		{'field_name': 'nombre_titular', 'date_format': None},
 		{'field_name': 'id_socio', 'date_format': None},
 		{'field_name': 'id_localidad_tarjeta', 'date_format': None},

@@ -1,8 +1,6 @@
 # tarjeta\apps\maestros\models\tarjeta_models.py
 from django.db import models
-from datetime import date
-#from django.core.exceptions import ValidationError
-#import re
+#from datetime import date
 from .base_gen_models import ModeloBaseGenerico
 from .base_models import (Actividad, Sucursal, Localidad, Provincia, 
 						  TipoDocumentoIdentidad, Titulo, TarjetaEstado)
@@ -53,10 +51,10 @@ class Socio(ModeloBaseGenerico):
         verbose_name_plural = ('Socios')
         ordering = ['nombre_socio']
 
-
 class Tarjeta(ModeloBaseGenerico):
     id_tarjeta = models.AutoField(primary_key=True)
     estatus_tarjeta = models.BooleanField("Estatus*", default=True, choices=ESTATUS_GEN)
+    numero_tarjeta = models.BigIntegerField()  #  editable=False Campo entero para almacenar la concatenación
     id_sucursal_tarjeta = models.ForeignKey(Sucursal, on_delete=models.PROTECT, 
                                             verbose_name="Sucursal*")
     id_socio = models.ForeignKey(Socio, on_delete=models.PROTECT, verbose_name="Socio*")
@@ -84,7 +82,7 @@ class Tarjeta(ModeloBaseGenerico):
     id_titulo = models.ForeignKey(Titulo, on_delete=models.PROTECT, verbose_name="Titulo*")
     id_tarjeta_estado = models.ForeignKey(TarjetaEstado, on_delete=models.PROTECT, 
                                           verbose_name="Estado*")
-    fecha_alta = models.DateField("Fecha Alta", default=date.today())
+    fecha_alta = models.DateField("Fecha Alta")
     fecha_baja = models.DateField(blank=True, null=True)
     vencimiento = models.DateField("Vencimiento*")
     liquidacion_mail = models.BooleanField(blank=True)
@@ -93,12 +91,24 @@ class Tarjeta(ModeloBaseGenerico):
 
     def __str__(self):
         return self.nombre_titular
-    
+
+    def save(self, *args, **kwargs):
+        # Calcula `numero_tarjeta` usando operaciones aritméticas
+        self.numero_tarjeta = (
+            self.id_sucursal_tarjeta.id_sucursal * 100000000 +  # Deja espacio para los siguientes 8 dígitos
+            self.id_socio.id_socio * 1000 +            # Deja espacio para los siguientes 3 dígitos
+            self.adicional * 10 +              # Deja espacio para el dígito verificador
+            self.digito_verificador            # El último dígito
+        )
+        super().save(*args, **kwargs)
+
     class Meta:
         db_table = 'tarjeta'
         verbose_name = ('Tarjeta')
         verbose_name_plural = ('Tarjetas')
         ordering = ['nombre_titular']
+
+
 
 
 class RegitroLimite(ModeloBaseGenerico):
