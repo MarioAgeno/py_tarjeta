@@ -56,6 +56,7 @@ class Comercio(ModeloBaseGenerico):
         verbose_name_plural = ('Comercios')
         ordering = ['razon_social_comercio']
 
+
 class LiqudacionComercio(ModeloBaseGenerico):
     id_liquidacion_comercio = models.AutoField(primary_key=True)
     liquidacion_comercio = models.IntegerField("Numero Liquidacion", db_column="liquidacion")
@@ -78,6 +79,7 @@ class LiqudacionComercio(ModeloBaseGenerico):
         verbose_name = ('Liquidacio Comercio')
         verbose_name_plural = ('Liquidaciones a Comercios')
         ordering = ['liquidacion_comercio']
+
 
 class PlanComercio(ModeloBaseGenerico):
     id_plan_comercio = models.AutoField(primary_key=True)

@@ -19,6 +19,7 @@ from .views.comercio_views import *
 from .views.socio_views import *
 from .views.tarjeta_views import *
 from .views.registro_limite_views import *
+from .views.liquidacion_socio_views import *
 
 
 #-- Catálogos
@@ -126,4 +127,7 @@ urlpatterns = [
 	path('plancomercio/nueva/', PlanComercioCreateView.as_view(), name='plan_comercio_create'),
 	path('plancomercio/<int:pk>/editar/', PlanComercioUpdateView.as_view(), name='plan_comercio_update'),
 	path('plancomercio/<int:pk>/eliminar/', PlanComercioDeleteView.as_view(), name='plan_comercio_delete'),
+    
+	#-- Liquidacion Socios
+	path('liquidacionsocio/', LiquidacionSocioListView.as_view(), name='liquidacion_socio_list'),
 ]

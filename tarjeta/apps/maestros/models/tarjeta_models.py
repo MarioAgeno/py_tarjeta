@@ -51,6 +51,7 @@ class Socio(ModeloBaseGenerico):
         verbose_name_plural = ('Socios')
         ordering = ['nombre_socio']
 
+
 class Tarjeta(ModeloBaseGenerico):
     id_tarjeta = models.AutoField(primary_key=True)
     estatus_tarjeta = models.BooleanField("Estatus*", default=True, choices=ESTATUS_GEN)
@@ -107,8 +108,6 @@ class Tarjeta(ModeloBaseGenerico):
         verbose_name = ('Tarjeta')
         verbose_name_plural = ('Tarjetas')
         ordering = ['nombre_titular']
-
-
 
 
 class RegitroLimite(ModeloBaseGenerico):

@@ -1,0 +1,27 @@
+<form method="get">
+    <label for="numero_tarjeta">Número de Tarjeta:</label>
+    <input type="text" name="numero_tarjeta" id="numero_tarjeta" placeholder="Buscar por Número de Tarjeta">
+    
+    <label for="id_tarjeta">ID Tarjeta:</label>
+    <input type="text" name="id_tarjeta" id="id_tarjeta" placeholder="Buscar por ID Tarjeta">
+    
+    <label for="liquidacion">Número de Liquidación:</label>
+    <input type="text" name="liquidacion" id="liquidacion" placeholder="Buscar por Número de Liquidación">
+    
+    <label for="sucursal_pago">Sucursal de Pago:</label>
+    <input type="text" name="sucursal_pago" id="sucursal_pago" placeholder="Buscar por Sucursal de Pago">
+    
+    <label for="fecha_inicio">Fecha de Inicio:</label>
+    <input type="date" name="fecha_inicio" id="fecha_inicio">
+    
+    <label for="fecha_fin">Fecha de Fin:</label>
+    <input type="date" name="fecha_fin" id="fecha_fin">
+    
+    <button type="submit">Filtrar</button>
+</form>
+
+<ul>
+    {% for liquidacion in liquidaciones %}
+        <li>{{ liquidacion.numero_tarjeta }} - {{ liquidacion.id_tarjeta }} - {{ liquidacion.liquidacion_socio }} - {{ liquidacion.sucursal_pago }} - {{ liquidacion.cierre_actual }}</li>
+    {% endfor %}
+</ul>

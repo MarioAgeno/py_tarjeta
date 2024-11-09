@@ -45,6 +45,7 @@ class LiquidacionSocio(ModeloBaseGenerico):
         verbose_name_plural = ('Liquidaciones de Socios')
         ordering = ['liquidacion_socio']
 
+
 class Cuota(ModeloBaseGenerico):
     id_cuota = models.AutoField(primary_key=True)
     id_compra = models.ForeignKey(Operacion, on_delete=models.PROTECT, verbose_name="Compra*")
