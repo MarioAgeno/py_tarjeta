@@ -16,7 +16,6 @@ from .views.tarjeta_estado_views import *
 from .views.titulo_views import *
 from .views.plan_comercio_views import *
 from .views.comercio_views import *
-#from .views.socio_views import *
 from .views.tarjeta_views import *
 from .views.registro_limite_views import *
 from .views.liquidacion_socio_views import *

@@ -43,7 +43,7 @@ with transaction.atomic():
         # Ajusta estos nombres de campo para que coincidan con tu modelo `Titulo` y la consulta SQL
         TipoIva.objects.create(
             estatus_tipo_iva=True,
-            codigo_iva=row[2],
+            codigo_iva=row[0],
             nombre_iva=row[1],
             discrimina_iva=row[3]
         )
