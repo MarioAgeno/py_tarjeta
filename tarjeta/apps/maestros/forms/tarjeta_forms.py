@@ -16,8 +16,9 @@ class TarjetaForm(CrudGenericForm):
 				forms.Select(attrs={**formclassselect}), 
 			'id_sucursal_tarjeta': 
 				forms.Select(attrs={**formclassselect}), 
-			'id_socio': 
-				forms.Select(attrs={**formclassselect}), 
+			'codigo_socio': 
+				forms.NumberInput(attrs={**formclasstext, 
+							'min': 0, 'max': 99999}),
 			'adicional': 
 				forms.NumberInput(attrs={**formclasstext, 
 							'min': 0, 'max': 99}),

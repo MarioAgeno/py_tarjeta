@@ -56,7 +56,7 @@ with transaction.atomic():
             mail_comercio=row[11],
             id_actividad=row[12],
             id_sucursal_comercio=row[13],
-            id_socio=row[14],
+            codigo_socio=row[14],
             id_iva_comercio=row[15],
             cuit_comercio=row[16],
             ingreso_bruto=row[17],

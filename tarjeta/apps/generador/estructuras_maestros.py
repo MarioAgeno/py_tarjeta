@@ -299,7 +299,7 @@ estructura_campos = {
             'fila_6': [
                 {'field_name': 'id_actividad', 'columna': 4},
                 {'field_name': 'id_sucursal_comercio', 'columna': 3},
-                {'field_name': 'id_socio', 'columna': 4},
+                {'field_name': 'codigo_socio', 'columna': 2},
             ],
             'fila_7': [
                 {'field_name': 'id_iva_comercio', 'columna': 3},
@@ -324,6 +324,7 @@ estructura_campos = {
         }
     },
 
+'''
     'socio': {
         'Información Socios': {
             'fila_1': [
@@ -364,6 +365,7 @@ estructura_campos = {
             ],
         }
     },
+'''
 
     'tarjeta': {
         'Información Tarjeta': {
@@ -372,7 +374,7 @@ estructura_campos = {
                 {'field_name': 'id_sucursal_tarjeta', 'columna': 3},
             ],
             'fila_2': [
-                {'field_name': 'id_socio', 'columna': 4},
+                {'field_name': 'codigo_socio', 'columna': 2},
                 {'field_name': 'adicional', 'columna': 2},
                 {'field_name': 'digito_verificador', 'columna': 2},
                 {'field_name': 'numero_tarjeta', 'columna': 3},

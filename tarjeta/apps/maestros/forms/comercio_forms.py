@@ -43,8 +43,9 @@ class ComercioForm(CrudGenericForm):
 				forms.Select(attrs={**formclassselect}), 
 			'id_sucursal_comercio': 
 				forms.Select(attrs={**formclassselect}), 
-			'id_socio': 
-				forms.Select(attrs={**formclassselect}), 
+			'codigo_socio': 
+				forms.NumberInput(attrs={**formclasstext, 
+							'min': 0, 'max': 99999}),
 			'id_iva_comercio': 
 				forms.Select(attrs={**formclassselect}), 
 			'cuit_comercio':

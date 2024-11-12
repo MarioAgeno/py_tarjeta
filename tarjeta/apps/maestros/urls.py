@@ -16,7 +16,7 @@ from .views.tarjeta_estado_views import *
 from .views.titulo_views import *
 from .views.plan_comercio_views import *
 from .views.comercio_views import *
-from .views.socio_views import *
+#from .views.socio_views import *
 from .views.tarjeta_views import *
 from .views.registro_limite_views import *
 from .views.liquidacion_socio_views import *
@@ -103,12 +103,6 @@ urlpatterns = [
 	path('comercio/nueva/', ComercioCreateView.as_view(), name='comercio_create'),
 	path('comercio/<int:pk>/editar/', ComercioUpdateView.as_view(), name='comercio_update'),
 	path('comercio/<int:pk>/eliminar/', ComercioDeleteView.as_view(), name='comercio_delete'),
-
-	#-- Socios.
-	path('socio/', SocioListView.as_view(), name='socio_list'),
-	path('socio/nueva/', SocioCreateView.as_view(), name='socio_create'),
-	path('socio/<int:pk>/editar/', SocioUpdateView.as_view(), name='socio_update'),
-	path('socio/<int:pk>/eliminar/', SocioDeleteView.as_view(), name='socio_delete'),
 
  	#-- Tarjetas.
 	path('tarjeta/', TarjetaListView.as_view(), name='tarjeta_list'),

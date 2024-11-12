@@ -1,13 +1,12 @@
 # tarjeta\apps\maestros\models\tarjeta_models.py
 from django.db import models
-#from datetime import date
 from .base_gen_models import ModeloBaseGenerico
 from .base_models import (Actividad, Sucursal, Localidad, Provincia, 
 						  TipoDocumentoIdentidad, Titulo, TarjetaEstado)
 from entorno.constantes_base import (SEGURO,
 	ESTATUS_GEN, PEP, TIPO_PERSONA)
 
-
+'''
 class Socio(ModeloBaseGenerico):
     id_socio = models.AutoField(primary_key=True)
     estatus_socio = models.BooleanField("Estatus*", default=True, choices=ESTATUS_GEN)
@@ -50,7 +49,7 @@ class Socio(ModeloBaseGenerico):
         verbose_name = ('Socio')
         verbose_name_plural = ('Socios')
         ordering = ['nombre_socio']
-
+'''
 
 class Tarjeta(ModeloBaseGenerico):
     id_tarjeta = models.AutoField(primary_key=True)
@@ -58,7 +57,7 @@ class Tarjeta(ModeloBaseGenerico):
     numero_tarjeta = models.BigIntegerField()  #  editable=False Campo entero para almacenar la concatenación
     id_sucursal_tarjeta = models.ForeignKey(Sucursal, on_delete=models.PROTECT, 
                                             verbose_name="Sucursal*")
-    id_socio = models.ForeignKey(Socio, on_delete=models.PROTECT, verbose_name="Socio*")
+    codigo_socio = models.IntegerField("Codigo Socio*", default=0)
     adicional = models.IntegerField("Adicional*")
     digito_verificador = models.IntegerField("Digito Verificador*")
     nombre_titular = models.CharField("Titular*", max_length=40, blank=True)
@@ -97,7 +96,7 @@ class Tarjeta(ModeloBaseGenerico):
         # Calcula `numero_tarjeta` usando operaciones aritméticas
         self.numero_tarjeta = (
             self.id_sucursal_tarjeta.id_sucursal * 100000000 +  # Deja espacio para los siguientes 8 dígitos
-            self.id_socio.id_socio * 1000 +            # Deja espacio para los siguientes 3 dígitos
+            self.codigo_socio * 1000 +            # Deja espacio para los siguientes 3 dígitos
             self.adicional * 10 +              # Deja espacio para el dígito verificador
             self.digito_verificador            # El último dígito
         )

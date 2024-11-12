@@ -3,7 +3,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from .base_gen_models import ModeloBaseGenerico
 from .base_models import (Plan, Actividad, Sucursal, Localidad, Provincia, TipoIva)
-from .tarjeta_models import Socio
+#from .tarjeta_models import Socio
 from entorno.constantes_base import ESTATUS_GEN
 
 
@@ -27,8 +27,7 @@ class Comercio(ModeloBaseGenerico):
                                      verbose_name="Actividad*")
     id_sucursal_comercio = models.ForeignKey(Sucursal, on_delete=models.PROTECT, 
                                              verbose_name="Sucursal*", db_column="id_sucursal")
-    id_socio = models.ForeignKey(Socio, on_delete=models.PROTECT, 
-                                 verbose_name="Socio*")
+    codigo_socio = models.IntegerField("Codigo Socio", default=0)
     id_iva_comercio = models.ForeignKey(TipoIva, on_delete=models.PROTECT, 
                                         verbose_name="IVA*", db_column="id_iva")
     cuit_comercio = models.DecimalField("CUIT*", db_column="cuit", max_digits=11, decimal_places=0)
