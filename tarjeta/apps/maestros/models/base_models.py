@@ -27,7 +27,7 @@ class Actividad(ModeloBaseGenerico):
                                             default=True, choices=ESTATUS_GEN)    
     nombre_actividad = models.CharField('Nombre', db_column="nombre", max_length=30, blank=True)
     interes_actividad = models.DecimalField('Interes(%)', db_column="interes", 
-                                            max_digits=6, decimal_places=2, 
+                                            max_digits=5, decimal_places=2, 
                                             validators=[MinValueValidator(0), 
 											            MaxValueValidator(100.00)])
     codigo_afip = models.IntegerField('Codigo de AFIP', db_column="afip", blank=True)
@@ -103,10 +103,10 @@ class Plan(ModeloBaseGenerico):
                                        default=True, choices=ESTATUS_GEN)
     nombre_plan = models.CharField("Nombre", max_length=30, db_column="nombre")
     cuotas_plan = models.IntegerField("Cuotas*", db_column="cuotas")
-    interes_plan = models.DecimalField("Interes(%)", db_column="interes", max_digits=4, decimal_places=2, 
+    interes_plan = models.DecimalField("Interes(%)", db_column="interes", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    costo_financiero_plan = models.DecimalField("Costo Financiero(%)", db_column="costo_financiero", max_digits=4, decimal_places=2, 
+    costo_financiero_plan = models.DecimalField("Costo Financiero(%)", db_column="costo_financiero", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
     vencimiento_plan = models.DateField(db_column="vencimiento")
@@ -192,14 +192,14 @@ class Empresa(ModeloBaseGenerico):
 
 class Parametro(ModeloBaseGenerico):
     id_parametro = models.AutoField(primary_key=True)
-    gastos = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
-    tasa = models.DecimalField("Tasa Mora(%)", max_digits=4, decimal_places=2, 
+    gastos = models.DecimalField(max_digits=14, decimal_places=2, blank=True)
+    tasa = models.DecimalField("Tasa Mora(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    punitorios = models.DecimalField("Interes Punitorio(%)", max_digits=4, decimal_places=2, 
+    punitorios = models.DecimalField("Interes Punitorio(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    minimo = models.DecimalField("Pago Minimo(%)", max_digits=4, decimal_places=2, 
+    minimo = models.DecimalField("Pago Minimo(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
     cierre_ultimo = models.DateField(blank=True)
@@ -208,51 +208,51 @@ class Parametro(ModeloBaseGenerico):
     vencimiento_ultimo = models.DateField(blank=True)
     vencimiento_actual = models.DateField(blank=True)
     vencimiento_proximo = models.DateField(blank=True)
-    retencion_debito_credito = models.DecimalField("Retencion DB/CD(%)", max_digits=4, decimal_places=2, 
+    retencion_debito_credito = models.DecimalField("Retencion DB/CD(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    retencion_ib_general = models.DecimalField("Renecion IIBB General(%)", max_digits=4, decimal_places=2, 
+    retencion_ib_general = models.DecimalField("Renecion IIBB General(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    retencion_ib = models.DecimalField("Retencion IIBB(%)", max_digits=4, decimal_places=2, 
+    retencion_ib = models.DecimalField("Retencion IIBB(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
     retencion_ib_minimo = models.DecimalField("Minimo Retencion IIBB", max_digits=14, decimal_places=2, 
 							 validators=[MinValueValidator(0), 
-										 MaxValueValidator(9999999999999.99)])
-    retencion_ganancia = models.DecimalField("Retencion Ganancias(%)", max_digits=4, decimal_places=2, 
+										 MaxValueValidator(999999999999.99)])
+    retencion_ganancia = models.DecimalField("Retencion Ganancias(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    retencion_ganancia_nc = models.DecimalField("Retencion Ganancias NC(%)", max_digits=4, decimal_places=2, 
+    retencion_ganancia_nc = models.DecimalField("Retencion Ganancias NC(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    retencion_ganancia_minimo = models.DecimalField("Minimo Retencion Ganancias", max_digits=15, decimal_places=2, 
+    retencion_ganancia_minimo = models.DecimalField("Minimo Retencion Ganancias", max_digits=14, decimal_places=2, 
 							 validators=[MinValueValidator(0), 
-										 MaxValueValidator(9999999999999.99)])
-    retencion_ganancia_minimo_nc = models.DecimalField("Minimo Retencion Ganancias NC", max_digits=15, decimal_places=2, 
+										 MaxValueValidator(999999999999.99)])
+    retencion_ganancia_minimo_nc = models.DecimalField("Minimo Retencion Ganancias NC", max_digits=14, decimal_places=2, 
 							 validators=[MinValueValidator(0), 
-										 MaxValueValidator(9999999999999.99)])
+										 MaxValueValidator(999999999999.99)])
     retencion_iva = models.DecimalField("Retencion IVA(%)", max_digits=4, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    retencion_iva_estacion_servicio = models.DecimalField("Retencion IVA Est.Servicios(%)", max_digits=4, decimal_places=2, 
+    retencion_iva_estacion_servicio = models.DecimalField("Retencion IVA Est.Servicios(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    retencion_iva_nc = models.DecimalField("Retencion IVA NC(%)", max_digits=4, decimal_places=2, 
+    retencion_iva_nc = models.DecimalField("Retencion IVA NC(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    retencion_iva_minimo = models.DecimalField("Minimo Retencion IVA", max_digits=15, decimal_places=2, 
+    retencion_iva_minimo = models.DecimalField("Minimo Retencion IVA", max_digits=14, decimal_places=2, 
 							 validators=[MinValueValidator(0), 
-										 MaxValueValidator(9999999999999.99)])
-    sello = models.DecimalField("Sellado(%)", max_digits=4, decimal_places=2, 
+										 MaxValueValidator(999999999999.99)])
+    sello = models.DecimalField("Sellado(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    seguro = models.DecimalField("Seguro Vida(%)", max_digits=4, decimal_places=2, 
+    seguro = models.DecimalField("Seguro Vida(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    dias_mora = models.DecimalField(max_digits=2, decimal_places=0, blank=True)
+    dias_mora = models.IntegerField(blank=True)
     mensaje = models.CharField(max_length=250, blank=True)
-    gastos_mail = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    gastos_mail = models.DecimalField(max_digits=14, decimal_places=2, blank=True)
     codigo_roela = models.CharField(max_length=10, blank=True)
 
     def __str__(self):

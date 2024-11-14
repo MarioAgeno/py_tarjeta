@@ -56,20 +56,22 @@ class ConfigViews():
 
 
 class DataViewList():
-	search_fields = ['razon_social_comercio', 'nombre_titular']
+	search_fields = ['razon_social_comercio', 'nombre_titular', 'cuit_comercio']
 	
 	ordering = ['razon_social_comercio']
 	
 	paginate_by = 8
 	  
 	table_headers = {
-		'razon_social_comercio': (4, 'Descripción'),
-		'nombre_titular': (4, 'Interes'),
-		'id_sucursal_comercio': (2, 'AFIP'),
-		'acciones': (2, 'Acciones'),
+		'estatus_comercio': (1, 'Estatus'),
+		'razon_social_comercio': (4, 'Razon social'),
+		'nombre_titular': (3, 'Titular'),
+		'id_sucursal_comercio': (2, 'Sucursal'),
+		'acciones': (1, 'Acciones'),
 	}
 	
 	table_data = [
+		{'field_name': 'estatus_comercio', 'date_format': None},
 		{'field_name': 'razon_social_comercio', 'date_format': None},
 		{'field_name': 'nombre_titular', 'date_format': None},
 		{'field_name': 'id_sucursal_comercio', 'date_format': None},

@@ -20,6 +20,8 @@ from .views.tarjeta_views import *
 from .views.registro_limite_views import *
 from .views.liquidacion_socio_views import *
 
+#-- Otras rutas.
+from .views.consulta_views_maestros import filtrar_localidad
 
 #-- Catálogos
 
@@ -123,4 +125,8 @@ urlpatterns = [
     
 	#-- Liquidacion Socios
 	path('liquidacionsocio/', LiquidacionSocioListView.as_view(), name='liquidacion_socio_list'),
+    
+	#-- Otras rutas.
+	path('filtrar-localidad/', filtrar_localidad, name='filtrar_localidad'),
+
 ]

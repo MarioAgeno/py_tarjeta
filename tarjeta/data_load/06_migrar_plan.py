@@ -67,6 +67,8 @@ with transaction.atomic():
 
         expected_id += 1 
 
+    # Eliminar los registros marcados como "BORRAR"
+    # Plan.objects.filter(nombre_plan="BORRAR").delete()
 
 # Cerrar la conexión
 conn.close()

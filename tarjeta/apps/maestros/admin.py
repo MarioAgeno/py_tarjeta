@@ -27,4 +27,3 @@ admin.site.register(Comercio)
 admin.site.register(Tarjeta)
 admin.site.register(RegitroLimite)
 admin.site.register(LiquidacionSocio)
-

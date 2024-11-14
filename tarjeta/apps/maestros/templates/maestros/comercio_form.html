@@ -56,7 +56,7 @@
 														{{ form.estatus_comercio }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.codigo_comercio.label }}
 														</label>
@@ -93,36 +93,36 @@
 														{{ form.domicilio_comercio }}
 													</div>
 						
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
-															{{ form.id_localidad_comercio.label }}
-														</label>
-														{{ form.id_localidad_comercio }}
-													</div>
-						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.id_provincia_comercio.label }}
 														</label>
 														{{ form.id_provincia_comercio }}
 													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.id_localidad_comercio.label }}
+														</label>
+														{{ form.id_localidad_comercio }}
+													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.telefono_comercio.label }}
 														</label>
 														{{ form.telefono_comercio }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.telefono2_comercio.label }}
 														</label>
 														{{ form.telefono2_comercio }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.movil_comercio.label }}
 														</label>
@@ -138,7 +138,7 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-4">
+													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
 															{{ form.id_actividad.label }}
 														</label>
@@ -152,7 +152,7 @@
 														{{ form.id_sucursal_comercio }}
 													</div>
 						
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.codigo_socio.label }}
 														</label>
@@ -160,7 +160,7 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.id_iva_comercio.label }}
 														</label>
@@ -179,6 +179,20 @@
 															{{ form.ingreso_bruto.label }}
 														</label>
 														{{ form.ingreso_bruto }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.porcentaje_consumo.label }}
+														</label>
+														{{ form.porcentaje_consumo }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.porcentaje_retencion_ib.label }}
+														</label>
+														{{ form.porcentaje_retencion_ib }}
 													</div>
 												</div>
 												<div class="row">
@@ -216,35 +230,20 @@
 														</label>
 														{{ form.acreditar_cuenta }}
 													</div>
-												</div>
-												<div class="row">
+						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.leido.label }}
 														</label>
 														{{ form.leido }}
 													</div>
-						
+												</div>
+												<div class="row">
 													<div class="col-md-6">
 														<label class="form-label text-primary mb-0">
 															{{ form.mensaje.label }}
 														</label>
 														{{ form.mensaje }}
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
-															{{ form.porcentaje_consumo.label }}
-														</label>
-														{{ form.porcentaje_consumo }}
-													</div>
-						
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
-															{{ form.porcentaje_retencion_ib.label }}
-														</label>
-														{{ form.porcentaje_retencion_ib }}
 													</div>
 												</div>
 											</div>
@@ -269,65 +268,102 @@
 		</div>
 	{% endblock principalcomponent %}
 {% endblock maincomponent %}
-<!-- -------------------------------------------------------------------- -->
-{% block modals %}
-	<!-- Modal para mostrar errores -->
-	{% include 'maestros/modal_errors.html' %}
-	
-	<!-- Modal para mostrar los requerimientos de los campos -->
-	{% include 'maestros/modal_fields_requirements.html' %}
-{% endblock modals %}
-<!-- -------------------------------------------------------------------- -->
-{% block footer %}
-{% endblock footer %}
-<!-- -------------------------------------------------------------------- -->
+
 {% block script %}
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-			const modalElement = document.getElementById('errorModal');
-			const hasErrors = modalElement.dataset.hasErrors === "true";
-			
-			// Mostrar el modal si hay errores
-			if (hasErrors) {
-				errorModal.show();
+{{ block.super }}
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+			// Limpiar sessionStorage al cargar la página para evitar mantener datos previos
+			sessionStorage.removeItem("provinciaSeleccionada");
+			sessionStorage.removeItem("localidadSeleccionada");
+		
+			const provinciaSelect = document.getElementById("id_id_provincia");
+			const localidadSelect = document.getElementById("id_id_localidad");
+
+			// Validar si se obtuvieron correctamente los elementos
+			if (!provinciaSelect) {
+					console.log('El elemento con id "id_id_provincia" no se encontró');
+					return;
 			}
 			
-			// Validación en tiempo real: remover clases al escribir.
-			// Seleccionar inputs y selects.
-			var inputs = document.querySelectorAll('input, select');
-			console.log(inputs);
-			inputs.forEach(function (input) {
-				// Para los campos de tipo input (text, number, etc.)
-				input.addEventListener('input', function () {
-					if (input.classList.contains('is-invalid')) {
-						// Eliminar la clase de borde rojo (border-danger).
-						input.classList.remove('is-invalid', 'border-danger');
-						// Agregar la clase de borde azul (border-primary).
-						input.classList.add('border-primary');
+			if (!localidadSelect) {
+					console.log('El elemento con id "id_id_localidad" no se encontró');
+					return;
+			}
+
+			// Función para resetear el select de localidad y el campo de código postal
+			function resetLocalidadSelect(defaultText) {
+					localidadSelect.innerHTML = `<option value="">${defaultText}</option>`;
+					localidadSelect.disabled = true;
+			}
+
+			// Almacena el código postal de cada localidad
+			let localidadesData = {};
+
+			// Función para cargar las localidades y seleccionar la correcta
+			function cargarLocalidades(provinciaId, localidadSeleccionadaId = null) {
+					const url = "{% url 'filtrar_localidad' %}?id_provincia=" + provinciaId;
+
+					resetLocalidadSelect("Seleccionar Localidad");
+
+					if (provinciaId) {
+							fetch(url)
+									.then(response => response.json())
+									.then(data => {
+											localidadSelect.disabled = false;
+											localidadesData = {}; // Reiniciar datos de localidad
+
+											data.localidad.forEach(localidad => {
+													localidadesData[localidad.id_localidad] = localidad.codigo_postal;
+													const option = new Option(localidad.nombre_completo, localidad.id_localidad);
+													localidadSelect.add(option);
+											});
+
+											// Si hay una localidad seleccionada (al editar o al volver de la modal)
+											if (localidadSeleccionadaId && localidadesData[localidadSeleccionadaId]) {
+													localidadSelect.value = localidadSeleccionadaId;
+													codigoPostalText.value = localidadesData[localidadSeleccionadaId];
+											}
+									});
 					}
-				});
-				// Para los combobox (select)
-				input.addEventListener('change', function () {
-					if (input.classList.contains('is-invalid')) {
-						// Eliminar la clase de borde rojo (border-danger).
-						input.classList.remove('is-invalid', 'border-danger');
-						// Agregar la clase de borde azul (border-primary).
-						input.classList.add('border-primary');
+			}
+
+			// Escucha el cambio en Provincia y carga las localidades correspondientes
+			provinciaSelect.addEventListener("change", function () {
+					const provinciaId = this.value;
+					
+					// Guardar selección de provincia en sessionStorage
+					sessionStorage.setItem("provinciaSeleccionada", provinciaId);
+					sessionStorage.removeItem("localidadSeleccionada"); // Resetear localidad en sesión
+
+					cargarLocalidades(provinciaId);  // Llamar sin localidad seleccionada
+			});
+
+			// Escucha el cambio en Localidad y actualiza el código postal
+			localidadSelect.addEventListener("change", function () {
+					const localidadId = this.value;
+					if (localidadId) {
+							codigoPostalText.value = localidadesData[localidadId] || "";
+							
+							// Guardar selección de localidad y código postal en sessionStorage
+							sessionStorage.setItem("localidadSeleccionada", localidadId);
+					} else {
+							codigoPostalText.value = "";
+							sessionStorage.removeItem("localidadSeleccionada"); // Limpiar localidad de sesión
 					}
-				});
-				
 			});
-			
-			// Al cerrar el modal, enfocar el primer campo con error
-			modalElement.addEventListener('hidden.bs.modal', function () {
-				// Buscar el primer campo con la clase 'is-invalid' después de que el modal esté completamente oculto
-				const firstInvalidField = document.querySelector('.is-invalid');
-				if (firstInvalidField) {
-					firstInvalidField.focus(); // Establecer el foco en el primer campo con error
-				}
-			});
-			
-		});
-	</script>
+		
+			// Detectar valores iniciales (para el caso de actualizar o volver de la modal)
+			const provinciaSeleccionada = sessionStorage.getItem("provinciaSeleccionada") || provinciaSelect.value;
+			const localidadSeleccionada = sessionStorage.getItem("localidadSeleccionada") || localidadSelect.value;
+
+			// Cargar localidades y seleccionar automáticamente la localidad al cargar la página
+			if (provinciaSeleccionada) {
+					cargarLocalidades(provinciaSeleccionada, localidadSeleccionada);
+			}
+		
+	});
+</script>
+
 {% endblock script %}
+

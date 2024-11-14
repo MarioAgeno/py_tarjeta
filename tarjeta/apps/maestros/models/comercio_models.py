@@ -39,10 +39,10 @@ class Comercio(ModeloBaseGenerico):
     exento_ganancias = models.BooleanField("Exento Ganancias", blank=True)
     mensaje = models.CharField("Mensaje", max_length=120, blank=True)
     leido = models.BooleanField("Leido", blank=True)
-    porcentaje_consumo = models.DecimalField("Cosumo(%)", db_column="consumo", max_digits=4, decimal_places=2, 
+    porcentaje_consumo = models.DecimalField("Cosumo(%)", db_column="consumo", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)])
-    porcentaje_retencion_ib = models.DecimalField("Rentecion IIBB(%)", db_column="retencion_ib", max_digits=4, decimal_places=2, 
+    porcentaje_retencion_ib = models.DecimalField("Rentecion IIBB(%)", db_column="retencion_ib", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
 											MaxValueValidator(100.00)]) 
 
@@ -60,15 +60,15 @@ class LiqudacionComercio(ModeloBaseGenerico):
     id_liquidacion_comercio = models.AutoField(primary_key=True)
     liquidacion_comercio = models.IntegerField("Numero Liquidacion", db_column="liquidacion")
     id_comercio = models.ForeignKey(Comercio, on_delete=models.PROTECT, verbose_name="Comercio*")
-    fecha_liquidacion = models.DateTimeField("Fecha", db_column="fecha")
-    importe_liquidacion = models.DecimalField("Importe Liquidacion", db_column="importe", max_digits=10, decimal_places=2)
-    importe_comision = models.DecimalField("Comision", db_column="comision", max_digits=10, decimal_places=2)
+    fecha_liquidacion = models.DateField("Fecha", db_column="fecha")
+    importe_liquidacion = models.DecimalField("Importe Liquidacion", db_column="importe", max_digits=14, decimal_places=2)
+    importe_comision = models.DecimalField("Comision", db_column="comision", max_digits=14, decimal_places=2)
     costo_financiero = models.DecimalField("Costo Financiero", max_digits=10, decimal_places=2)
-    retencion_ganancias = models.DecimalField("Retencion Ganancias", max_digits=10, decimal_places=2, blank=True)
-    retencion_iva = models.DecimalField("Retencion IVA", max_digits=10, decimal_places=2, blank=True)
-    retencio_ib = models.DecimalField("Retencion IIBB", max_digits=10, decimal_places=2, blank=True)
-    retencion_debito_credito = models.DecimalField("Retencion DB/CD", max_digits=10, decimal_places=2, blank=True)
-    total_liquidacion = models.DecimalField("Total", db_column="total", max_digits=10, decimal_places=2, blank=True)
+    retencion_ganancias = models.DecimalField("Retencion Ganancias", max_digits=14, decimal_places=2, blank=True)
+    retencion_iva = models.DecimalField("Retencion IVA", max_digits=14, decimal_places=2, blank=True)
+    retencio_ib = models.DecimalField("Retencion IIBB", max_digits=14, decimal_places=2, blank=True)
+    retencion_debito_credito = models.DecimalField("Retencion DB/CD", max_digits=14, decimal_places=2, blank=True)
+    total_liquidacion = models.DecimalField("Total", db_column="total", max_digits=14, decimal_places=2, blank=True)
 
     def __str__(self):
         return self.id_comercio

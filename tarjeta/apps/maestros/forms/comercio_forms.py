@@ -1,6 +1,7 @@
 # tarjeta\apps\maestros\forms\comercio_forms.py
 from django import forms
 from .crud_forms_generics import CrudGenericForm
+from ..models.base_models import *
 from ..models.comercio_models import Comercio
 from diseno_base.diseno_bootstrap import (
 	formclasstext, formclassselect, formclasscheck)
@@ -20,16 +21,16 @@ class ComercioForm(CrudGenericForm):
 							'min': 0, 'max': 99999999}),
 			'pin': 
 				forms.NumberInput(attrs={**formclasstext, 
-							'min': 0, 'max': 999}),
+							'readonly': True}),
 			'razon_social_comercio': 
 				forms.TextInput(attrs={**formclasstext}),
 			'nombre_titular': 
 				forms.TextInput(attrs={**formclasstext}),
 			'domicilio_comercio': 
 				forms.TextInput(attrs={**formclasstext}),
-			'id_localidad_comercio': 
-				forms.Select(attrs={**formclassselect}), 
 			'id_provincia_comercio': 
+				forms.Select(attrs={**formclassselect}), 
+			'id_localidad_comercio': 
 				forms.Select(attrs={**formclassselect}), 
 			'telefono_comercio': 
 				forms.TextInput(attrs={**formclasstext}),
@@ -73,3 +74,26 @@ class ComercioForm(CrudGenericForm):
 				forms.NumberInput(attrs={**formclasstext, 
                            'min': 0, 'max': 999, 'step': '0.01'}),
 		}
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		# Verifica si estamos editando un registro con provincia ya seleccionada
+		if self.instance and self.instance.pk and self.instance.id_provincia_comercio:
+
+			localidades = Localidad.objects.filter(id_provincia=self.instance.id_provincia_comercio).order_by('nombre_localidad')
+
+			# Configura el campo para mostrar 'nombre_localidad - codigo_postal'
+			self.fields['id_localidad_comercio'].choices = [
+				(loc.id_localidad, f"{loc.nombre_localidad} - {loc.codigo_postal}")
+				for loc in localidades
+			]
+   
+		else:
+			# En caso de nuevo registro o provincia no seleccionada, muestra un queryset vacío
+			# self.fields['id_localidad'].queryset = Localidad.objects.none()
+			self.fields['id_localidad_comercio'].choices = []
+			
+		# Opcional: si quieres que se muestre un mensaje de "Seleccione una localidad"
+		# self.fields['id_localidad'].empty_label = "Seleccione una localidad"
+		self.fields['id_localidad_comercio'].empty_label = "Seleccione una localidad"
+		

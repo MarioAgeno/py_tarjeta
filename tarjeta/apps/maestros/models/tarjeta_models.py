@@ -75,9 +75,9 @@ class Tarjeta(ModeloBaseGenerico):
     mail_tarjeta = models.EmailField(max_length=50, blank=True, 
                                      verbose_name="eMail")
     nombre_garantia = models.CharField(max_length=40, blank=True)
-    limite_maximo_tarjeta = models.DecimalField(max_digits=10, decimal_places=2, default=0,
+    limite_maximo_tarjeta = models.DecimalField(max_digits=12, decimal_places=2, default=0,
                                                 verbose_name="Limite de Compra*")
-    saldo_disponible = models.DecimalField(max_digits=10, decimal_places=2, default=0,
+    saldo_disponible = models.DecimalField(max_digits=12, decimal_places=2, default=0,
                                            verbose_name="Disponible*")
     id_titulo = models.ForeignKey(Titulo, on_delete=models.PROTECT, verbose_name="Titulo*")
     id_tarjeta_estado = models.ForeignKey(TarjetaEstado, on_delete=models.PROTECT, 
