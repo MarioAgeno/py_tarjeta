@@ -33,7 +33,7 @@ class LiquidacionSocio(ModeloBaseGenerico):
     importe_sellado = models.DecimalField("Sellado", db_column="sellado", max_digits=14, decimal_places=2, blank=True)
     importe_total = models.DecimalField("Importe Total", db_column="total", max_digits=14, decimal_places=2, blank=True)
     su_pago = models.DecimalField("Su Pago", max_digits=14, decimal_places=2, blank=True)
-    fecha_pago = models.DateTimeField("Fecha Pago", blank=True)
+    fecha_pago = models.DateField("Fecha Pago", blank=True)
     sucursal_pago = models.IntegerField("Sucursal Pago", blank=True)
 
     def __str__(self):
