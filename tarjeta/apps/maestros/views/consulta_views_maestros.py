@@ -1,4 +1,4 @@
-# tarjeta\apps\maestros\views\consulta_views_maestros.py
+# neumatic\apps\maestros\views\consulta_views_maestros.py
 from django.http import JsonResponse
 from ..models.base_models import Localidad
 

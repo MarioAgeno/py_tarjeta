@@ -38,95 +38,91 @@
 												class="accordion-button py-2 " 
 												type="button" 
 												data-bs-toggle="collapse" 
-												data-bs-target="#Información_General" 
+												data-bs-target="#Información_Sucursal" 
 												aria-expanded="true" 
-												aria-controls="Información_General">
-												<strong>Información Sucursales</strong>
+												aria-controls="Información_Sucursal">
+												<strong>Información Sucursal</strong>
 											</button>
 										</h2>
 										<div class="accordion-collapse collapse show"
-											id="Información_General">
+											id="Información_Sucursal">
 											<div class="accordion-body bg-secondary-subtle">
 		
 												<div class="row">
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.estatus_sucursal.label }}
 														</label>
 														{{ form.estatus_sucursal }}
 													</div>
-
+						
 													<div class="col-md-4">
 														<label class="form-label text-primary mb-0">
 															{{ form.nombre_sucursal.label }}
 														</label>
 														{{ form.nombre_sucursal }}
 													</div>
-                                                </div>
-
-                                                <div class="row">
-													<div class="col-md-4">
+												</div>
+												<div class="row">
+													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
 															{{ form.domicilio_sucursal.label }}
 														</label>
 														{{ form.domicilio_sucursal }}
 													</div>
-
-													<div class="col-md-4">
+						
+													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
 															{{ form.localidad_sucursal.label }}
 														</label>
 														{{ form.localidad_sucursal }}
-                                                    </div>
-
+													</div>
+						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.codigo_postal.label }}
 														</label>
 														{{ form.codigo_postal }}
 													</div>
-                                                </div>
-
-                                                <div class="row">
+												</div>
+												<div class="row">
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.telefono.label }}
 														</label>
 														{{ form.telefono }}
 													</div>
-
+						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.telefono2.label }}
 														</label>
 														{{ form.telefono2 }}
 													</div>
-
+						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.movil.label }}
 														</label>
 														{{ form.movil }}
 													</div>
-                                                </div>
-
-                                                <div class="row">
-													<div class="col-md-4">
+												</div>
+												<div class="row">
+													<div class="col-md-6">
 														<label class="form-label text-primary mb-0">
 															{{ form.mail.label }}
 														</label>
 														{{ form.mail }}
 													</div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-4">
+												</div>
+												<div class="row">
+													<div class="col-md-6">
 														<label class="form-label text-primary mb-0">
 															{{ form.ruta_archivo.label }}
 														</label>
 														{{ form.ruta_archivo }}
 													</div>
-                                                </div>
+												</div>
 											</div>
 										</div>
 									</div>

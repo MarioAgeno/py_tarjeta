@@ -4,6 +4,10 @@ import os
 import sys
 import django
 from django.db import connection
+from dotenv import load_dotenv  # Importa dotenv para cargar el .env
+
+# Carga las variables de entorno desde el archivo .env
+load_dotenv()
 
 # Agrega la ruta base del proyecto y la ruta interna del settings al PATH
 sys.path.append("D:/Python/PROYECTO_TARJETA/tarjeta")
@@ -17,12 +21,27 @@ from django.db import transaction
 from apps.maestros.models.base_models import Plan
 from apps.maestros.models.comercio_models import PlanComercio, Comercio
 
-# Conexión a la base de datos SQL Server
-conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER=PCMARIO\SQLEXPRESS;DATABASE=Tarjetas;UID=sa;PWD=maasoft')
+# Obtén los valores de las variables de entorno
+server = os.getenv("SQL_SERVER")
+database = os.getenv("SQL_DATABASE")
+username = os.getenv("SQL_USER")
+password = os.getenv("SQL_PASSWORD")
+driver = os.getenv("SQL_DRIVER")
+
+# Configura la conexión con las variables del .env
+conn = pyodbc.connect(
+    f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+)
 cursor = conn.cursor()
 
 # Query para obtener los datos de la tabla SQL Server
-cursor.execute("select tjPlanComercio.*, tjComercios.nombre  from tjPlanComercio inner join tjComercios on tjPlanComercio.idComercio = tjComercios.id")
+#cursor.execute("select tjPlanComercio.*, tjComercios.nombre  from tjPlanComercio inner join tjComercios on tjPlanComercio.idComercio = tjComercios.id")
+
+consulta ='''
+select tjPlanComercio.*, tjComercios.nombre  from tjPlanComercio inner join tjComercios on tjPlanComercio.idComercio = tjComercios.id
+	inner join tjPlanes on tjPlanComercio.idPlan = tjPlanes.id
+'''
+cursor.execute(consulta)
 
 def reset_modelo():
     # Elimina todos los registros del modelo `Plan_comercio` en Django
@@ -33,7 +52,7 @@ def reset_modelo():
         cursor.execute("DELETE FROM sqlite_sequence WHERE name='plan_comercio'")
 
 
-# Transacción para insertar los datos de titulos en Django
+# Transacción para insertar los datos de Planes Comercio en Django
 with transaction.atomic():
     reset_modelo()  # Eliminar datos existentes antes de migrar
 

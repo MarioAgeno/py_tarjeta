@@ -63,6 +63,7 @@ class DataViewList():
 	paginate_by = 8
 	
 	table_headers = {
+		'estatus_tipo_iva': (1, 'Estado'),
 		'nombre_iva': (2, 'Nombre'),
 		'codigo_iva': (2, 'Código IVA'),
 		'discrimina_iva': (2, 'Discrimina IVA'),
@@ -70,6 +71,7 @@ class DataViewList():
 	}
 	
 	table_data = [
+		{'field_name': 'estatus_tipo_iva', 'date_format': None},
 		{'field_name': 'nombre_iva', 'date_format': None},
 		{'field_name': 'codigo_iva', 'date_format': None},
 		{'field_name': 'discrimina_iva', 'date_format': None},

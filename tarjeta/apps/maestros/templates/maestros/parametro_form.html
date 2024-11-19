@@ -58,6 +58,21 @@
 						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
+															{{ form.gastos_mail.label }}
+														</label>
+														{{ form.gastos_mail }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.dias_mora.label }}
+														</label>
+														{{ form.dias_mora }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
 															{{ form.tasa.label }}
 														</label>
 														{{ form.tasa }}
@@ -78,21 +93,21 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.cierre_ultimo.label }}
 														</label>
 														{{ form.cierre_ultimo }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.cierre_actual.label }}
 														</label>
 														{{ form.cierre_actual }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.cierre_proximo.label }}
 														</label>
@@ -100,21 +115,21 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.vencimiento_ultimo.label }}
 														</label>
 														{{ form.vencimiento_ultimo }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.vencimiento_actual.label }}
 														</label>
 														{{ form.vencimiento_actual }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.vencimiento_proximo.label }}
 														</label>
@@ -122,14 +137,14 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_debito_credito.label }}
 														</label>
 														{{ form.retencion_debito_credito }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_iva_estacion_servicio.label }}
 														</label>
@@ -137,21 +152,21 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_ib_general.label }}
 														</label>
 														{{ form.retencion_ib_general }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_ib.label }}
 														</label>
 														{{ form.retencion_ib }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_ib_minimo.label }}
 														</label>
@@ -159,28 +174,28 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_ganancia.label }}
 														</label>
 														{{ form.retencion_ganancia }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_ganancia_minimo.label }}
 														</label>
 														{{ form.retencion_ganancia_minimo }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_ganancia_nc.label }}
 														</label>
 														{{ form.retencion_ganancia_nc }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_ganancia_minimo_nc.label }}
 														</label>
@@ -188,21 +203,21 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_iva.label }}
 														</label>
 														{{ form.retencion_iva }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_iva_nc.label }}
 														</label>
 														{{ form.retencion_iva_nc }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.retencion_iva_minimo.label }}
 														</label>
@@ -210,32 +225,18 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.sello.label }}
 														</label>
 														{{ form.sello }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.seguro.label }}
 														</label>
 														{{ form.seguro }}
-													</div>
-						
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
-															{{ form.dias_mora.label }}
-														</label>
-														{{ form.dias_mora }}
-													</div>
-						
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
-															{{ form.gastos_mail.label }}
-														</label>
-														{{ form.gastos_mail }}
 													</div>
 												</div>
 												<div class="row">

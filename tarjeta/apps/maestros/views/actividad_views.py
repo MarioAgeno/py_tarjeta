@@ -63,13 +63,15 @@ class DataViewList():
 	paginate_by = 8
 	  
 	table_headers = {
+		'estatus_actividad': (1, 'Estatus'),
 		'nombre_actividad': (4, 'Descripción'),
 		'interes_actividad': (2, 'Interes'),
-		'codigo_afip': (2, 'AFIP'),
+		'codigo_afip': (2, 'Codigo AFIP'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
+		{'field_name': 'estatus_actividad', 'date_format': None},
 		{'field_name': 'nombre_actividad', 'date_format': None},
 		{'field_name': 'interes_actividad', 'date_format': None},
 		{'field_name': 'codigo_afip', 'date_format': None},

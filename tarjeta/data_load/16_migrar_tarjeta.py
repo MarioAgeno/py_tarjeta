@@ -1,9 +1,13 @@
-# Migrar tabla Tarjea al  modelos DJango
+# Migrar tabla Tarjeta al  modelos DJango
 
 import os
 import sys
 import django
 from django.db import connection
+from dotenv import load_dotenv  # Importa dotenv para cargar el .env
+
+# Carga las variables de entorno desde el archivo .env
+load_dotenv()
 
 # Agrega la ruta base del proyecto y la ruta interna del settings al PATH
 sys.path.append("D:/Python/PROYECTO_TARJETA/tarjeta")
@@ -17,23 +21,32 @@ from django.db import transaction
 from apps.maestros.models.tarjeta_models import Tarjeta
 from apps.maestros.models.base_models import Localidad, Provincia, Titulo, Sucursal, TarjetaEstado
 
-# Conexión a la base de datos SQL Server
-conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER=PCMARIO\SQLEXPRESS;DATABASE=Tarjetas;UID=sa;PWD=maasoft')
+# Obtén los valores de las variables de entorno
+server = os.getenv("SQL_SERVER")
+database = os.getenv("SQL_DATABASE")
+username = os.getenv("SQL_USER")
+password = os.getenv("SQL_PASSWORD")
+driver = os.getenv("SQL_DRIVER")
+
+# Configura la conexión con las variables del .env
+conn = pyodbc.connect(
+    f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+)
 cursor = conn.cursor()
 
 # Query para obtener los datos de la tabla Tarjetas SQL Server
 cursor.execute("select * from tjTarjetas")
 
 def reset_modelo():
-    # Elimina todos los registros del modelo `Comercio` en Django
+    # Elimina todos los registros del modelo `tarjeta` en Django
     Tarjeta.objects.all().delete()
 
     # Resetea el contador autoincremental del campo `id`
     with connection.cursor() as cursor:
-        cursor.execute("DELETE FROM sqlite_sequence WHERE name='comercio'")
+        cursor.execute("DELETE FROM sqlite_sequence WHERE name='tarjeta'")
 
 
-# Transacción para insertar los datos de titulos en Django
+# Transacción para insertar los datos de las Tarjetas en Django
 with transaction.atomic():
     reset_modelo()  # Eliminar datos existentes antes de migrar
 
@@ -70,18 +83,18 @@ with transaction.atomic():
             print(f"No se encontró la Sucursal: {row[1]} para {row[0]} {row[5]}")
             continue
 
-        # Ajusta estos nombres de campo para que coincidan con tu modelo `Titulo` y la consulta SQL
+        # Ajusta estos nombres de campo para que coincidan con tu modelo `tarjeta` y la consulta SQL
         Tarjeta.objects.create(
             estatus_tarjeta=True,
             numero_tarjeta=row[0],
-            id_sucursal_tarjeta=sucursal,
+            id_sucursal=sucursal,
             codigo_socio=row[2],
             adicional=row[3],
             digito_verificador=row[4],
             nombre_titular=row[5],
             domicilio=row[6],
-            id_localidad_tarjeta=localidad,
-            id_provincia_tarjeta=provincia,
+            id_localidad=localidad,
+            id_provincia=provincia,
             telefono_tarjeta=row[10],
             telefono2_tarjeta=row[11] if row[11] is not None else '',
             movil_tarjeta=row[12],

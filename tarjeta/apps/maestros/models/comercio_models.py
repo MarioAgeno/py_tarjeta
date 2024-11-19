@@ -15,9 +15,9 @@ class Comercio(ModeloBaseGenerico):
     razon_social_comercio = models.CharField("Razon Social*", db_column="razon_social", max_length=40)
     nombre_titular = models.CharField("Titular*", db_column="titular", max_length=40)
     domicilio_comercio = models.CharField("Domicilio", db_column="domicilio", max_length=40)
-    id_localidad_comercio = models.ForeignKey(Localidad, on_delete=models.PROTECT, 
+    id_localidad = models.ForeignKey(Localidad, on_delete=models.PROTECT, 
                                               verbose_name="Localidad*", db_column="id_localidad")
-    id_provincia_comercio = models.ForeignKey(Provincia, on_delete=models.PROTECT, 
+    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT, 
                                               verbose_name="Provincia*", db_column="id_provincia")
     telefono_comercio = models.CharField("Telefono", db_column="telefono", max_length=15, blank=True)
     telefono2_comercio = models.CharField("Telefono 2", db_column="telefono2", max_length=15, blank=True)
@@ -25,11 +25,11 @@ class Comercio(ModeloBaseGenerico):
     mail_comercio = models.EmailField("eMail", db_column="mail", max_length=50, blank=True)
     id_actividad = models.ForeignKey(Actividad, on_delete=models.PROTECT, 
                                      verbose_name="Actividad*")
-    id_sucursal_comercio = models.ForeignKey(Sucursal, on_delete=models.PROTECT, 
+    id_sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT, 
                                              verbose_name="Sucursal*", db_column="id_sucursal")
     codigo_socio = models.IntegerField("Codigo Socio", default=0)
-    id_iva_comercio = models.ForeignKey(TipoIva, on_delete=models.PROTECT, 
-                                        verbose_name="IVA*", db_column="id_iva")
+    id_tipo_iva = models.ForeignKey(TipoIva, on_delete=models.PROTECT, default=1, 
+                                        verbose_name="IVA*", db_column="id_tipo_iva")
     cuit_comercio = models.DecimalField("CUIT*", db_column="cuit", max_digits=11, decimal_places=0)
     ingreso_bruto = models.CharField("Ingresos Brutos", max_length=15, blank=True)
     monto_fijo = models.BooleanField("Monto Fijo", blank=True)

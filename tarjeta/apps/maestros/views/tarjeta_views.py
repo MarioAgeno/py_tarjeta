@@ -63,18 +63,20 @@ class DataViewList():
 	paginate_by = 8
 	  
 	table_headers = {
+		'estatus_tarjeta': (1, 'Numero'),
 		'numero_tarjeta': (2, 'Numero'),
 		'nombre_titular': (3, 'Titular'),
-		'id_socio': (3, 'Socio'),
-		'id_localidad_tarjeta': (2, 'Localidad'),
+		'codigo_socio': (2, 'Socio'),
+		'id_localidad': (2, 'Localidad'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
+		{'field_name': 'estatus_tarjeta', 'date_format': None},
 		{'field_name': 'numero_tarjeta', 'date_format': None},
 		{'field_name': 'nombre_titular', 'date_format': None},
-		{'field_name': 'id_socio', 'date_format': None},
-		{'field_name': 'id_localidad_tarjeta', 'date_format': None},
+		{'field_name': 'codigo_socio', 'date_format': None},
+		{'field_name': 'id_localidad', 'date_format': None},
 	]
 
 

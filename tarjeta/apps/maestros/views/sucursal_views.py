@@ -63,6 +63,7 @@ class DataViewList():
 	paginate_by = 8
 	
 	table_headers = {
+		'estatus_sucursal': (2, 'Nombre'),
 		'nombre_sucursal': (2, 'Nombre'),
 		'domicilio_sucursal': (2, 'Domicilio'),
 		'localidad_sucursal': (2, 'Localidad'),
@@ -70,6 +71,7 @@ class DataViewList():
 	}
 	
 	table_data = [
+		{'field_name': 'estatus_sucursal', 'date_format': None},
 		{'field_name': 'nombre_sucursal', 'date_format': None},
 		{'field_name': 'domicilio_sucursal', 'date_format': None},
 		{'field_name': 'localidad_sucursal', 'date_format': None},

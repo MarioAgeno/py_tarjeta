@@ -63,9 +63,9 @@ class DataViewList():
 	paginate_by = 8
 	  
 	table_headers = {
-		'razon_social': (4, 'Descripción'),
-		'nombre_empresa': (4, 'Interes'),
-		'domicilio': (2, 'AFIP'),
+		'razon_social': (4, 'Razon Social'),
+		'nombre_empresa': (4, 'Empresa'),
+		'domicilio': (2, 'Domicilio'),
 		'acciones': (2, 'Acciones'),
 	}
 	

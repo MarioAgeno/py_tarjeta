@@ -63,15 +63,15 @@ class DataViewList():
 	paginate_by = 8
 	
 	table_headers = {
+		'codigo_postal': (1, 'Código Postal'),
 		'nombre_localidad': (2, 'Nombre Localidad'),
-		'codigo_postal': (2, 'Código Postal'),
 		'id_provincia': (2, 'Provincia'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
-		{'field_name': 'nombre_localidad', 'date_format': None},
 		{'field_name': 'codigo_postal', 'date_format': None},
+		{'field_name': 'nombre_localidad', 'date_format': None},
 		{'field_name': 'id_provincia', 'date_format': None},
 	]
 

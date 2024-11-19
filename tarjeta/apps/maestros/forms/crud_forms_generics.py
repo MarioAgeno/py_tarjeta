@@ -1,4 +1,4 @@
-# tarjeta\apps\maestros\forms\crud_forms_generics.py
+# neumatic\apps\maestros\forms\crud_forms_generics.py
 from django import forms
 
 

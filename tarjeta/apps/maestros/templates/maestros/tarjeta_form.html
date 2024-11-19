@@ -56,15 +56,22 @@
 														{{ form.estatus_tarjeta }}
 													</div>
 						
+													<div class="col-md-4">
+														<label class="form-label text-primary mb-0">
+															{{ form.id_sucursal.label }}
+														</label>
+														{{ form.id_sucursal }}
+													</div>
+						
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
-															{{ form.id_sucursal_tarjeta.label }}
+															{{ form.numero_tarjeta.label }}
 														</label>
-														{{ form.id_sucursal_tarjeta }}
+														{{ form.numero_tarjeta }}
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.codigo_socio.label }}
 														</label>
@@ -84,15 +91,22 @@
 														</label>
 														{{ form.digito_verificador }}
 													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-3">
+														<label class="form-label text-primary mb-0">
+															{{ form.nombre_titular.label }}
+														</label>
+														{{ form.nombre_titular }}
+													</div>
 						
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
-															{{ form.numero_tarjeta.label }}
+															{{ form.nombre_garantia.label }}
 														</label>
-														{{ form.numero_tarjeta }}
+														{{ form.nombre_garantia }}
 													</div>
-												</div>
-												<div class="row">
+						
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
 															{{ form.id_titulo.label }}
@@ -106,22 +120,45 @@
 														</label>
 														{{ form.id_tarjeta_estado }}
 													</div>
-						
+												</div>
+												<div class="row">
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.fecha_alta.label }}
 														</label>
 														{{ form.fecha_alta }}
 													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.vencimiento.label }}
+														</label>
+														{{ form.vencimiento }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.fecha_baja.label }}
+														</label>
+														{{ form.fecha_baja }}
+													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
-															{{ form.nombre_titular.label }}
+															{{ form.limite_maximo_tarjeta.label }}
 														</label>
-														{{ form.nombre_titular }}
+														{{ form.limite_maximo_tarjeta }}
 													</div>
 						
+													<div class="col-md-3">
+														<label class="form-label text-primary mb-0">
+															{{ form.saldo_disponible.label }}
+														</label>
+														{{ form.saldo_disponible }}
+													</div>
+												</div>
+												<div class="row">
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
 															{{ form.domicilio.label }}
@@ -131,16 +168,16 @@
 						
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
-															{{ form.id_localidad_tarjeta.label }}
+															{{ form.id_provincia.label }}
 														</label>
-														{{ form.id_localidad_tarjeta }}
+														{{ form.id_provincia }}
 													</div>
 						
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
-															{{ form.id_provincia_tarjeta.label }}
+															{{ form.id_localidad.label }}
 														</label>
-														{{ form.id_provincia_tarjeta }}
+														{{ form.id_localidad }}
 													</div>
 												</div>
 												<div class="row">
@@ -166,51 +203,15 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-4">
+													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
 															{{ form.mail_tarjeta.label }}
 														</label>
 														{{ form.mail_tarjeta }}
 													</div>
-						
-													<div class="col-md-4">
-														<label class="form-label text-primary mb-0">
-															{{ form.nombre_garantia.label }}
-														</label>
-														{{ form.nombre_garantia }}
-													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
-															{{ form.limite_maximo_tarjeta.label }}
-														</label>
-														{{ form.limite_maximo_tarjeta }}
-													</div>
-						
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
-															{{ form.saldo_disponible.label }}
-														</label>
-														{{ form.saldo_disponible }}
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-2">
-														<label class="form-label text-primary mb-0">
-															{{ form.fecha_baja.label }}
-														</label>
-														{{ form.fecha_baja }}
-													</div>
-						
-													<div class="col-md-2">
-														<label class="form-label text-primary mb-0">
-															{{ form.vencimiento.label }}
-														</label>
-														{{ form.vencimiento }}
-													</div>
-						
-													<div class="col-md-5">
+													<div class="col-md-6">
 														<label class="form-label text-primary mb-0">
 															{{ form.observacion.label }}
 														</label>

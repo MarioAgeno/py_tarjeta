@@ -6,7 +6,7 @@ from diseno_base.diseno_bootstrap import (formclassdate,
 	formclasstext, formclassselect, formclasscheck)
 
 class TarjetaForm(CrudGenericForm):
-	
+
 	class Meta:
 		model = Tarjeta
 		fields = '__all__'
@@ -14,7 +14,7 @@ class TarjetaForm(CrudGenericForm):
 		widgets = {
 			'estatus_tarjeta': 
 				forms.Select(attrs={**formclassselect}), 
-			'id_sucursal_tarjeta': 
+			'id_sucursal': 
 				forms.Select(attrs={**formclassselect}), 
 			'codigo_socio': 
 				forms.NumberInput(attrs={**formclasstext, 
@@ -31,9 +31,9 @@ class TarjetaForm(CrudGenericForm):
 				forms.TextInput(attrs={**formclasstext}),
 			'domicilio': 
 				forms.TextInput(attrs={**formclasstext}),
-			'id_localidad_tarjeta': 
+			'id_localidad': 
 				forms.Select(attrs={**formclassselect}), 
-			'id_provincia_tarjeta': 
+			'id_provincia': 
 				forms.Select(attrs={**formclassselect}), 
 			'telefono_tarjeta': 
 				forms.TextInput(attrs={**formclasstext}),

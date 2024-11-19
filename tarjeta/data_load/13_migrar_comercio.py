@@ -4,6 +4,10 @@ import os
 import sys
 import django
 from django.db import connection
+from dotenv import load_dotenv  # Importa dotenv para cargar el .env
+
+# Carga las variables de entorno desde el archivo .env
+load_dotenv()
 
 # Agrega la ruta base del proyecto y la ruta interna del settings al PATH
 sys.path.append("D:/Python/PROYECTO_TARJETA/tarjeta")
@@ -17,8 +21,17 @@ from django.db import transaction
 from apps.maestros.models.comercio_models import Comercio
 from apps.maestros.models.base_models import Localidad, Provincia, Actividad, Sucursal, TipoIva
 
-# Conexión a la base de datos SQL Server
-conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER=PCMARIO\SQLEXPRESS;DATABASE=Tarjetas;UID=sa;PWD=maasoft')
+# Obtén los valores de las variables de entorno
+server = os.getenv("SQL_SERVER")
+database = os.getenv("SQL_DATABASE")
+username = os.getenv("SQL_USER")
+password = os.getenv("SQL_PASSWORD")
+driver = os.getenv("SQL_DRIVER")
+
+# Configura la conexión con las variables del .env
+conn = pyodbc.connect(
+    f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+)
 cursor = conn.cursor()
 
 # Query para obtener los datos de la tabla SQL Server
@@ -33,13 +46,14 @@ def reset_modelo():
         cursor.execute("DELETE FROM sqlite_sequence WHERE name='comercio'")
 
 
-# Transacción para insertar los datos de titulos en Django
+# Transacción para insertar los datos de Comercios en Django
 with transaction.atomic():
     reset_modelo()  # Eliminar datos existentes antes de migrar
 
     for row in cursor.fetchall():
         # Depuración: imprime el contenido de la fila para verificar los datos
-        # print(row[0], row[2])  # Esto imprimirá cada fila obtenida de SQL Server
+        print(row[0], row[2], row[7], row[12], row[13], row[15])  # Esto imprimirá cada fila obtenida de SQL Server
+        #print(row)
 
         # Filtra las localidades por código postal y selecciona los campos 'id_localidad' y 'id_provincia_id'
         cp = row[7].strip()
@@ -47,7 +61,7 @@ with transaction.atomic():
         provincia = Provincia.objects.get(id_provincia=localidad.id_provincia_id)
         actividad = Actividad.objects.get(id_actividad=row[12])
         sucursal = Sucursal.objects.get(id_sucursal=row[13])
-        tipo_iva = TipoIva.objects.filter(codigo_iva=row[15]).first()
+        tipo_iva = TipoIva.objects.get(codigo_iva=row[15])
 
         # Verifica si se encontró una localidad con el código postal dado 
         if not localidad: 
@@ -78,16 +92,16 @@ with transaction.atomic():
             razon_social_comercio=row[2],
             nombre_titular=row[3],
             domicilio_comercio=row[4],
-            id_localidad_comercio=localidad,
-            id_provincia_comercio=provincia,
+            id_localidad=localidad,
+            id_provincia=provincia,
             telefono_comercio=row[8],
             telefono2_comercio=row[9] if row[9] is not None else '',
             movil_comercio=row[10],
             mail_comercio=row[11],
             id_actividad=actividad,
-            id_sucursal_comercio=sucursal,
+            id_sucursal=sucursal,
             codigo_socio=row[14],
-            id_iva_comercio=tipo_iva,
+            id_tipo_iva=tipo_iva,
             cuit_comercio=row[16],
             ingreso_bruto=row[17]  if row[17] is not None else '',
             monto_fijo=row[18] if row[18] is not None else 0,

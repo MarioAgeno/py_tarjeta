@@ -4,6 +4,10 @@ import os
 import sys
 import django
 from django.db import connection
+from dotenv import load_dotenv  # Importa dotenv para cargar el .env
+
+# Carga las variables de entorno desde el archivo .env
+load_dotenv()
 
 # Agrega la ruta base del proyecto y la ruta interna del settings al PATH
 sys.path.append("D:/Python/PROYECTO_TARJETA/tarjeta")
@@ -18,7 +22,20 @@ from apps.maestros.models.compra_models import Operacion
 from apps.maestros.models.liquidacion_models import Cuota
 
 # Conexión a la base de datos SQL Server
-conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER=PCMARIO\SQLEXPRESS;DATABASE=Tarjetas;UID=sa;PWD=maasoft')
+# conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER=HPMARIO\SQLEXPRESS;DATABASE=Tarjetas;UID=sa;PWD=maasoft')
+# cursor = conn.cursor()
+
+# Obtén los valores de las variables de entorno
+server = os.getenv("SQL_SERVER")
+database = os.getenv("SQL_DATABASE")
+username = os.getenv("SQL_USER")
+password = os.getenv("SQL_PASSWORD")
+driver = os.getenv("SQL_DRIVER")
+
+# Configura la conexión con las variables del .env
+conn = pyodbc.connect(
+    f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+)
 cursor = conn.cursor()
 
 # Query para obtener los datos de la tabla SQL Server
@@ -39,7 +56,7 @@ def reset_modelo():
         cursor.execute("DELETE FROM sqlite_sequence WHERE name='cuota'")
 
 
-# Transacción para insertar los datos de titulos en Django
+# Transacción para insertar los datos de Cuotas de Liquidaciones a Socios en Django
 with transaction.atomic():
     reset_modelo()  # Eliminar datos existentes antes de migrar
 
@@ -70,7 +87,7 @@ with transaction.atomic():
         # Incrementar el contador
         contador += 1
 
-        # Imprimir el contador cada 100 registros
+        # Imprimir el contador cada 1000 registros
         if contador % 1000 == 0:
             print(f"{contador} registros insertados...")
 

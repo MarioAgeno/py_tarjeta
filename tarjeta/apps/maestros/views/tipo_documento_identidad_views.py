@@ -65,15 +65,17 @@ class DataViewList():
 	paginate_by = 8
 	
 	table_headers = {
-		'descripcion_documento_identidad': (4, 'Nombre'),
+		'estatus_tipo_documento_identidad': (1, 'Estatus'),
 		'tipo_documento_identidad': (2, 'Tipo'),
+		'descripcion_documento_identidad': (4, 'Descripcion'),
 		'codigo_afip': (2, 'Código AFIP'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
-		{'field_name': 'descripcion_documento_identidad', 'date_format': None},
+		{'field_name': 'estatus_tipo_documento_identidad', 'date_format': None},
 		{'field_name': 'tipo_documento_identidad', 'date_format': None},
+		{'field_name': 'descripcion_documento_identidad', 'date_format': None},
 		{'field_name': 'codigo_afip', 'date_format': None},
 	]
 

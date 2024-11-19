@@ -139,10 +139,14 @@ class Titulo(ModeloBaseGenerico):
 
 class Sucursal(ModeloBaseGenerico):
     id_sucursal = models.AutoField(primary_key=True)
-    estatus_sucursal = models.BooleanField("Estatus", db_column="estatus", default=True, choices=ESTATUS_GEN)
-    nombre_sucursal = models.CharField("Nombre", db_column="nombre", max_length=30, blank=True)
-    domicilio_sucursal = models.CharField("Domicilio", db_column="domicilio", max_length=30, blank=True)
-    localidad_sucursal = models.CharField("Localidad", db_column="localidad", max_length=30, blank=True)
+    estatus_sucursal = models.BooleanField("Estatus",
+                                        db_column="estatus", default=True, choices=ESTATUS_GEN)
+    nombre_sucursal = models.CharField("Nombre",
+                                        db_column="nombre", max_length=30, blank=True)
+    domicilio_sucursal = models.CharField("Domicilio",
+                                        db_column="domicilio", max_length=30, blank=True)
+    localidad_sucursal = models.CharField("Localidad",
+                                        db_column="localidad", max_length=30, blank=True)
     codigo_postal = models.CharField("Codigo Postal", max_length=10, blank=True)
     telefono = models.CharField("Telefono", max_length=15, blank=True)
     telefono2 = models.CharField("Telefono", max_length=15, blank=True)
@@ -165,7 +169,8 @@ class Empresa(ModeloBaseGenerico):
     estatus_empresa = models.BooleanField("Estatus", db_column="estatus",
                                            default=True, choices=ESTATUS_GEN)
     razon_social = models.CharField("Razon Social", max_length=50, blank=True)
-    nombre_empresa = models.CharField("Nombre", db_column="nombre", max_length=50, blank=True)
+    nombre_empresa = models.CharField("Nombre", 
+                                    db_column="nombre", max_length=50, blank=True)
     domicilio = models.CharField("Domicilio", max_length=30, blank=True)
     localidad = models.CharField("Localidad", max_length=20, blank=True)
     provincia = models.CharField("Provincia", max_length=20, blank=True)
@@ -229,7 +234,7 @@ class Parametro(ModeloBaseGenerico):
     retencion_ganancia_minimo = models.DecimalField("Minimo Retencion Ganancias", max_digits=14, decimal_places=2, 
 							 validators=[MinValueValidator(0), 
 										 MaxValueValidator(999999999999.99)])
-    retencion_ganancia_minimo_nc = models.DecimalField("Minimo Retencion Ganancias NC", max_digits=14, decimal_places=2, 
+    retencion_ganancia_minimo_nc = models.DecimalField("Minimo Ret.Ganancias NC", max_digits=14, decimal_places=2, 
 							 validators=[MinValueValidator(0), 
 										 MaxValueValidator(999999999999.99)])
     retencion_iva = models.DecimalField("Retencion IVA(%)", max_digits=4, decimal_places=2, 
