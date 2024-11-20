@@ -56,20 +56,22 @@ class ConfigViews():
 
 
 class DataViewList():
-	search_fields = ['id_tarjeta']
+	search_fields = ['id_tarjeta__nombre_titular']
 	
-	ordering = ['id_tarjeta']
+	ordering = ['id_tarjeta', 'fecha_limite']
 	
 	paginate_by = 8
 	
 	table_headers = {
-		'id_tarjeta': (4, 'Titular'),
+		'estatus_registro_limite': (1, 'Titular'),
+		'id_tarjeta': (3, 'Titular'),
 		'maximo_limite': (3, 'Limite'),
 		'fecha_limite': (2, 'Vencimiento'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
+		{'field_name': 'estatus_registro_limite', 'date_format': None},
 		{'field_name': 'id_tarjeta', 'date_format': None},
 		{'field_name': 'maximo_limite', 'date_format': None},
 		{'field_name': 'fecha_limite', 'date_format': 'd/m/Y'},

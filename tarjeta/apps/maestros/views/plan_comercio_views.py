@@ -56,19 +56,21 @@ class ConfigViews():
 
 
 class DataViewList():
-	search_fields = ['id_plan', 'id_comercio']
+	search_fields = ['id_plan__nombre_plan', 'id_comercio__razon_social_comercio']
 	
 	ordering = ['id_plan']
 	
 	paginate_by = 8
 	
 	table_headers = {
+		'estatus_plan_comercio': (1, 'Estado'),
 		'id_plan': (4, 'Plan'),
 		'id_comercio': (6, 'Comercio'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
+		{'field_name': 'estatus_plan_comercio', 'date_format': None},
 		{'field_name': 'id_plan', 'date_format': None},
 		{'field_name': 'id_comercio', 'date_format': None},
 	]

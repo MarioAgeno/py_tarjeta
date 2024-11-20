@@ -66,7 +66,7 @@ class DataViewList():
 		'estatus_comercio': (1, 'Estatus'),
 		'razon_social_comercio': (4, 'Razon social'),
 		'nombre_titular': (3, 'Titular'),
-		'id_sucursal_comercio': (2, 'Sucursal'),
+		'id_sucursal': (2, 'Sucursal'),
 		'acciones': (1, 'Acciones'),
 	}
 	
@@ -74,7 +74,7 @@ class DataViewList():
 		{'field_name': 'estatus_comercio', 'date_format': None},
 		{'field_name': 'razon_social_comercio', 'date_format': None},
 		{'field_name': 'nombre_titular', 'date_format': None},
-		{'field_name': 'id_sucursal_comercio', 'date_format': None},
+		{'field_name': 'id_sucursal', 'date_format': None},
 	]
 
 

@@ -24,9 +24,10 @@ class TarjetaForm(CrudGenericForm):
 							'min': 0, 'max': 99}),
 			'digito_verificador': 
 				forms.NumberInput(attrs={**formclasstext, 
-							'min': 0, 'max': 9}),
+							'readonly': True}),
 			'numero_tarjeta':  
-				forms.NumberInput(attrs={**formclasstext}), 
+				forms.NumberInput(attrs={**formclasstext, 
+							'readonly': True}), 
 			'nombre_titular': 
 				forms.TextInput(attrs={**formclasstext}),
 			'domicilio': 
@@ -46,19 +47,19 @@ class TarjetaForm(CrudGenericForm):
 			'nombre_garantia': 
 				forms.TextInput(attrs={**formclasstext}),
 			'limite_maximo_tarjeta': 
-				forms.NumberInput(attrs={**formclasstext, 
+				forms.NumberInput(attrs={**formclasstext, 'readonly': True, 
                            'min': 0, 'max': 999999999, 'step': '0.01'}),
 			'saldo_disponible': 
-				forms.NumberInput(attrs={**formclasstext, 
+				forms.NumberInput(attrs={**formclasstext, 'readonly': True,
                            'min': 0, 'max': 999999999, 'step': '0.01'}),
 			'id_titulo': 
 				forms.Select(attrs={**formclassselect}), 
 			'id_tarjeta_estado': 
 				forms.Select(attrs={**formclassselect}), 
 			'fecha_alta': 
-				forms.TextInput(attrs={'type':'date', **formclassdate}),
+				forms.TextInput(attrs={'type':'date', **formclassdate, 'readonly': True}),
 			'fecha_baja': 
-				forms.TextInput(attrs={'type':'date', **formclassdate}),
+				forms.TextInput(attrs={'type':'date', **formclassdate, 'readonly': True}),
 			'vencimiento': 
 				forms.TextInput(attrs={'type':'date', **formclassdate}),
 			'liquidacion_mail': 

@@ -13,6 +13,8 @@ class ParametroForm(CrudGenericForm):
 		fields = '__all__'
 
 		widgets = {
+			'id_empresa': 
+				forms.Select(attrs={**formclassselect}),			
 			'gastos': 
 				forms.NumberInput(attrs={**formclasstext, 'min': 0, 'max': 99999999}),
 			'tasa': 

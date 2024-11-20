@@ -63,11 +63,13 @@ class DataViewList():
 	paginate_by = 8
 	  
 	table_headers = {
+		'estatus_titulo': (1, 'Estado'),
 		'titulo': (4, 'Descripción'),
 		'acciones': (2, 'Acciones'),
 	}
 	
 	table_data = [
+		{'field_name': 'estatus_titulo', 'date_format': None},
 		{'field_name': 'titulo', 'date_format': None},
 	]
 

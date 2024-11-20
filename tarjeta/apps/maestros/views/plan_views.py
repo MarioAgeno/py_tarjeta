@@ -63,6 +63,7 @@ class DataViewList():
 	paginate_by = 8
 	  
 	table_headers = {
+		'estatus_plan': (1, 'Nombre'),
 		'nombre_plan': (4, 'Nombre'),
 		'cuotas_plan': (2, 'Cuotas'),
 		'vencimiento_plan': (2, 'Vencimiento'),
@@ -70,6 +71,7 @@ class DataViewList():
 	}
 
 	table_data = [
+		{'field_name': 'estatus_plan', 'date_format': None},
 		{'field_name': 'nombre_plan', 'date_format': None},
 		{'field_name': 'cuotas_plan', 'date_format': None},
 		{'field_name': 'vencimiento_plan', 'date_format': 'd/m/Y'},

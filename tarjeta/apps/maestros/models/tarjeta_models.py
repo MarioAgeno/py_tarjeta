@@ -73,7 +73,7 @@ class RegitroLimite(ModeloBaseGenerico):
     maximo_limite = models.DecimalField(max_digits=14, decimal_places=2)
 
     def __str__(self):
-        return str(self.id_tarjeta)
+        return str(self.id_tarjeta.nombre_titular)
     
     class Meta:
         db_table = 'registro_limite'

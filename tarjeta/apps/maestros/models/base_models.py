@@ -46,7 +46,7 @@ class TipoIva(ModeloBaseGenerico):
     id_tipo_iva = models.AutoField(primary_key=True)
     estatus_tipo_iva = models.BooleanField("Estatus", db_column="estatus", 
                                            default=True, choices=ESTATUS_GEN)    
-    codigo_iva = models.CharField("Codigo", db_column="codigo",  max_length=4)
+    codigo_iva = models.CharField("Codigo", db_column="codigo",  max_length=4, unique=True)
     nombre_iva = models.CharField("Nombre", db_column="nombre", 
                                   max_length=20, blank=True)
     discrimina_iva = models.BooleanField(blank=True)
@@ -65,7 +65,7 @@ class TipoDocumentoIdentidad(ModeloBaseGenerico):
     id_tipo_documento_identidad = models.AutoField(primary_key=True)
     estatus_tipo_documento_identidad = models.BooleanField("Estatus", db_column="estatus", 
                                                            default=True, choices=ESTATUS_GEN)
-    tipo_documento_identidad = models.CharField(max_length=4, db_column="tipo")
+    tipo_documento_identidad = models.CharField(max_length=4, db_column="tipo", unique=True)
     descripcion_documento_identidad = models.CharField(max_length=25, db_column="descripcion")
     codigo_afip = models.CharField(max_length=2, db_column="codigo_afip")
 
@@ -197,6 +197,7 @@ class Empresa(ModeloBaseGenerico):
 
 class Parametro(ModeloBaseGenerico):
     id_parametro = models.AutoField(primary_key=True)
+    id_empresa = models.OneToOneField(Empresa, on_delete=models.CASCADE, default=1)
     gastos = models.DecimalField(max_digits=14, decimal_places=2, blank=True)
     tasa = models.DecimalField("Tasa Mora(%)", max_digits=5, decimal_places=2, 
 								validators=[MinValueValidator(0), 
@@ -274,7 +275,7 @@ class Provincia(ModeloBaseGenerico):
 	id_provincia = models.AutoField(primary_key=True)
 	estatus_provincia = models.BooleanField("Estatus", db_column="estatus", default=True,
 											choices=ESTATUS_GEN)
-	codigo_provincia = models.CharField("Código", db_column="codigo", max_length=1)
+	codigo_provincia = models.CharField("Código", db_column="codigo", max_length=1, unique=True)
 	nombre_provincia = models.CharField("Nombre", db_column="nombre", max_length=30)
 
 	def __str__(self):

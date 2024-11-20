@@ -59,22 +59,24 @@ estructura_campos = {
         'Información Sucursal': {
             'fila_1': [
                 {'field_name': 'estatus_sucursal', 'columna': 2},
-                {'field_name': 'nombre_sucursal', 'columna': 4},
             ],
             'fila_2': [
-                {'field_name': 'domicilio_sucursal', 'columna': 3},
-                {'field_name': 'localidad_sucursal', 'columna': 3},
+                {'field_name': 'nombre_sucursal', 'columna': 4},
                 {'field_name': 'codigo_postal', 'columna': 2},
             ],
             'fila_3': [
+                {'field_name': 'domicilio_sucursal', 'columna': 3},
+                {'field_name': 'localidad_sucursal', 'columna': 3},
+            ],
+            'fila_4': [
                 {'field_name': 'telefono', 'columna': 2},
                 {'field_name': 'telefono2', 'columna': 2},
                 {'field_name': 'movil', 'columna': 2},
             ],
-            'fila_4': [
+            'fila_5': [
                 {'field_name': 'mail', 'columna': 6},
             ],
-            'fila_5': [
+            'fila_6': [
                 {'field_name': 'ruta_archivo', 'columna': 6},
             ],
         }
@@ -84,10 +86,12 @@ estructura_campos = {
         'Información Plan': {
             'fila_1': [
                 {'field_name': 'estatus_plan', 'columna': 2},
+            ],
+            'fila_2': [
                 {'field_name': 'nombre_plan', 'columna': 4},
                 {'field_name': 'vencimiento_plan', 'columna': 2},
             ],
-            'fila_2': [
+            'fila_3': [
                 {'field_name': 'interes_plan', 'columna': 2},
                 {'field_name': 'costo_financiero_plan', 'columna': 2},
                 {'field_name': 'cuotas_plan', 'columna': 2}
@@ -103,9 +107,9 @@ estructura_campos = {
                 {'field_name': 'nombre_empresa', 'columna': 4},
             ],
             'fila_2': [
-                {'field_name': 'domicilio', 'columna': 3},
-                {'field_name': 'localidad', 'columna': 3},
-                {'field_name': 'provincia', 'columna': 3},
+                {'field_name': 'domicilio', 'columna': 2},
+                {'field_name': 'localidad', 'columna': 2},
+                {'field_name': 'provincia', 'columna': 2},
                 {'field_name': 'codigo_postal', 'columna': 2},
             ],
             'fila_3': [
@@ -136,6 +140,9 @@ estructura_campos = {
 
     'parametro': {
         'Información Parámetros': {
+            'fila_0': [
+                {'field_name': 'id_empresa', 'columna': 3},
+            ],
             'fila_1': [
                 {'field_name': 'gastos', 'columna': 2},
                 {'field_name': 'gastos_mail', 'columna': 2},
@@ -214,41 +221,45 @@ estructura_campos = {
         'Información Planes de Comercios': {
             'fila_1': [
                 {'field_name': 'estatus_plan_comercio', 'columna': 2},
-                {'field_name': 'id_plan', 'columna': 4},
             ],
             'fila_2': [
-                {'field_name': 'id_comercio', 'columna': 4},
+                {'field_name': 'id_plan', 'columna': 4},
             ],
+            'fila_3': [
+                {'field_name': 'id_comercio', 'columna': 4},
+            ]
         }
     },
 
     'comercio': {
         'Información Comercios': {
-            'fila_1': [
+            'fila_0': [
                 {'field_name': 'estatus_comercio', 'columna': 2},
+                {'field_name': 'id_sucursal', 'columna': 4},
+            ],
+            'fila_1': [
                 {'field_name': 'codigo_comercio', 'columna': 2},
                 {'field_name': 'pin', 'columna': 2},
-                {'field_name': 'id_sucursal', 'columna': 3},
+                {'field_name': 'codigo_socio', 'columna': 2},
             ],
             'fila_2': [
-                {'field_name': 'codigo_socio', 'columna': 2},
-                {'field_name': 'razon_social_comercio', 'columna': 4},
-                {'field_name': 'nombre_titular', 'columna': 4},
+                {'field_name': 'nombre_titular', 'columna': 3},
+                {'field_name': 'razon_social_comercio', 'columna': 3},
             ],
             'fila_3': [
-                {'field_name': 'domicilio_comercio', 'columna': 4},
-                {'field_name': 'id_provincia', 'columna': 2},
-                {'field_name': 'id_localidad', 'columna': 2},
+                {'field_name': 'domicilio_comercio', 'columna': 3},
             ],
             'fila_4': [
+                {'field_name': 'id_provincia', 'columna': 3},
+                {'field_name': 'id_localidad', 'columna': 3},
+            ],
+            'fila_5': [
                 {'field_name': 'telefono_comercio', 'columna': 2},
                 {'field_name': 'telefono2_comercio', 'columna': 2},
                 {'field_name': 'movil_comercio', 'columna': 2},
             ],
-            'fila_5': [
-                {'field_name': 'mail_comercio', 'columna': 4},
-            ],
             'fila_6': [
+                {'field_name': 'mail_comercio', 'columna': 3},
                 {'field_name': 'id_actividad', 'columna': 3},
             ],
             'fila_7': [
@@ -264,11 +275,13 @@ estructura_campos = {
                 {'field_name': 'monto_fijo', 'columna': 2},
                 {'field_name': 'exento_ganancias', 'columna': 2},
                 {'field_name': 'estacion_servicio', 'columna': 2},
+            ],
+            'fila_10': [
                 {'field_name': 'debito_credito', 'columna': 2},
                 {'field_name': 'acreditar_cuenta', 'columna': 2},
                 {'field_name': 'leido', 'columna': 2},
             ],
-            'fila_10': [
+            'fila_11': [
                 {'field_name': 'mensaje', 'columna': 6},
             ],
         }
@@ -279,7 +292,7 @@ estructura_campos = {
             'fila_1': [
                 {'field_name': 'estatus_tarjeta', 'columna': 2},
                 {'field_name': 'id_sucursal', 'columna': 4},
-                {'field_name': 'numero_tarjeta', 'columna': 3},
+                {'field_name': 'numero_tarjeta', 'columna': 2},
             ],
             'fila_2': [
                 {'field_name': 'codigo_socio', 'columna': 2},
@@ -289,6 +302,8 @@ estructura_campos = {
             'fila_3': [
                 {'field_name': 'nombre_titular', 'columna': 3},
                 {'field_name': 'nombre_garantia', 'columna': 3},
+            ],
+            'fila_3b': [
                 {'field_name': 'id_titulo', 'columna': 3},
                 {'field_name': 'id_tarjeta_estado', 'columna': 3},
             ],
@@ -298,8 +313,8 @@ estructura_campos = {
                 {'field_name': 'fecha_baja', 'columna': 2},
             ],
             'fila_5': [
-                {'field_name': 'limite_maximo_tarjeta', 'columna': 3},
-                {'field_name': 'saldo_disponible', 'columna': 3},
+                {'field_name': 'limite_maximo_tarjeta', 'columna': 2},
+                {'field_name': 'saldo_disponible', 'columna': 2},
             ],
             'fila_6': [
                 {'field_name': 'domicilio', 'columna': 3},

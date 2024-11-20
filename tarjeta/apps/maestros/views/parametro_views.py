@@ -63,13 +63,15 @@ class DataViewList():
 	paginate_by = 8
 
 	table_headers = {
-		'vencimiento_ultimo': (3, 'Vencimiento Anterior'),
-		'vencimiento_actual': (3, 'Vencimiento Actual'),
-		'vencimiento_proximo': (3, 'Vencimiento Proximo'),
+		'id_empresa': (3, 'Empresa'),
+		'vencimiento_ultimo': (2, 'Vencimiento Anterior'),
+		'vencimiento_actual': (2, 'Vencimiento Actual'),
+		'vencimiento_proximo': (2, 'Vencimiento Proximo'),
 		'acciones': (2, 'Acciones'),
 	}
 
 	table_data = [
+		{'field_name': 'id_empresa', 'date_format': None},
 		{'field_name': 'vencimiento_ultimo', 'date_format': 'd/m/Y'},
 		{'field_name': 'vencimiento_actual', 'date_format': 'd/m/Y'},
 		{'field_name': 'vencimiento_proximo', 'date_format': 'd/m/Y'},
