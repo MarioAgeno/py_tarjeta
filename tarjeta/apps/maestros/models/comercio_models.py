@@ -1,9 +1,11 @@
 # tarjeta\apps\maestros\models\comercio_models.py
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+import re
 from .base_gen_models import ModeloBaseGenerico
 from .base_models import (Plan, Actividad, Sucursal, Localidad, Provincia, TipoIva)
-#from .tarjeta_models import Socio
+from utils.validatos.validaciones import validar_cuit
 from entorno.constantes_base import ESTATUS_GEN
 
 
@@ -19,9 +21,9 @@ class Comercio(ModeloBaseGenerico):
                                               verbose_name="Localidad*", db_column="id_localidad")
     id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT, 
                                               verbose_name="Provincia*", db_column="id_provincia")
-    telefono_comercio = models.CharField("Telefono", db_column="telefono", max_length=15, blank=True)
+    telefono_comercio = models.CharField("Telefono*", db_column="telefono", max_length=15)
     telefono2_comercio = models.CharField("Telefono 2", db_column="telefono2", max_length=15, blank=True)
-    movil_comercio = models.CharField("Movil", db_column="movil", max_length=15, blank=True)
+    movil_comercio = models.CharField("Movil*", db_column="movil", max_length=15)
     mail_comercio = models.EmailField("eMail", db_column="mail", max_length=50, blank=True)
     id_actividad = models.ForeignKey(Actividad, on_delete=models.PROTECT, 
                                      verbose_name="Actividad*")
@@ -48,7 +50,31 @@ class Comercio(ModeloBaseGenerico):
 
     def __str__(self):
         return self.razon_social_comercio
-    
+
+    def clean(self):
+        super().clean()
+		
+        errors = {}
+		
+        telefono_str = str(self.telefono_comercio) if self.telefono_comercio else ''
+        movil_comercio_str = str(self.movil_comercio) if self.movil_comercio else ''
+		
+        try:
+            validar_cuit(self.cuit_comercio)
+        except ValidationError as e:
+            errors['cuit_comercio'] = e.messages
+		
+        if not re.match(r'^\+?\d[\d ]{0,14}$', telefono_str):
+            errors.update({'telefono_comercio': 'Debe indicar sólo dígitos numéricos positivos, mínimo 1 y máximo 15, el signo + y espacios.'})
+		
+        if movil_comercio_str and not re.match(r'^\+?\d[\d ]{0,14}$', movil_comercio_str):
+            errors.update({'movil_comercio': 'Debe indicar sólo dígitos numéricos positivos, mínimo 1 y máximo 15, el signo +, espacios o vacío.'})
+		
+		
+        if errors:
+            raise ValidationError(errors)
+
+
     class Meta:
         db_table = 'comercio'
         verbose_name = ('Comercio')

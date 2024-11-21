@@ -75,11 +75,13 @@ class ComercioForm(CrudGenericForm):
                            'min': 0, 'max': 999, 'step': '0.01'}),
 		}
 
+
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		# Verifica si estamos editando un registro con provincia ya seleccionada
 		if self.instance and self.instance.pk and self.instance.id_provincia:
-
+			# self.fields['id_localidad'].queryset = Localidad.objects.filter(id_provincia=self.instance.id_provincia).order_by('nombre_localidad')
+   
 			localidades = Localidad.objects.filter(id_provincia=self.instance.id_provincia).order_by('nombre_localidad')
 
 			# Configura el campo para mostrar 'nombre_localidad - codigo_postal'
@@ -94,6 +96,26 @@ class ComercioForm(CrudGenericForm):
 			self.fields['id_localidad'].choices = []
 			
 		# Opcional: si quieres que se muestre un mensaje de "Seleccione una localidad"
-		# self.fields['id_localidad'].empty_label = "Seleccione una localidad"
 		self.fields['id_localidad'].empty_label = "Seleccione una localidad"
 		
+		###################################################################################
+		#-- Si es un nuevo registro.
+		if not self.instance.pk:
+			self.fields['id_sucursal'].initial = self.initial.get('id_sucursal')
+			#-- Deshabilita el campo.
+			self.fields['id_sucursal'].widget.attrs['disabled'] = True
+		else:
+			#-- Configuración en modo edición.
+			self.fields['id_sucursal'].widget = forms.HiddenInput()
+			self.fields['id_sucursal'].required = False
+			self.initial['id_sucursal'] = self.instance.id_sucursal		
+	
+	def clean(self):
+		cleaned_data = super().clean()
+		#-- Asignar automáticamente id_sucursal si el formulario está en modo edición.
+		if self.instance.pk:
+			cleaned_data['id_sucursal'] = self.instance.id_sucursal
+			#-- Remover id_sucursal de la validación en modo edición.
+			self._errors.pop('id_sucursal', None)
+		return cleaned_data
+	
