@@ -48,65 +48,111 @@
 							
 							<div class="card-body">
 								{% if form.errors %}
-									<div class="alert alert-danger alert-dismissible fade show">{{ form.errors }}</div>
+									<div class="alert alert-danger alert-dismissible fade show">
+										<ul>
+											{% for field in form %}
+												{% if field.errors %}
+													<li class="text-danger">{{ field.label }}:
+														<ul>
+															{% for error in field.errors %}
+																<li class="text-danger">{{ error }}</li>
+															{% endfor %}
+														</ul>
+													</li>
+												{% endif %}
+											{% endfor %}
+										</ul>
+									</div>
 								{% endif %}
 								
-								<form method="post">
+								<form method="post" novalidate>
 									{% csrf_token %}
 									
 									<!-- Datos del Usuario -->
 									<div class="bg-primary bg-opacity-75 rounded-2">
 										<h6 class="py-2 px-1 text-white">Datos del Usuario</h6>
 									</div>
-									<div class="form-group">
-										<label for="usuario">Nombre de Usuario</label>
-										<input type="text" class="form-control" id="usuario" name="username" value="{{ form.username.value | default:'' }}" autocomplete="off">
-										<div class="form-text">
-											<ul class="mb-0">
-												<li>Campo requerido.</li>
-												<li>150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</li>
-											</ul>
+									
+ 									<div class="row">
+										
+										<div class="col-md-6">
+											<label class="form-label text-primary mb-0">
+												{{ form.username.label }}
+											</label>
+											{{ form.username }}
+											<div class="form-text">
+												<ul class="mb-0">
+													<li>Campo requerido.</li>
+													<li>150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</li>
+												</ul>
+											</div>
 										</div>
-									</div>
-									<div class="form-group mt-2">
-										<label for="email">Correo electrónico</label>
-										<input type="email" class="form-control" id="email" name="email" value="{{ form.email.value | default:'' }}" autocomplete="off">
-										<div class="form-text">
-											<ul class="mb-0">
-												<li>Campo requerido.</li>
-												<li>Debe ser un correo válido.</li>
-											</ul>
+										
+										<div class="col-md-6">
+											<label class="form-label text-primary mb-0">
+												{{ form.email.label }}
+											</label>
+											{{ form.email }}
+											<div class="form-text">
+												<ul class="mb-0">
+													<li>Campo requerido.</li>
+													<li>150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</li>
+												</ul>
+											</div>
 										</div>
+										
 									</div>
 									
+									<!-- ***************************************************************************************************************************** -->
 									<div class="row">
 										<div class="col-lg-6 mt-2">
 											<!-- Información Personal -->
 											<div class="bg-primary opacity-75 rounded-2">
 												<h6 class="py-2 px-1 text-white">Información Personal</h6>
 											</div>
-											<div class="form-group">
-												<label for="nombre">Nombre</label>
-												<input type="text" class="form-control" id="nombre" name="first_name" value="{{ form.first_name.value | default:'' }}" autocomplete="off">
-											</div>
-											<div class="form-group mt-2">
-												<label for="apellido">Apellido</label>
-												<input type="text" class="form-control" id="apellido" name="last_name" value="{{ form.last_name.value | default:'' }}" autocomplete="off">
-											</div>
+											
+											<label class="form-label text-primary mb-0">
+												{{ form.first_name.label }}
+											</label>
+											{{ form.first_name }}
+											
+											<label class="form-label text-primary mb-0">
+												{{ form.last_name.label }}
+											</label>
+											{{ form.last_name }}
+											
+											<label class="form-label text-primary mb-0">
+												{{ form.iniciales.label }}
+											</label>
+											{{ form.iniciales }}
+											
+											<label class="form-label text-primary mb-0">
+												{{ form.jerarquia.label }}
+											</label>
+											{{ form.jerarquia }}
+											
 										</div>
 										<div class="col-lg-6 mt-2">
 											<!-- Datos Adicionales -->
 											<div class="bg-primary opacity-75 rounded-2">
 												<h6 class="py-2 px-1 text-white">Datos Adicionales</h6>
 											</div>
-											<div class="form-group">
-												<label for="correo-alt">Correo Alternativo</label>
-												<input type="text" class="form-control" id="correo-alt" name="email_alt" value="{{ form.email_alt.value | default:'' }}" autocomplete="off">
-											</div>
-											<div class="form-group mt-2">
-												<label for="telefono">Teléfono</label>
-												<input type="text" class="form-control" id="telefono" name="telefono" value="{{ form.telefono.value | default:'' }}" autocomplete="off">
-											</div>
+											
+											<!-- <label class="form-label text-primary mb-0">
+												{{ form.email_alt.label }}
+											</label>
+											{{ form.email_alt }} -->
+											
+											<label class="form-label text-primary mb-0">
+												{{ form.telefono.label }}
+											</label>
+											{{ form.telefono }}
+											
+											<label class="form-label text-primary mb-0">
+												{{ form.id_sucursal.label }}
+											</label>
+											{{ form.id_sucursal }}
+											
 										</div>
 									</div>
 									
@@ -115,17 +161,16 @@
 										<h6 class="py-2 px-1 text-white">Permisos</h6>
 									</div>
 									
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="activo" name="is_active" {% if form.is_active.value %}checked{% endif %}>
-										<label class="form-check-label" for="activo">
-											Activo
+									<div class="col-12">
+										<label class="form-label text-primary mb-0">
+											{{ form.is_active }}
+											{{ form.is_active.label }}
 										</label>
 									</div>
-									
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="activo" name="is_staff" {% if form.is_staff.value %}checked{% endif %}>
-										<label class="form-check-label" for="activo">
-											Staff
+									<div class="col-12">
+										<label class="form-label text-primary mb-0">
+											{{ form.is_staff }}
+											{{ form.is_staff.label }}
 										</label>
 									</div>
 									
@@ -228,7 +273,6 @@
 								</form>
 							</div>
 						</div>
-						
 						
 					</div>
 				</main>

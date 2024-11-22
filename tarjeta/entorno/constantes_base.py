@@ -9,24 +9,9 @@ TIPO_PERSONA = [
     ("J", 'Juridica'),
 ]
 
-CONDICION_VENTA = [
-    (1, 'Contado'),
-    (2, 'Cuenta Corriente'),
-]
-
-CONDICION_COMPRA = [
-    (1, 'Contado'),
-    (2, 'Cuenta Corriente'),
-]
-
 SEXO = [
     ("M", 'Masculino'),
     ("F", 'Femenino'),
-]
-
-BLACK_LIST = [
-    (True, 'Si'),
-    (False, 'No'),
 ]
 
 PEP = [

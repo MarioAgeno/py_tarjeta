@@ -17,6 +17,8 @@ Including another URLconf
 # neumatic\neumatic\urls.py
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import home_view
 
 urlpatterns = [
@@ -24,4 +26,4 @@ urlpatterns = [
     path('', home_view, name='home'),
     path('usuarios/', include('apps.usuarios.urls')),
     path('maestros/', include('apps.maestros.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,4 +1,4 @@
-# D:\PROJECT_NEUMATIC\neumatic\apps\usuarios\forms\user_form.py
+# neumatic\apps\usuarios\forms\user_form.py
 from django import forms
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
@@ -7,11 +7,21 @@ from django.contrib.auth.models import Group
 #from apps.usuarios.models.user_models import User
 from apps.usuarios.models import User
 
+from diseno_base.diseno_bootstrap import (
+	formclasstext, formclassselect, formclasscheck)
 
 # -- Registrar Usuario 
 class RegistroUsuarioForm(UserCreationForm):
 	
-	email = forms.EmailField(required=True)
+	password1 = forms.CharField(
+		label="Contraseña",
+		widget=forms.PasswordInput(attrs={**formclasstext})
+	)
+	password2 = forms.CharField(
+		label="Confirmar Contraseña",
+		widget=forms.PasswordInput(attrs={**formclasstext})
+	)
+	
 	
 	class Meta:
 		model = User
@@ -24,14 +34,40 @@ class RegistroUsuarioForm(UserCreationForm):
 			'telefono',
 			'is_active',
 			'is_staff',
+			'iniciales',
+			'jerarquia',
+			'id_sucursal',
 			'password1',
-			'password2'
+			'password2',
 		]
+		
+		widgets = {
+			'username': 
+				forms.TextInput(attrs={**formclasstext}),
+			'first_name': 
+				forms.TextInput(attrs={**formclasstext}),
+			'last_name': 
+				forms.TextInput(attrs={**formclasstext}),
+			'email': 
+				forms.EmailInput(attrs={**formclasstext}),
+			'email_alt': 
+				forms.TextInput(attrs={**formclasstext}),
+			'telefono': 
+				forms.TextInput(attrs={**formclasstext}),
+			'is_active': 
+				forms.CheckboxInput(attrs={**formclasscheck}),
+			'is_staff': 
+				forms.CheckboxInput(attrs={**formclasscheck}),
+			'iniciales': 
+				forms.TextInput(attrs={**formclasstext}),
+			'jerarquia': 
+				forms.TextInput(attrs={**formclasstext}),
+			'id_sucursal': 
+				forms.Select(attrs={**formclassselect}),
+		}
 
 class EditarUsuarioForm(UserChangeForm):
 	
-	email = forms.EmailField(required=True)
-	
 	class Meta:
 		model = User
 		fields = [
@@ -43,7 +79,35 @@ class EditarUsuarioForm(UserChangeForm):
 			'telefono',
 			'is_active',
 			'is_staff',
+			'iniciales',
+			'jerarquia',
+			'id_sucursal',
 		]
+		
+		widgets = {
+			'username': 
+				forms.TextInput(attrs={**formclasstext}),
+			'first_name': 
+				forms.TextInput(attrs={**formclasstext}),
+			'last_name': 
+				forms.TextInput(attrs={**formclasstext}),
+			'email': 
+				forms.TextInput(attrs={**formclasstext}),
+			'email_alt': 
+				forms.TextInput(attrs={**formclasstext}),
+			'telefono': 
+				forms.TextInput(attrs={**formclasstext}),
+			'is_active': 
+				forms.CheckboxInput(attrs={**formclasscheck}),
+			'is_staff': 
+				forms.CheckboxInput(attrs={**formclasscheck}),
+			'iniciales': 
+				forms.TextInput(attrs={**formclasstext}),
+			'jerarquia': 
+				forms.TextInput(attrs={**formclasstext}),
+			'id_sucursal': 
+				forms.Select(attrs={**formclassselect}),
+		}
 
 class GroupForm(forms.ModelForm):
 	class Meta:

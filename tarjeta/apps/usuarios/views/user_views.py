@@ -1,4 +1,4 @@
-# D:\PROJECT_NEUMATIC\neumatic\apps\usuarios\views\user_views.py
+# neumatic\apps\usuarios\views\user_views.py
 from django.urls import reverse_lazy
 
 #from django.contrib.auth import authenticate, login, logout
@@ -7,6 +7,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 #from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import authenticate
+from django.contrib import messages
 
 from .user_views_generics import *
 from apps.usuarios.forms.user_form import *
@@ -22,13 +25,67 @@ project_app_labels = ['usuarios', 'maestros', 'facturacion']
 #-- Vista Login. 
 class CustomLoginView(GenericLoginView):
 	template_name = 'usuarios/sesion_iniciar.html'
+	
+	def form_valid(self, form):
+		#-- Llama al método original para autenticar al usuario.
+		response = super().form_valid(form)
+		
+		#-- Obtener el usuario autenticado.
+		user = form.get_user()
+		
+		#-- Guardar los datos del usuario en la sesión.
+		self.request.session['username'] = user.username
+		self.request.session['first_name'] = user.first_name
+		self.request.session['last_name'] = user.last_name
+		self.request.session['is_superuser'] = user.is_superuser
+		self.request.session['is_staff'] = user.is_staff
+		
+		return response
+	
+	def form_invalid(self, form):
+		#-- Obtiene el nombre de usuario y contraseña enviados.
+		username = form.data.get("username")
+		password = form.data.get("password")
+		
+		#-- Verifica si el campo de usuario está vacío.
+		if not username:
+			messages.error(self.request, "El campo de usuario es obligatorio.")
+		elif not password:
+			messages.error(self.request, "El campo de contraseña es obligatorio.")
+		else:
+			#-- Verifica si el usuario existe en la base de datos.
+			try:
+				user = User.objects.get(username=username)
+				#-- Verifica si el usuario está activo.
+				if not user.is_active:
+					messages.error(self.request, "El usuario no está activo.")
+				else:
+					#-- Si el usuario está activo, intenta autenticar.
+					user = authenticate(username=username, password=password)
+					if not user:
+						messages.error(self.request, "Contraseña incorrecta.")
+			except User.DoesNotExist:
+				messages.error(self.request, "El usuario no existe.")
+		
+		#-- Llama a form_invalid para manejar el error.
+		return super().form_invalid(form)
 
 
 #-- Vista Logout. 
 class CustomLogoutView(GenericLogoutView):
 	template_name = 'usuarios/sesion_cerrar.html'
 	http_method_names = ["get", "post", "options"]  # He tenido que incluir el método GET para que funcione. NO DEBERÍA SER!!!
-
+	
+	def dispatch(self, request, *args, **kwargs):
+		#-- Limpiar los datos del usuario de la sesión.
+		request.session.pop('username', None)
+		request.session.pop('first_name', None)
+		request.session.pop('last_name', None)
+		request.session.pop('is_superuser', None)
+		request.session.pop('is_staff', None)
+		 
+		#-- Llama al método original para cerrar la sesión.
+		return super().dispatch(request, *args, **kwargs)
 
 #-- Vistas de Grupos de usuarios. 
 #@method_decorator(login_required, name='dispatch')

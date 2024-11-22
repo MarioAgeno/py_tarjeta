@@ -1,7 +1,8 @@
 # tarjeta\apps\maestros\models\base_models.py
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-#from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError
+import re
 from .base_gen_models import ModeloBaseGenerico
 from entorno.constantes_base import ESTATUS_GEN
 

@@ -5,9 +5,6 @@ from django.db import models
 from .base_gen_models import ModeloBaseGenerico
 from .tarjeta_models import Tarjeta
 from .compra_models import Operacion
-from entorno.constantes_base import (
-	ESTATUS_GEN, CONDICION_VENTA, SEXO, 
-	TIPO_PERSONA, BLACK_LIST)
 
 class LiquidacionSocio(ModeloBaseGenerico):
     id_liquidacion_socio = models.AutoField(primary_key=True)
