@@ -2,6 +2,9 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.db.models import Q
 from django.http import JsonResponse
+from django.db import transaction
+from django.db.models import ProtectedError
+
 
 #-- Recursos necesarios para proteger las rutas.
 from django.utils.decorators import method_decorator
@@ -45,9 +48,20 @@ class MaestroListView(ListView):
 			except ValueError:
 				pass
 		
-		#-- Obtener la cadena de filtro.
+		#-- Obtener la cadena de filtro (Propuesto y recomendado por ChatGPT).
 		query = self.request.GET.get('busqueda', None)
 		
+		if query:
+			#-- Generar filtros dinámicamente.
+			search_conditions = Q()
+			for field in self.search_fields:
+				search_conditions |= Q(**{f"{field}__icontains": query})
+			
+			queryset = queryset.filter(search_conditions)
+		
+		return queryset.order_by(*self.ordering)
+		
+		''' Método original de Ricardo y Leoncio. (No seguro)
 		#-- Crear la cadena de filtro en base a la lista search_fields-
 		cadena_filtro = ""
 		for field in self.search_fields:
@@ -64,7 +78,7 @@ class MaestroListView(ListView):
 		# Ordenar el queryset según la lista ordering
 		queryset = queryset.order_by(*self.ordering)
 		
-		return queryset
+		return queryset'''
 	
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -104,14 +118,32 @@ class MaestroListView(ListView):
 class MaestroCreateView(PermissionRequiredMixin, CreateView):
 	list_view_name = None
 	
+	def form_valid(self, form):
+		#-- Accede al usuario evaluado.
+		user = self.request.user
+		
+		#-- Asigna el usuario directamente en el modelo.
+		form.instance.id_user = user
+		form.instance.usuario = user.username
+		
+		try:
+			#-- Manejo de transacciones.
+			with transaction.atomic():
+				return super().form_valid(form)
+		
+		except Exception as e:
+			#-- Captura el error de transacción.
+			context = self.get_context_data(form)
+			context['data_has_erors'] = True
+			context['transaction_error'] = str(e)
+			return self.render_to_response(context)
+	
 	def form_invalid(self, form):
 		"""
 		Si el formulario no es válido, renderiza el formulario con los errores.
 		"""
 		
-		#-- Establecer el contexto con la información sobre errores.
 		context = self.get_context_data(form=form)
-		#-- Indicar que hay errores.
 		context['data_has_errors'] = True
 		
 		return self.render_to_response(context)
@@ -119,14 +151,18 @@ class MaestroCreateView(PermissionRequiredMixin, CreateView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		
+		#-- Agregar datos comunes al contexto.
+		context.update({
+			"accion": f"Crear {self.model._meta.verbose_name}",
+			"list_view_name": self.list_view_name,
+		})		
+		
 		#-- Controlar mostrar o no el modal con los errors de validación.
 		#-- Inicialmente, no hay errores.
-		if 'data_has_errors' not in context:
-			context['data_has_errors'] = False
+		context['data_has_errors'] = False
 		
 		#-- Asegurarse de que el formulario en el contexto sea el mismo que se validó
-		if 'form' not in context:
-			context['form'] = self.get_form()
+		context['form'] = self.get_form()
 		context['requerimientos'] = obtener_requerimientos_modelo(self.model)
 		
 		return context
@@ -141,6 +177,16 @@ class MaestroCreateView(PermissionRequiredMixin, CreateView):
 class MaestroUpdateView(PermissionRequiredMixin, UpdateView):
 	list_view_name = None
 	
+	def form_valid(self, form):
+		#-- Accede al usuario evaluado.
+		user = self.request.user
+		
+		#-- Asigna el usuario directamente en el modelo.
+		form.instance.id_user = user
+		form.instance.usuario = user.username
+		
+		return super().form_valid(form)
+	
 	def form_invalid(self, form):
 		"""
 		Si el formulario no es válido, renderiza el formulario con los errores.
@@ -156,14 +202,21 @@ class MaestroUpdateView(PermissionRequiredMixin, UpdateView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		
+		#-- Obtener el objeto que se está editando.
+		registro = self.get_object()
+		
+		#-- Agregar información personalizada al contexto.
+		context.update({
+			"accion": f"Editar {self.model._meta.verbose_name} - {registro.pk}",
+			"list_view_name": self.list_view_name,
+		})
+		
 		#-- Controlar mostrar o no el modal con los errors de validación.
 		#-- Inicialmente, no hay errores.
-		if 'data_has_errors' not in context:
-			context['data_has_errors'] = False
+		context['data_has_errors'] = False
 		
 		#-- Asegurarse de que el formulario en el contexto sea el mismo que se validó
-		if 'form' not in context:
-			context['form'] = self.get_form()
+		context['form'] = self.get_form()
 		context['requerimientos'] = obtener_requerimientos_modelo(self.model)
 		
 		return context
@@ -178,10 +231,38 @@ class MaestroUpdateView(PermissionRequiredMixin, UpdateView):
 class MaestroDeleteView(PermissionRequiredMixin, DeleteView):
 	list_view_name = None
 	
+	# def get_context_data(self, **kwargs):
+	# 	#-- Llamar al contexto base.
+	# 	context = super().get_context_data(**kwargs)
+	# 	
+	# 	#-- Obtener el objeto que se está eliminando.
+	# 	registro = self.get_object()
+	# 	
+	# 	#-- Agregar datos comunes al contexto.
+	# 	context.update({
+	# 		"accion": f"Eliminar {self.model._meta.verbose_name} - {registro.pk}",
+	# 		"list_view_name": self.list_view_name,
+	# 		"mensaje": "Estás seguro de eliminar el Registro"
+	# 	})
+	# 	
+	# 	return context	
+	
 	#-- Método que agrega mensaje cuando no tiene permiso de eliminar.
 	def handle_no_permission(self):
 		messages.error(self.request, 'No tienes permiso para realizar esta acción.')
 		return redirect(self.list_view_name)
+	
+	def post(self, request, *args, **kwargs):
+		try:
+			with transaction.atomic():
+				return self.delete(request, *args, **kwargs)
+		except ProtectedError:
+			messages.error(request, 'No se puede eliminar el registro ya que está relacionado con otros archivos.')
+			return redirect(self.success_url)
+		except Exception as e:
+			messages.error(request, f'Ocurrió un error inesperado al intentar eliminar: {str(e)}')
+			return redirect(self.success_url)
+
 # ------------------------------------------------------------------------------------
 
 

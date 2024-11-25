@@ -74,10 +74,15 @@
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.pin.label }}
+															<button type="button" class="btn btn-primary btn-sm" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;" id="generatePinBtn">
+																Nuevo PIN
+															</button>
 														</label>
-														{{ form.pin }}
+														<div class="input-group">
+															{{ form.pin }}
+														</div>
 													</div>
-						
+												
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.codigo_socio.label }}
@@ -349,8 +354,20 @@
 				// Si no hay una provincia seleccionada, deshabilitar el combo de localidades
 				cargarLocalidades(provinciaSeleccionada);  // Llamar sin localidad seleccionada
 			}
-			
-			
 		});
 	</script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const generatePinBtn = document.getElementById("generatePinBtn");
+			const pinField = document.getElementById("id_pin");  // Asegúrate de que coincida con el id del campo
+	
+			generatePinBtn.addEventListener("click", function() {
+				// Genera un número aleatorio de 3 dígitos 
+				const randomPin = Math.floor(100 + Math.random() * 900); 
+				pinField.value = randomPin;
+			});
+		});
+	</script>
+	
 {% endblock script %}

@@ -114,12 +114,19 @@ class ComercioCreateView(MaestroCreateView):
 	#-- Indicar el permiso que requiere para ejecutar la acción.
 	# (revisar de donde lo copiaste que tienes asignado permission_change en vez de permission_add)
 	permission_required = ConfigViews.permission_add
-	
+
+	'''
 	extra_context = {
 		"accion": f"Crear {ConfigViews.model._meta.verbose_name}",
 		"list_view_name" : ConfigViews.list_view_name
 	}
+	'''
 
+	def get_initial(self):
+		initial = super().get_initial()
+		#-- Asignar la sucursal del usuario autenticado como valor inicial.
+		initial['id_sucursal'] = self.request.user.id_sucursal
+		return initial
 
 # ComercioUpdateView
 class ComercioUpdateView(MaestroUpdateView):

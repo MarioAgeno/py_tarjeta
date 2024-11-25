@@ -12,7 +12,7 @@ from entorno.constantes_base import ESTATUS_GEN
 class Comercio(ModeloBaseGenerico):
     id_comercio = models.AutoField(primary_key=True)
     estatus_comercio = models.BooleanField("Estatus*", db_column="estatus", default=True, choices=ESTATUS_GEN)
-    codigo_comercio = models.IntegerField("Codigo*", db_column="codigo")
+    codigo_comercio = models.IntegerField("Codigo*", db_column="codigo", unique=True)
     pin = models.IntegerField()
     razon_social_comercio = models.CharField("Razon Social*", db_column="razon_social", max_length=40)
     nombre_titular = models.CharField("Titular*", db_column="titular", max_length=40)
@@ -69,7 +69,6 @@ class Comercio(ModeloBaseGenerico):
 		
         if movil_comercio_str and not re.match(r'^\+?\d[\d ]{0,14}$', movil_comercio_str):
             errors.update({'movil_comercio': 'Debe indicar sólo dígitos numéricos positivos, mínimo 1 y máximo 15, el signo +, espacios o vacío.'})
-		
 		
         if errors:
             raise ValidationError(errors)

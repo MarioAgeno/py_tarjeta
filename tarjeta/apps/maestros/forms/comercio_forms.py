@@ -1,4 +1,5 @@
 # tarjeta\apps\maestros\forms\comercio_forms.py
+import random
 from django import forms
 from .crud_forms_generics import CrudGenericForm
 from ..models.base_models import *
@@ -18,10 +19,10 @@ class ComercioForm(CrudGenericForm):
 				forms.Select(attrs={**formclassselect}), 
 			'codigo_comercio': 
 				forms.NumberInput(attrs={**formclasstext, 
-							'min': 0, 'max': 99999999}),
+							'min': 1, 'max': 99999999}),
 			'pin': 
 				forms.NumberInput(attrs={**formclasstext, 
-							'readonly': True}),
+							'min': 0, 'max': 999, 'readonly': True}),
 			'razon_social_comercio': 
 				forms.TextInput(attrs={**formclasstext}),
 			'nombre_titular': 
@@ -43,7 +44,7 @@ class ComercioForm(CrudGenericForm):
 			'id_actividad': 
 				forms.Select(attrs={**formclassselect}), 
 			'id_sucursal': 
-				forms.Select(attrs={**formclassselect}), 
+				forms.Select(attrs={**formclassselect}),  
 			'codigo_socio': 
 				forms.NumberInput(attrs={**formclasstext, 
 							'min': 0, 'max': 99999}),
@@ -80,8 +81,6 @@ class ComercioForm(CrudGenericForm):
 		super().__init__(*args, **kwargs)
 		# Verifica si estamos editando un registro con provincia ya seleccionada
 		if self.instance and self.instance.pk and self.instance.id_provincia:
-			# self.fields['id_localidad'].queryset = Localidad.objects.filter(id_provincia=self.instance.id_provincia).order_by('nombre_localidad')
-   
 			localidades = Localidad.objects.filter(id_provincia=self.instance.id_provincia).order_by('nombre_localidad')
 
 			# Configura el campo para mostrar 'nombre_localidad - codigo_postal'
@@ -89,7 +88,6 @@ class ComercioForm(CrudGenericForm):
 				(loc.id_localidad, f"{loc.nombre_localidad} - {loc.codigo_postal}")
 				for loc in localidades
 			]
-   
 		else:
 			# En caso de nuevo registro o provincia no seleccionada, muestra un queryset vacío
 			# self.fields['id_localidad'].queryset = Localidad.objects.none()
@@ -97,25 +95,12 @@ class ComercioForm(CrudGenericForm):
 			
 		# Opcional: si quieres que se muestre un mensaje de "Seleccione una localidad"
 		self.fields['id_localidad'].empty_label = "Seleccione una localidad"
-		
-		###################################################################################
+
 		#-- Si es un nuevo registro.
 		if not self.instance.pk:
 			self.fields['id_sucursal'].initial = self.initial.get('id_sucursal')
 			#-- Deshabilita el campo.
-			self.fields['id_sucursal'].widget.attrs['disabled'] = True
-		else:
-			#-- Configuración en modo edición.
-			self.fields['id_sucursal'].widget = forms.HiddenInput()
-			self.fields['id_sucursal'].required = False
-			self.initial['id_sucursal'] = self.instance.id_sucursal		
-	
-	def clean(self):
-		cleaned_data = super().clean()
-		#-- Asignar automáticamente id_sucursal si el formulario está en modo edición.
-		if self.instance.pk:
-			cleaned_data['id_sucursal'] = self.instance.id_sucursal
-			#-- Remover id_sucursal de la validación en modo edición.
-			self._errors.pop('id_sucursal', None)
-		return cleaned_data
-	
+			# self.fields['id_sucursal'].widget.attrs['disabled'] = True
+
+		if not self.instance.pk:  # Solo en nuevos registros
+			self.fields['pin'].initial = random.randint(100, 999)  # Número de 3 dígitos
