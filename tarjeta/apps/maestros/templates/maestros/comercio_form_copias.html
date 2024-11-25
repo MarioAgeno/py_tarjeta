@@ -1,0 +1,371 @@
+{% extends 'maestro_form.html' %}
+{% load static %}
+<!-- -------------------------------------------------------------------- -->
+{% block maincomponent %}
+	{% block principalcomponent %}
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid">
+					
+					<div class="card border-light mb-3 mt-2">
+						<div class="card-header text-white bg-primary opacity-75 d-flex 
+									justify-content-between">
+							{{ accion }}
+							<div class="flex align-items-center">
+								<a 
+									class="me-2 text-white" 
+									data-bs-toggle="modal" 
+									data-bs-target="#helpModal" 
+									style="cursor: pointer;">
+									<i class="bi bi-question-lg"></i></a>
+								
+								<button type="button" class="btn-close btn-close-white" 
+									aria-label="Close"
+									onclick="window.location.href='{% url list_view_name %}'">
+								</button>
+							</div>
+						</div>
+						
+						<div class="card-body bg-body-secondary">
+							<form method="post" enctype="multipart/form-data" novalidate>
+								{% csrf_token %}
+								<div class="accordion" id="accordionPanelsStayOpenExample">
+									<!-- Estructura generada -->
+
+									<div class="accordion-item">
+										<h2 class="accordion-header">
+											<button 
+												class="accordion-button py-2 " 
+												type="button" 
+												data-bs-toggle="collapse" 
+												data-bs-target="#Información_Comercios" 
+												aria-expanded="true" 
+												aria-controls="Información_Comercios">
+												<strong>Información Comercios</strong>
+											</button>
+										</h2>
+										<div class="accordion-collapse collapse show"
+											id="Información_Comercios">
+											<div class="accordion-body bg-secondary-subtle">
+		
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.estatus_comercio.label }}
+														</label>
+														{{ form.estatus_comercio }}
+													</div>
+						
+													<div class="col-md-4">
+														<label class="form-label text-primary mb-0">
+															{{ form.id_sucursal.label }}
+														</label>
+														{{ form.id_sucursal }}
+													</div>
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.codigo_comercio.label }}
+														</label>
+														{{ form.codigo_comercio }}
+													</div>
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.pin.label }}
+															<button type="button" class="btn btn-primary btn-sm" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;" id="generatePinBtn">
+																Nuevo PIN
+															</button>
+														</label>
+														<div class="input-group">
+															{{ form.pin }}
+														</div>
+													</div>
+
+												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.codigo_socio.label }}
+														</label>
+														{{ form.codigo_socio }}
+													</div>
+													<div class="col-md-4">
+														<label class="form-label text-primary mb-0">
+															{{ form.nombre_titular.label }}
+														</label>
+														{{ form.nombre_titular }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-3">
+														<label class="form-label text-primary mb-0">
+															{{ form.razon_social_comercio.label }}
+														</label>
+														{{ form.razon_social_comercio }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-3">
+														<label class="form-label text-primary mb-0">
+															{{ form.domicilio_comercio.label }}
+														</label>
+														{{ form.domicilio_comercio }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-3">
+														<label class="form-label text-primary mb-0">
+															{{ form.id_provincia.label }}
+														</label>
+														{{ form.id_provincia }}
+													</div>
+						
+													<div class="col-md-3">
+														<label class="form-label text-primary mb-0">
+															{{ form.id_localidad.label }}
+														</label>
+														{{ form.id_localidad }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.telefono_comercio.label }}
+														</label>
+														{{ form.telefono_comercio }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.telefono2_comercio.label }}
+														</label>
+														{{ form.telefono2_comercio }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.movil_comercio.label }}
+														</label>
+														{{ form.movil_comercio }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-3">
+														<label class="form-label text-primary mb-0">
+															{{ form.mail_comercio.label }}
+														</label>
+														{{ form.mail_comercio }}
+													</div>
+						
+													<div class="col-md-3">
+														<label class="form-label text-primary mb-0">
+															{{ form.id_actividad.label }}
+														</label>
+														{{ form.id_actividad }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.id_tipo_iva.label }}
+														</label>
+														{{ form.id_tipo_iva }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.cuit_comercio.label }}
+														</label>
+														{{ form.cuit_comercio }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.ingreso_bruto.label }}
+														</label>
+														{{ form.ingreso_bruto }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.porcentaje_consumo.label }}
+														</label>
+														{{ form.porcentaje_consumo }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.porcentaje_retencion_ib.label }}
+														</label>
+														{{ form.porcentaje_retencion_ib }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.monto_fijo.label }}
+														</label>
+														{{ form.monto_fijo }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.exento_ganancias.label }}
+														</label>
+														{{ form.exento_ganancias }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.estacion_servicio.label }}
+														</label>
+														{{ form.estacion_servicio }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.debito_credito.label }}
+														</label>
+														{{ form.debito_credito }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.acreditar_cuenta.label }}
+														</label>
+														{{ form.acreditar_cuenta }}
+													</div>
+						
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.leido.label }}
+														</label>
+														{{ form.leido }}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<label class="form-label text-primary mb-0">
+															{{ form.mensaje.label }}
+														</label>
+														{{ form.mensaje }}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+		
+								</div>
+								
+								<div class="container mt-3">
+									<button class="btn btn-primary" type="submit" id="guardarBtn">
+										Guardar
+									</button>
+									<a class="btn btn-secondary" href="{% url list_view_name %}">
+										Cancelar
+									</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+	{% endblock principalcomponent %}
+{% endblock maincomponent %}
+
+
+{% block script %}
+	{{ block.super }}
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const provinciaSelect = document.getElementById("id_id_provincia");
+			const localidadSelect = document.getElementById("id_id_localidad");
+			
+			// Validar si se obtuvieron correctamente los elementos
+			if (!provinciaSelect) {
+				console.log('El elemento con id "id_id_provincia" no se encontró');
+				return;
+			}
+			
+			if (!localidadSelect) {
+				console.log('El elemento con id "id_id_localidad" no se encontró');
+				return;
+			}
+			
+			// Función para resetear el select de localidad y el campo de código postal
+			function resetLocalidadSelect(defaultText) {
+				localidadSelect.innerHTML = `<option value="">${defaultText}</option>`;
+				localidadSelect.disabled = true;
+			}
+			
+			// Almacena el código postal de cada localidad
+			let localidadesData = {};
+			
+			// Función para cargar las localidades y seleccionar la correcta
+			function cargarLocalidades(provinciaId, localidadSeleccionadaId = null) {
+				const url = "{% url 'filtrar_localidad' %}?id_provincia=" + provinciaId;
+				resetLocalidadSelect("Seleccione una localidad");
+				
+				if (provinciaId) {
+					fetch(url)
+						.then(response => response.json())
+						.then(data => {
+							localidadSelect.disabled = false;
+							localidadesData = {}; // Reiniciar datos de localidad
+							
+							// Insertar la opción inicial
+							localidadSelect.innerHTML = `<option value="">Seleccione una localidad</option>`;
+							
+							data.localidad.forEach(localidad => {
+								localidadesData[localidad.id_localidad] = localidad.codigo_postal;
+								const option = new Option(localidad.nombre_completo, localidad.id_localidad);
+								localidadSelect.add(option);
+							});
+							
+							// Si hay una localidad seleccionada (al editar o al volver de la modal)
+							if (localidadSeleccionadaId && localidadesData[localidadSeleccionadaId]) {
+								localidadSelect.value = localidadSeleccionadaId;
+							}
+						});
+				}
+			}
+			
+			// Escucha el cambio en Provincia y carga las localidades correspondientes
+			provinciaSelect.addEventListener("change", function () {
+				const provinciaId = this.value;
+				cargarLocalidades(provinciaId);  // Llamar sin localidad seleccionada
+			});
+			
+		
+			// Detectar valores iniciales (para el caso de actualizar o volver de la modal)
+			const provinciaSeleccionada = provinciaSelect.value;
+			const localidadSeleccionada = localidadSelect.value;
+			
+			// Cargar localidades y seleccionar automáticamente la localidad al cargar la página
+			if (provinciaSeleccionada) {
+				cargarLocalidades(provinciaSeleccionada, localidadSeleccionada);
+				codigoPostalText.value = codigoPostalSeleccionado;  // Setear el código postal guardado
+			}
+			else{
+				// Si no hay una provincia seleccionada, deshabilitar el combo de localidades
+				cargarLocalidades(provinciaSeleccionada);  // Llamar sin localidad seleccionada
+			}
+		});
+	</script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const generatePinBtn = document.getElementById("generatePinBtn");
+			const pinField = document.getElementById("id_pin");  // Asegúrate de que coincida con el id del campo
+	
+			generatePinBtn.addEventListener("click", function() {
+				// Genera un número aleatorio de 3 dígitos 
+				const randomPin = Math.floor(100 + Math.random() * 900); 
+				pinField.value = randomPin;
+			});
+		});
+	</script>
+	
+{% endblock script %}

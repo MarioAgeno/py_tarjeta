@@ -1,6 +1,7 @@
 # tarjeta\apps\maestros\forms\comercio_forms.py
 import random
 from django import forms
+#from django.db.models import Max
 from .crud_forms_generics import CrudGenericForm
 from ..models.base_models import *
 from ..models.comercio_models import Comercio
@@ -102,5 +103,39 @@ class ComercioForm(CrudGenericForm):
 			#-- Deshabilita el campo.
 			# self.fields['id_sucursal'].widget.attrs['disabled'] = True
 
-		if not self.instance.pk:  # Solo en nuevos registros
+			# Calculo de PIN Numero Aleatorio
 			self.fields['pin'].initial = random.randint(100, 999)  # Número de 3 dígitos
+
+		'''
+		# Calculo el ultimo codigo de comercio de la sucursal, Si es un nuevo registro
+		if not self.instance.pk:
+			# 1. Obtén el valor inicial de id_sucursal desde self.initial
+			id_sucursal = self.initial.get('id_sucursal')
+			
+			if id_sucursal:
+				# Asegúrate de que id_sucursal sea un entero
+				id_sucursal = int(id_sucursal)
+				
+				# 2. Filtra los comercios que comienzan con el código de la sucursal
+				filtro_sucursal = Comercio.objects.filter(
+					codigo_comercio__startswith=str(id_sucursal).zfill(2)  # Asegura que tenga 2 dígitos
+				)
+				
+				# 3. Obtiene el número más alto para esa sucursal
+				ultimo_numero = filtro_sucursal.aggregate(Max('codigo_comercio'))['codigo_comercio__max']
+				
+				if ultimo_numero:
+					# Extrae la parte numérica y calcula el siguiente consecutivo
+					consecutivo = int(ultimo_numero[2:])  # Los últimos 4 dígitos
+					nuevo_consecutivo = consecutivo + 1
+				else:
+					# Si no hay registros, comienza desde 1
+					nuevo_consecutivo = 1
+				
+				# 4. Formatea el nuevo código (2 dígitos de sucursal + 4 dígitos del consecutivo)
+				nuevo_numero = f"{id_sucursal:02d}{nuevo_consecutivo:04d}"
+				self.fields['codigo_comercio'].initial = nuevo_numero
+			
+			# Calculo de PIN: número aleatorio de 3 dígitos
+			self.fields['pin'].initial = random.randint(100, 999)
+		'''

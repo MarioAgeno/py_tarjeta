@@ -62,8 +62,7 @@
 														</label>
 														{{ form.id_sucursal }}
 													</div>
-												</div>
-												<div class="row">
+						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.codigo_comercio.label }}
@@ -82,23 +81,23 @@
 															{{ form.pin }}
 														</div>
 													</div>
-												
+												</div>
+												<div class="row">
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.codigo_socio.label }}
 														</label>
 														{{ form.codigo_socio }}
 													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-3">
+						
+													<div class="col-md-4">
 														<label class="form-label text-primary mb-0">
 															{{ form.nombre_titular.label }}
 														</label>
 														{{ form.nombre_titular }}
 													</div>
 						
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<label class="form-label text-primary mb-0">
 															{{ form.razon_social_comercio.label }}
 														</label>
@@ -112,8 +111,7 @@
 														</label>
 														{{ form.domicilio_comercio }}
 													</div>
-												</div>
-												<div class="row">
+						
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
 															{{ form.id_provincia.label }}
@@ -186,8 +184,7 @@
 														</label>
 														{{ form.ingreso_bruto }}
 													</div>
-												</div>
-												<div class="row">
+						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.porcentaje_consumo.label }}
@@ -223,8 +220,7 @@
 														</label>
 														{{ form.estacion_servicio }}
 													</div>
-												</div>
-												<div class="row">
+						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.debito_credito.label }}
@@ -238,13 +234,6 @@
 														</label>
 														{{ form.acreditar_cuenta }}
 													</div>
-						
-													<div class="col-md-2">
-														<label class="form-label text-primary mb-0">
-															{{ form.leido.label }}
-														</label>
-														{{ form.leido }}
-													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-6">
@@ -254,6 +243,15 @@
 														{{ form.mensaje }}
 													</div>
 												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<label class="form-label text-primary mb-0">
+															{{ form.leido.label }}
+														</label>
+														{{ form.leido }}
+													</div>
+												</div>
+
 											</div>
 										</div>
 									</div>
@@ -276,7 +274,6 @@
 		</div>
 	{% endblock principalcomponent %}
 {% endblock maincomponent %}
-
 
 {% block script %}
 	{{ block.super }}

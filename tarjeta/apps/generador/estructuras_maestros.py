@@ -233,23 +233,19 @@ estructura_campos = {
 
     'comercio': {
         'Información Comercios': {
-            'fila_0': [
+            'fila_1': [
                 {'field_name': 'estatus_comercio', 'columna': 2},
                 {'field_name': 'id_sucursal', 'columna': 4},
-            ],
-            'fila_1': [
                 {'field_name': 'codigo_comercio', 'columna': 2},
                 {'field_name': 'pin', 'columna': 2},
-                {'field_name': 'codigo_socio', 'columna': 2},
             ],
             'fila_2': [
-                {'field_name': 'nombre_titular', 'columna': 3},
-                {'field_name': 'razon_social_comercio', 'columna': 3},
+                {'field_name': 'codigo_socio', 'columna': 2},
+                {'field_name': 'nombre_titular', 'columna': 4},
+                {'field_name': 'razon_social_comercio', 'columna': 4},
             ],
             'fila_3': [
                 {'field_name': 'domicilio_comercio', 'columna': 3},
-            ],
-            'fila_4': [
                 {'field_name': 'id_provincia', 'columna': 3},
                 {'field_name': 'id_localidad', 'columna': 3},
             ],
@@ -266,8 +262,6 @@ estructura_campos = {
                 {'field_name': 'id_tipo_iva', 'columna': 2},
                 {'field_name': 'cuit_comercio', 'columna': 2},
                 {'field_name': 'ingreso_bruto', 'columna': 2},
-            ],
-            'fila_8': [
                 {'field_name': 'porcentaje_consumo', 'columna': 2},
                 {'field_name': 'porcentaje_retencion_ib', 'columna': 2},
             ],
@@ -275,14 +269,14 @@ estructura_campos = {
                 {'field_name': 'monto_fijo', 'columna': 2},
                 {'field_name': 'exento_ganancias', 'columna': 2},
                 {'field_name': 'estacion_servicio', 'columna': 2},
-            ],
-            'fila_10': [
                 {'field_name': 'debito_credito', 'columna': 2},
                 {'field_name': 'acreditar_cuenta', 'columna': 2},
-                {'field_name': 'leido', 'columna': 2},
             ],
             'fila_11': [
                 {'field_name': 'mensaje', 'columna': 6},
+            ],
+            'fila_12': [
+                {'field_name': 'leido', 'columna': 2},
             ],
         }
     },
