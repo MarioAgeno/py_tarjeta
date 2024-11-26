@@ -3,6 +3,7 @@ from django import forms
 from .crud_forms_generics import CrudGenericForm
 from ..models.base_models import *
 from ..models.tarjeta_models import Tarjeta
+from datetime import datetime
 from diseno_base.diseno_bootstrap import (formclassdate,
 	formclasstext, formclassselect, formclasscheck)
 
@@ -48,7 +49,7 @@ class TarjetaForm(CrudGenericForm):
 			'nombre_garantia': 
 				forms.TextInput(attrs={**formclasstext}),
 			'limite_maximo_tarjeta': 
-				forms.NumberInput(attrs={**formclasstext, 'readonly': True, 
+				forms.NumberInput(attrs={**formclasstext,
                            'min': 0, 'max': 999999999, 'step': '0.01'}),
 			'saldo_disponible': 
 				forms.NumberInput(attrs={**formclasstext, 'readonly': True,
@@ -58,7 +59,7 @@ class TarjetaForm(CrudGenericForm):
 			'id_tarjeta_estado': 
 				forms.Select(attrs={**formclassselect}), 
 			'fecha_alta': 
-				forms.TextInput(attrs={'type':'date', **formclassdate, 'readonly': True}),
+				forms.TextInput(attrs={'type':'date', **formclassdate}),
 			'fecha_baja': 
 				forms.TextInput(attrs={'type':'date', **formclassdate, 'readonly': True}),
 			'vencimiento': 
@@ -76,8 +77,6 @@ class TarjetaForm(CrudGenericForm):
 		super().__init__(*args, **kwargs)
 		# Verifica si estamos editando un registro con provincia ya seleccionada
 		if self.instance and self.instance.pk and self.instance.id_provincia:
-			# self.fields['id_localidad'].queryset = Localidad.objects.filter(id_provincia=self.instance.id_provincia).order_by('nombre_localidad')
-   
 			localidades = Localidad.objects.filter(id_provincia=self.instance.id_provincia).order_by('nombre_localidad')
 
 			# Configura el campo para mostrar 'nombre_localidad - codigo_postal'
@@ -85,7 +84,6 @@ class TarjetaForm(CrudGenericForm):
 				(loc.id_localidad, f"{loc.nombre_localidad} - {loc.codigo_postal}")
 				for loc in localidades
 			]
-   
 		else:
 			# En caso de nuevo registro o provincia no seleccionada, muestra un queryset vacío
 			# self.fields['id_localidad'].queryset = Localidad.objects.none()
@@ -94,24 +92,20 @@ class TarjetaForm(CrudGenericForm):
 		# Opcional: si quieres que se muestre un mensaje de "Seleccione una localidad"
 		self.fields['id_localidad'].empty_label = "Seleccione una localidad"
 		
-		###################################################################################
 		#-- Si es un nuevo registro.
 		if not self.instance.pk:
 			self.fields['id_sucursal'].initial = self.initial.get('id_sucursal')
-			#-- Deshabilita el campo.
-			self.fields['id_sucursal'].widget.attrs['disabled'] = True
+			self.fields['fecha_alta'].initial = datetime.now().strftime('%Y-%m-%d')
+			self.fields['fecha_alta'].widget.attrs['readonly'] = True
+			self.fields['saldo_disponible'].initial = self.fields['limite_maximo_tarjeta']
+			self.fields['saldo_disponible'].widget.attrs['readonly'] = True
+
 		else:
-			#-- Configuración en modo edición.
-			self.fields['id_sucursal'].widget = forms.HiddenInput()
-			self.fields['id_sucursal'].required = False
-			self.initial['id_sucursal'] = self.instance.id_sucursal		
-	
-	def clean(self):
-		cleaned_data = super().clean()
-		#-- Asignar automáticamente id_sucursal si el formulario está en modo edición.
-		if self.instance.pk:
-			cleaned_data['id_sucursal'] = self.instance.id_sucursal
-			#-- Remover id_sucursal de la validación en modo edición.
-			self._errors.pop('id_sucursal', None)
-		return cleaned_data
-	
+			self.fields['id_sucursal'].widget.attrs['readonly'] = True
+			self.fields['codigo_socio'].widget.attrs['readonly'] = True
+			self.fields['adicional'].widget.attrs['readonly'] = True
+			self.fields['digito_verificador'].widget.attrs['readonly'] = True
+			self.fields['saldo_disponible'].widget.attrs['readonly'] = True
+			self.fields['limite_maximo_tarjeta'].widget.attrs['readonly'] = True
+			self.fields['fecha_alta'].widget.attrs['readonly'] = True
+

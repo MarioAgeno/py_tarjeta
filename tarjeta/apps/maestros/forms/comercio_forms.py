@@ -77,7 +77,6 @@ class ComercioForm(CrudGenericForm):
                            'min': 0, 'max': 999, 'step': '0.01'}),
 		}
 
-
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		# Verifica si estamos editando un registro con provincia ya seleccionada

@@ -32,3 +32,33 @@ def validar_cuit(cuit):
 	#-- Validar el dígito verificador.
 	if digito_verificador != digito_calculado:
 		raise ValidationError("El CUIT no es válido.")
+
+def calcular_digito_tarjeta(sucursal, socio, adicional):
+    # Calcular nTarjeta
+    n_tarjeta = (sucursal * 10000000) + (socio * 100) + adicional
+
+    # Convertir nTarjeta a una cadena de 9 dígitos (izquierda alineada, relleno con espacios)
+    # c_cadena = f"{n_tarjeta:9d}"
+    c_cadena = str(n_tarjeta).zfill(9)  # Asegura 9 dígitos, rellenando con ceros a la izquierda
+
+    # Inicializar variables
+    n_suma = 0
+    b = 1
+
+    # Bucle para sumar según la lógica dada
+    for i in range(9):
+        n_nro = int(c_cadena[i])  # Extraer el dígito en la posición i
+        n_suma += n_nro * b  # Multiplicar por el valor de 'b'
+        b += 2  # Incrementar b por 2
+        if b > 9:
+            b = 3  # Reiniciar b si excede 9
+
+    # Calcular nResto (equivalente a mitad de suma y su residuo)
+    n_mitad = n_suma / 2
+    n_resto = int(n_mitad % 10)
+
+    # Calcular el valor total de la tarjeta con el dígito verificador
+    n_tarjeta_verificada = (n_tarjeta * 10) + n_resto
+
+    # Devolver los resultados
+    return n_tarjeta_verificada
