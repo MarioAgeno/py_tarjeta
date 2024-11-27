@@ -3,7 +3,9 @@ from django.urls import reverse_lazy
 from ..views.cruds_views_generics import *
 from ..models.tarjeta_models import Tarjeta
 from ..forms.tarjeta_forms  import TarjetaForm
-
+#from django.core.exceptions import ValidationError
+#from django.db import IntegrityError
+from utils.validatos.validaciones import calcular_digito_tarjeta
 
 class ConfigViews():
 	# Modelo
@@ -112,23 +114,38 @@ class TarjetaCreateView(MaestroCreateView):
 	#-- Indicar el permiso que requiere para ejecutar la acción.
 	# (revisar de donde lo copiaste que tienes asignado permission_change en vez de permission_add)
 	permission_required = ConfigViews.permission_add
-	'''
-	extra_context = {
-		"accion": f"Crear {ConfigViews.model._meta.verbose_name}",
-		"list_view_name" : ConfigViews.list_view_name
-	}
-	'''
+
 	def get_initial(self):
 		initial = super().get_initial()
 		#-- Asignar la sucursal del usuario autenticado como valor inicial.
 		initial['id_sucursal'] = self.request.user.id_sucursal
 		return initial
 
-    # Modificar get_context_data para aceptar **kwargs
+	def form_valid(self, form):
+        # Calcular el número de tarjeta
+		numero_tarjeta = calcular_digito_tarjeta(
+            form.instance.id_sucursal.id_sucursal, 
+            form.instance.codigo_socio, 
+            form.instance.adicional
+        )
+        
+        # Verificar si el número ya existe
+		if Tarjeta.objects.filter(numero_tarjeta=numero_tarjeta).exists():
+			form.add_error('numero_tarjeta', "El número de tarjeta ya existe. Por favor, verifica los datos ingresados.")  # Especifica el campo
+			return self.form_invalid(form)
+
+        # Asignar valores al formulario
+		form.instance.numero_tarjeta = numero_tarjeta
+		form.instance.digito_verificador = numero_tarjeta % 10
+		form.instance.saldo_disponible = form.instance.limite_maximo_tarjeta
+
+		return super().form_valid(form)  # Guardar si todo está bien
+
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-        # Agregar más contexto si es necesario
+		context['accion'] = f"Crear {self.model._meta.verbose_name}"
 		return context
+
 
 # TarjetaUpdateView
 class TarjetaUpdateView(MaestroUpdateView):

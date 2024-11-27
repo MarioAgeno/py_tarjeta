@@ -1,9 +1,9 @@
 # tarjeta\apps\maestros\models\tarjeta_models.py
 from django.db import models
-from django.core.exceptions import ValidationError
+#from django.core.exceptions import ValidationError
 from .base_gen_models import ModeloBaseGenerico
-from .base_models import (Actividad, Sucursal, Localidad, Provincia, 
-						  TipoDocumentoIdentidad, Titulo, TarjetaEstado)
+from .base_models import (Sucursal, Localidad, Provincia, 
+						  Titulo, TarjetaEstado)
 from utils.validatos.validaciones import calcular_digito_tarjeta
 from entorno.constantes_base import (SEGURO,
 	ESTATUS_GEN, PEP, TIPO_PERSONA)
@@ -58,6 +58,7 @@ class Tarjeta(ModeloBaseGenerico):
             )
             self.digito_verificador = self.numero_tarjeta % 10  # Extraer el último dígito
             self.saldo_disponible = self.limite_maximo_tarjeta
+           
         super().save(*args, **kwargs)  # Guarda la instancia en la base de datos
 
     class Meta:

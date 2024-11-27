@@ -4,6 +4,7 @@ from .crud_forms_generics import CrudGenericForm
 from ..models.base_models import *
 from ..models.tarjeta_models import Tarjeta
 from datetime import datetime
+
 from diseno_base.diseno_bootstrap import (formclassdate,
 	formclasstext, formclassselect, formclasscheck)
 
@@ -25,11 +26,9 @@ class TarjetaForm(CrudGenericForm):
 				forms.NumberInput(attrs={**formclasstext, 
 							'min': 0, 'max': 99}),
 			'digito_verificador': 
-				forms.NumberInput(attrs={**formclasstext, 
-							'readonly': True}),
+				forms.NumberInput(attrs={**formclasstext, 'readonly': True}),
 			'numero_tarjeta':  
-				forms.NumberInput(attrs={**formclasstext, 
-							'readonly': True}), 
+				forms.NumberInput(attrs={**formclasstext, 'readonly': True}), 
 			'nombre_titular': 
 				forms.TextInput(attrs={**formclasstext}),
 			'domicilio': 
@@ -50,10 +49,9 @@ class TarjetaForm(CrudGenericForm):
 				forms.TextInput(attrs={**formclasstext}),
 			'limite_maximo_tarjeta': 
 				forms.NumberInput(attrs={**formclasstext,
-                           'min': 0, 'max': 999999999, 'step': '0.01'}),
+                           'min': 0, 'max': 999999999, 'step': '1'}),
 			'saldo_disponible': 
-				forms.NumberInput(attrs={**formclasstext, 'readonly': True,
-                           'min': 0, 'max': 999999999, 'step': '0.01'}),
+				forms.NumberInput(attrs={**formclasstext, 'readonly': True}),
 			'id_titulo': 
 				forms.Select(attrs={**formclassselect}), 
 			'id_tarjeta_estado': 
@@ -70,7 +68,6 @@ class TarjetaForm(CrudGenericForm):
 				forms.CheckboxInput(attrs={**formclasscheck}),
 			'observacion': 
 				forms.TextInput(attrs={**formclasstext}),
-		
 		}
 
 	def __init__(self, *args, **kwargs):
@@ -86,7 +83,6 @@ class TarjetaForm(CrudGenericForm):
 			]
 		else:
 			# En caso de nuevo registro o provincia no seleccionada, muestra un queryset vacío
-			# self.fields['id_localidad'].queryset = Localidad.objects.none()
 			self.fields['id_localidad'].choices = []
 			
 		# Opcional: si quieres que se muestre un mensaje de "Seleccione una localidad"
@@ -99,9 +95,8 @@ class TarjetaForm(CrudGenericForm):
 			self.fields['fecha_alta'].widget.attrs['readonly'] = True
 			self.fields['saldo_disponible'].initial = self.fields['limite_maximo_tarjeta']
 			self.fields['saldo_disponible'].widget.attrs['readonly'] = True
-
 		else:
-			self.fields['id_sucursal'].widget.attrs['readonly'] = True
+			self.fields['id_sucursal'].widget.attrs['disabled'] = True
 			self.fields['codigo_socio'].widget.attrs['readonly'] = True
 			self.fields['adicional'].widget.attrs['readonly'] = True
 			self.fields['digito_verificador'].widget.attrs['readonly'] = True

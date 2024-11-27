@@ -315,12 +315,12 @@ estructura_campos = {
                 {'field_name': 'telefono_tarjeta', 'columna': 2},
                 {'field_name': 'telefono2_tarjeta', 'columna': 2},
                 {'field_name': 'movil_tarjeta', 'columna': 2},
+                {'field_name': 'mail_tarjeta', 'columna': 3},
             ],
             'fila_7': [
-                {'field_name': 'mail_tarjeta', 'columna': 3},
+                {'field_name': 'observacion', 'columna': 6},
                 {'field_name': 'liquidacion_mail', 'columna': 2},
                 {'field_name': 'seguro', 'columna': 1},
-                {'field_name': 'observacion', 'columna': 6},
             ],
         }
     },

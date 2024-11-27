@@ -1,6 +1,7 @@
 {% extends 'maestro_form.html' %}
 {% load static %}
 <!-- -------------------------------------------------------------------- -->
+
 {% block maincomponent %}
 	{% block principalcomponent %}
 		<div id="layoutSidenav_content">
@@ -200,15 +201,22 @@
 														</label>
 														{{ form.movil_tarjeta }}
 													</div>
-												</div>
-												<div class="row">
+
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
 															{{ form.mail_tarjeta.label }}
 														</label>
 														{{ form.mail_tarjeta }}
 													</div>
-						
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<label class="form-label text-primary mb-0">
+															{{ form.observacion.label }}
+														</label>
+														{{ form.observacion }}
+													</div>
+
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.liquidacion_mail.label }}
@@ -221,13 +229,6 @@
 															{{ form.seguro.label }}
 														</label>
 														{{ form.seguro }}
-													</div>
-						
-													<div class="col-md-6">
-														<label class="form-label text-primary mb-0">
-															{{ form.observacion.label }}
-														</label>
-														{{ form.observacion }}
 													</div>
 												</div>
 											</div>
@@ -335,3 +336,4 @@
 		});
 	</script>
 {% endblock script %}
+
