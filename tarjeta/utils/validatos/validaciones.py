@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 import re
 
-
+# Calcular Digito de validacion del CUIT
 def calcular_digito_verificador(cuit_base):
 	coeficientes = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2]
 	cuit_digits = [int(digit) for digit in str(cuit_base)]

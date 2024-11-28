@@ -98,12 +98,14 @@ def reset_modelo():
     with connection.cursor() as cursor:
         cursor.execute("DELETE FROM sqlite_sequence WHERE name='empresa'")
 
+
     # Elimina todos los registros del modelo `sucursal` en Django
     Sucursal.objects.all().delete()
 
     # Resetea el contador autoincremental del campo `id`
     with connection.cursor() as cursor:
         cursor.execute("DELETE FROM sqlite_sequence WHERE name='sucursal'")
+
 
     # Elimina todos los registros del modelo `Titulo` en Django
     Titulo.objects.all().delete()

@@ -34,8 +34,6 @@
 								<a class="nav-link" href="{% url 'registro_limite_list' %}">Limites de Tarjetas</a>
 								<a class="nav-link" href="#">Liquidaciones de Socios</a>
 								<a class="nav-link" href="#">Cuotas de Socios</a>
-								<a class="nav-link" href="{% url 'titulo_list' %}">Titulos</a>
-								<a class="nav-link" href="{% url 'tarjeta_estado_list' %}">Estados Tarjetas</a>
 							</nav>
 						</div>
 
@@ -47,8 +45,6 @@
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="{% url 'comercio_list' %}">Comercios</a>
 								<a class="nav-link" href="#">Liquidaciones Comercios</a>
-								<a class="nav-link" href="{% url 'plan_list' %}">Planes</a>
-								<a class="nav-link" href="{% url 'plan_comercio_list' %}">Planes Comercios</a>
 								<a class="nav-link" href="#">Compras</a>
 								<a class="nav-link" href="#">Operaciones</a>
 							</nav>
@@ -60,15 +56,19 @@
 						</a>
 						<div class="collapse" id="pagesCollapseTabla" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="{% url 'parametro_list' %}">Parámetros</a>
+								<a class="nav-link" href="{% url 'plan_list' %}">Planes</a>
+								<a class="nav-link" href="{% url 'plan_comercio_list' %}">Planes Comercios</a>
 								<a class="nav-link" href="{% url 'actividad_list' %}">Actividad</a>
-								<a class="nav-link" href="{% url 'provincia_list' %}">Provincia</a>
-								<a class="nav-link" href="{% url 'localidad_list' %}">Localidad</a>
 								<a class="nav-link" href="{% url 'tipo_documento_identidad_list' %}">Tipo Documento</a>
 								<a class="nav-link" href="{% url 'tipo_iva_list' %}">Tipo Iva</a>
-								<a class="nav-link" href="{% url 'parametro_list' %}">Parámetros</a>
 								<a class="nav-link" href="{% url 'numero_list' %}">Números</a>
 								<a class="nav-link" href="{% url 'empresa_list' %}">Empresa</a> 
 								<a class="nav-link" href="{% url 'sucursal_list' %}">Sucursales</a>
+								<a class="nav-link" href="{% url 'titulo_list' %}">Titulos</a>
+								<a class="nav-link" href="{% url 'tarjeta_estado_list' %}">Estados Tarjetas</a>
+								<a class="nav-link" href="{% url 'provincia_list' %}">Provincia</a>
+								<a class="nav-link" href="{% url 'localidad_list' %}">Localidad</a>
 							</nav>
 						</div>
 					</nav>

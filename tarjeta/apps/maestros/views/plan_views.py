@@ -1,4 +1,4 @@
-# neumatic\apps\maestros\views\plan_views.py
+# tarjeta\apps\maestros\views\plan_views.py
 from django.urls import reverse_lazy
 from ..views.cruds_views_generics import *
 from ..models.base_models import Plan
