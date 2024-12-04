@@ -71,36 +71,67 @@ class TarjetaForm(CrudGenericForm):
 		}
 
 	def __init__(self, *args, **kwargs):
+		self.user = kwargs.pop('user', None)  # Extraer el usuario autenticado
 		super().__init__(*args, **kwargs)
-		# Verifica si estamos editando un registro con provincia ya seleccionada
-		if self.instance and self.instance.pk and self.instance.id_provincia:
+		
+		self.fields['id_localidad'].choices = []
+		
+		#-- Verificar si el formulario se llama con datos (POST).
+		if self.is_bound:
+			#-- Obtener el valor enviado de id_provincia_tarjeta.
+			provincia_id = self.data.get('id_provincia')
+			localidad_id = self.data.get('id_localidad', '')
+			
+			if provincia_id:
+				#-- Filtrar localidades según la provincia enviada.
+				localidades = Localidad.objects.filter(id_provincia=provincia_id).order_by('nombre_localidad')
+				self.fields['id_localidad'].choices = [("", "Seleccione una localidad")] + [
+					(loc.id_localidad, f"{loc.nombre_localidad} - {loc.codigo_postal}") for loc in localidades
+				]
+				self.initial['id_localidad'] = localidad_id
+			else:
+				self.fields['id_localidad'].choices = [("", "Seleccione una localidad")]
+			
+		#-- Si se está editando un registro existente.
+		elif self.instance and self.instance.pk and self.instance.id_provincia:
 			localidades = Localidad.objects.filter(id_provincia=self.instance.id_provincia).order_by('nombre_localidad')
-
-			# Configura el campo para mostrar 'nombre_localidad - codigo_postal'
 			self.fields['id_localidad'].choices = [
 				(loc.id_localidad, f"{loc.nombre_localidad} - {loc.codigo_postal}")
 				for loc in localidades
 			]
-		else:
-			# En caso de nuevo registro o provincia no seleccionada, muestra un queryset vacío
-			self.fields['id_localidad'].choices = []
 			
-		# Opcional: si quieres que se muestre un mensaje de "Seleccione una localidad"
-		self.fields['id_localidad'].empty_label = "Seleccione una localidad"
+			#-- Establecer localidad seleccionada inicialmente.
+			if self.instance.id_localidad:
+				self.initial['id_localidad'] = self.instance.id_localidad.id_localidad
 		
+		#-- Asegurar que exista una opción inicial en cualquier caso.
+		self.fields['id_localidad'].choices.insert(0, ("", "Seleccione una localidad"))
+
 		#-- Si es un nuevo registro.
 		if not self.instance.pk:
 			self.fields['id_sucursal'].initial = self.initial.get('id_sucursal')
+			self.fields['id_sucursal'].widget.attrs['disabled'] = True              #-- Deshabilita el campo.
 			self.fields['fecha_alta'].initial = datetime.now().strftime('%Y-%m-%d')
 			self.fields['fecha_alta'].widget.attrs['readonly'] = True
 			self.fields['saldo_disponible'].initial = self.fields['limite_maximo_tarjeta']
 			self.fields['saldo_disponible'].widget.attrs['readonly'] = True
 		else:
-			self.fields['id_sucursal'].widget.attrs['disabled'] = True
 			self.fields['codigo_socio'].widget.attrs['readonly'] = True
 			self.fields['adicional'].widget.attrs['readonly'] = True
 			self.fields['digito_verificador'].widget.attrs['readonly'] = True
 			self.fields['saldo_disponible'].widget.attrs['readonly'] = True
 			self.fields['limite_maximo_tarjeta'].widget.attrs['readonly'] = True
 			self.fields['fecha_alta'].widget.attrs['readonly'] = True
-
+			#-- Configuración en modo edición.
+			self.fields['id_sucursal'].widget = forms.HiddenInput()
+			self.fields['id_sucursal'].required = False
+			self.initial['id_sucursal'] = self.instance.id_sucursal
+	
+	def clean(self):
+		cleaned_data = super().clean()
+		#-- Asignar automáticamente id_sucursal si el formulario está en modo edición.
+		if self.instance.pk:
+			cleaned_data['id_sucursal'] = self.instance.id_sucursal
+			#-- Remover id_sucursal de la validación en modo edición.
+			self._errors.pop('id_sucursal', None)
+		return cleaned_data

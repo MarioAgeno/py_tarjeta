@@ -1,4 +1,4 @@
-# tarjeta\apps\maestros\views\cruds_views_generics.py
+# neumatic\apps\maestros\views\cruds_views_generics.py
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.db.models import Q
 from django.http import JsonResponse
@@ -177,6 +177,18 @@ class MaestroCreateView(PermissionRequiredMixin, CreateView):
 class MaestroUpdateView(PermissionRequiredMixin, UpdateView):
 	list_view_name = None
 	
+	def get_form_kwargs(self):
+		"""
+		Pasa los argumentos adicionales al formulario solo si son necesarios.
+		"""
+		kwargs = super().get_form_kwargs()
+		
+		#-- Verificar si el formulario soporta el argumento 'user'.
+		if hasattr(self.form_class, '__ini__') and 'user' in self.form_class.__init__.__code__.co_varnames:
+			kwargs['user'] = self.request.user  # Pasar el usuario autenticado al formulario
+		
+		return kwargs
+	
 	def form_valid(self, form):
 		#-- Accede al usuario evaluado.
 		user = self.request.user
@@ -257,7 +269,7 @@ class MaestroDeleteView(PermissionRequiredMixin, DeleteView):
 			with transaction.atomic():
 				return self.delete(request, *args, **kwargs)
 		except ProtectedError:
-			messages.error(request, 'No se puede eliminar el registro ya que está relacionado con otros archivos.')
+			messages.error(request, 'No se puede eliminar el registro ya que está relacionado con otros.')
 			return redirect(self.success_url)
 		except Exception as e:
 			messages.error(request, f'Ocurrió un error inesperado al intentar eliminar: {str(e)}')
