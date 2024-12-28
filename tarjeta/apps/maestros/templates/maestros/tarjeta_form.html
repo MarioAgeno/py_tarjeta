@@ -76,39 +76,84 @@
 													{% endif %}
 												</div>
 												<div class="row">
-													<div class="col-md-2">
-														<label class="form-label text-primary mb-0">
-															{{ form.codigo_socio.label }}
-														</label>
-														{{ form.codigo_socio }}
+													<div class="row">
+														<div class="col-md-2">
+															<label for="codigoSocio" class="form-label text-primary mb-0">Código de Socio:</label>
+															<input 
+																type="text" 
+																id="codigoSocio" 
+																class="form-control border-primary" 
+																placeholder="Ingrese el código del socio">
+														</div>
+														<div class="col-md-2">
+															<label for="id_codigo_socio" class="form-label text-primary mb-0">
+																{{ form.codigo_socio.label }}
+															</label>
+															{{ form.codigo_socio }}
+														</div>
+														<div class="col-md-2 align-self-end">
+															<button 
+																type="button" 
+																class="btn btn-info" 
+																id="consultaApiBtn">
+																Consultar Socio
+															</button>
+														</div>
 													</div>
-						
-													<div class="col-md-4">
-														<label class="form-label text-primary mb-0">
-															{{ form.nombre_titular.label }}
-														</label>
-														{{ form.nombre_titular }}
-													</div>
-						
+
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.adicional.label }}
 														</label>
 														{{ form.adicional }}
-													</div>
-						
+													</div>														
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.digito_verificador.label }}
 														</label>
 														{{ form.digito_verificador }}
 													</div>
-						
 													<div class="col-md-2">
 														<label class="form-label text-primary mb-0">
 															{{ form.numero_tarjeta.label }}
 														</label>
 														{{ form.numero_tarjeta }}
+													</div>
+
+													<div class="row mt-3">
+														<!-- Formulario con campos que serán completados -->
+														<div class="col-md-3">
+															<label for="nombre_titular" class="form-label text-primary mb-0">Nombre del Titular</label>
+															{{ form.nombre_titular }}
+														</div>
+														<div class="col-md-3">
+															<label for="domicilio" class="form-label text-primary mb-0">Domicilio</label>
+															{{ form.domicilio }}
+														</div>
+														<div class="col-md-2">
+															<label for="telefono_tarjeta" class="form-label text-primary mb-0">Teléfono</label>
+															{{ form.telefono_tarjeta }}
+														</div>
+														<div class="col-md-2">
+															<label for="telefono2_tarjeta" class="form-label text-primary mb-0">Teléfono</label>
+															{{ form.telefono2_tarjeta }}
+														</div>
+														<div class="col-md-2">
+															<label for="movil_tarjeta" class="form-label text-primary mb-0">Teléfono</label>
+															{{ form.movil_tarjeta }}
+														</div>
+														<div class="row">
+															<div class="col-md-3">
+																<label for="mail_tarjeta" class="form-label text-primary mb-0">Email</label>
+																{{ form.mail_tarjeta }}
+															</div>
+														</div>
+	
+													</div>
+													<div class="row mt-3">
+														<div id="resultadoApi" class="alert alert-info d-none">
+															<!-- Se mostrará un mensaje solo en caso de error -->
+														</div>
 													</div>
 												</div>
 												<div class="row">
@@ -172,13 +217,6 @@
 												<div class="row">
 													<div class="col-md-3">
 														<label class="form-label text-primary mb-0">
-															{{ form.domicilio.label }}
-														</label>
-														{{ form.domicilio }}
-													</div>
-						
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
 															{{ form.id_provincia.label }}
 														</label>
 														{{ form.id_provincia }}
@@ -189,35 +227,6 @@
 															{{ form.id_localidad.label }}
 														</label>
 														{{ form.id_localidad }}
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-2">
-														<label class="form-label text-primary mb-0">
-															{{ form.telefono_tarjeta.label }}
-														</label>
-														{{ form.telefono_tarjeta }}
-													</div>
-						
-													<div class="col-md-2">
-														<label class="form-label text-primary mb-0">
-															{{ form.telefono2_tarjeta.label }}
-														</label>
-														{{ form.telefono2_tarjeta }}
-													</div>
-						
-													<div class="col-md-2">
-														<label class="form-label text-primary mb-0">
-															{{ form.movil_tarjeta.label }}
-														</label>
-														{{ form.movil_tarjeta }}
-													</div>
-
-													<div class="col-md-3">
-														<label class="form-label text-primary mb-0">
-															{{ form.mail_tarjeta.label }}
-														</label>
-														{{ form.mail_tarjeta }}
 													</div>
 												</div>
 												<div class="row">
@@ -344,6 +353,68 @@
 			}
 			
 			
+		});
+	</script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const consultaApiBtn = document.getElementById("consultaApiBtn");
+			const codigoSocioInput = document.getElementById("codigoSocio");
+			const resultadoApi = document.getElementById("resultadoApi");
+		
+			// Referencias a los campos del formulario
+			const nombreTitularInput = document.getElementById("nombre_titular");
+			const domicilioInput = document.getElementById("domicilio");
+			const telefonoInput = document.getElementById("telefono_tarjeta");
+			const telefono2Input = document.getElementById("telefono2_tarjeta");
+			const movilInput = document.getElementById("movil_tarjeta");
+			const mailInput = document.getElementById("mail_tarjeta");
+		
+			consultaApiBtn.addEventListener("click", function () {
+				const codigoSocio = codigoSocioInput.value.trim();
+		
+				if (!codigoSocio) {
+					resultadoApi.classList.remove("d-none");
+					resultadoApi.classList.add("alert-danger");
+					resultadoApi.textContent = "Por favor, ingrese un código de socio.";
+					return;
+				}
+		
+				const apiUrl = `http://127.0.0.1:5000/sociocodigo/${codigoSocio}`;
+		
+				// Mostrar mensaje de carga
+				resultadoApi.classList.remove("d-none");
+				resultadoApi.classList.add("alert-info");
+				resultadoApi.textContent = "Consultando Bases de Socios...";
+		
+				fetch(apiUrl)
+					.then(response => {
+						if (!response.ok) {
+							throw new Error("El socio no existe o Error al consultar la API");
+						}
+						return response.json();
+					})
+					.then(data => {
+						console.log(data); // Depuración: verifica el contenido del JSON recibido
+		
+						// Asignar los valores obtenidos del API a los campos del formulario Django
+						document.getElementById("id_nombre_titular").value = data.Nombre || "";
+						document.getElementById("id_domicilio").value = data.Domicilio || "";
+						document.getElementById("id_telefono_tarjeta").value = data.Telefono || "";
+						document.getElementById("id_telefono2_tarjeta").value = data["Telefono 2"] || "";
+						document.getElementById("id_movil_tarjeta").value = data.Movil || "";
+						document.getElementById("id_mail_tarjeta").value = data["e-Mail"] || "";
+
+						// Ocultar el mensaje de resultado si todo es exitoso
+						resultadoApi.classList.add("d-none");
+					})
+					.catch(error => {
+						// Mostrar mensaje de error
+						resultadoApi.classList.remove("d-none");
+						resultadoApi.classList.add("alert-danger");
+						resultadoApi.textContent = `Error: ${error.message}`;
+					});
+			});
 		});
 	</script>
 {% endblock script %}
