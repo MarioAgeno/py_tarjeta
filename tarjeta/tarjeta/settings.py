@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'apps.maestros',
     'apps.usuarios',
+    'apps.listados',
 ]
 
 MIDDLEWARE = [
@@ -154,4 +156,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Modelo Usuario personalizado.
 AUTH_USER_MODEL = 'usuarios.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
 

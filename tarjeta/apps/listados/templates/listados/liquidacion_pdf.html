@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Liquidaciones a Comercios</title>
+    <style>
+        @page {
+            size: landscape;
+            margin: 1cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        header img {
+            height: 50px;
+        }
+        header .title {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: right;
+            flex-grow: 1;
+        }
+        header .filters {
+            text-align: right;
+            font-size: 0.9em;
+        }
+        table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 2px; /* Reduce el padding para disminuir el espacio entre líneas */
+            line-height: 1.2; /* Ajusta el line-height para reducir el espacio entre líneas */
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+            border-bottom: 1px solid #000;
+        }
+        td {
+            text-align: right;
+        }
+        td.text-left {
+            text-align: left;
+        }
+        tfoot td {
+            font-weight: bold;
+        }
+        .page-footer {
+            position: fixed;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 1cm;
+            background-color: #f2f2f2;
+            text-align: right;
+            font-size: 0.8em;
+            padding-right: 10px;
+            border-top: 1px solid #ccc;
+        }
+        .header-row {
+            font-weight: bold;
+        }
+        .col-liquidacion {
+            width: 5%; /* Ajusta el ancho de la columna "Liquidación" */
+        }
+        .col-fecha {
+            width: 6%; /* Ajusta el ancho de la columna "Fecha" */
+        }
+    </style>
+</head>
+<body>
+    <!-- Repetir el encabezado -->
+    <header>
+        <div class="row">
+            <div class="col-6">
+                <img src="{{ logo_path }}" alt="Logo">
+            </div>
+            <div class="col-6">
+                <div class="title">Liquidaciones a Comercios</div>
+            </div>
+        </div>
+        <div class="filters">
+            <div><strong>Sucursal:</strong> {{ filters.sucursal|default:"Todas" }}</div>
+            <div><strong>Fecha Desde:</strong> {{ filters.fecha_inicio|default:"No especificada" }}</div>
+            <div><strong>Fecha Hasta:</strong> {{ filters.fecha_fin|default:"No especificada" }}</div>
+        </div>
+    </header>
+
+    <table>
+        <thead>
+            <tr class="header-row">
+                <th class="col-liquidacion">Liquidación</th>
+                <th class="col-fecha">Fecha</th>
+                <th class="text-left">Comercio</th>
+                <th>Importe Neto</th>
+                <th>Comisión</th>
+                <th>Costo Financiero</th>
+                <th>Ganancias</th>
+                <th>IVA</th>
+                <th>IIBB</th>
+                <th>Deb/Cre</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for liquidacion in liquidaciones %}
+            <tr>
+                <td class="col-liquidacion">{{ liquidacion.liquidacion_comercio }}</td>
+                <td class="col-fecha">{{ liquidacion.fecha_liquidacion|date:"d/m/Y" }}</td>
+                <td class="text-left">{{ liquidacion.id_comercio.razon_social_comercio|slice:":14" }}</td>
+                <td>{{ liquidacion.importe_liquidacion|floatformat:2 }}</td>
+                <td>{{ liquidacion.importe_comision|floatformat:2 }}</td>
+                <td>{{ liquidacion.costo_financiero|floatformat:2 }}</td>
+                <td>{{ liquidacion.retencion_ganancias|floatformat:2 }}</td>
+                <td>{{ liquidacion.retencion_iva|floatformat:2 }}</td>
+                <td>{{ liquidacion.retencio_ib|floatformat:2 }}</td>
+                <td>{{ liquidacion.retencion_debito_credito|floatformat:2 }}</td>
+                <td>{{ liquidacion.total_liquidacion|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Totales</td>
+                <td>{{ totales.importe_liquidacion|floatformat:2 }}</td>
+                <td>{{ totales.importe_comision|floatformat:2 }}</td>
+                <td>{{ totales.costo_financiero|floatformat:2 }}</td>
+                <td>{{ totales.retencion_ganancias|floatformat:2 }}</td>
+                <td>{{ totales.retencion_iva|floatformat:2 }}</td>
+                <td>{{ totales.retencio_ib|floatformat:2 }}</td>
+                <td>{{ totales.retencion_debito_credito|floatformat:2 }}</td>
+                <td>{{ totales.total_liquidacion|floatformat:2 }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="page-footer">
+        Generado el: {{ current_date }} | Página {{ page_number }}
+    </div>
+</body>
+</html>

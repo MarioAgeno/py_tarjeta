@@ -1,0 +1,72 @@
+<nav aria-label="Page navigation example">
+    <div class="row">
+        <div class="col col-8">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <!-- Botón para ir a la primera página -->
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1&{{ query_params.urlencode }}" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                        </a>
+                    </li>
+                    <!-- Botón para ir a la página anterior -->
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ query_params.urlencode }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                <!-- Mostrar rango limitado de páginas -->
+                {% for i in page_obj.paginator.page_range|slice:"-5:" %}
+                    <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}&{{ query_params.urlencode }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+                
+                {% if page_obj.paginator.num_pages > 5 %}
+                    <!-- Mostrar elipsis si hay muchas páginas -->
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                {% endif %}
+
+                {% if page_obj.has_next %}
+                    <!-- Botón para ir a la página siguiente -->
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ query_params.urlencode }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <!-- Botón para ir a la última página -->
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&{{ query_params.urlencode }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- Selector de "líneas por página" -->
+        <div class="col col-3 justify-content-end">
+            <label for="pagination">Registros por página:</label>
+        </div>
+
+        <div class="col col-1">
+            <form method="get">
+                <select class="form-select" name="paginate_by" id="pagination" onchange="this.form.submit()">
+                    {% for option in pagination_options %}
+                        <option value="{{ option }}" {% if selected_pagination == option %}selected{% endif %}>
+                            {{ option }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <!-- Mantener los valores de los filtros actuales -->
+                {% for key, value in query_params.items %}
+                    <input type="hidden" name="{{ key }}" value="{{ value }}">
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</nav>

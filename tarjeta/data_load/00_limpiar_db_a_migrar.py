@@ -64,7 +64,7 @@ def reset_modelo():
         cursor.execute("DELETE FROM sqlite_sequence WHERE name='tarjeta'")
 
     # Elimina todos los registros del modelo `liquidacion_comercio` en Django
-    LiqudacionComercio.objects.all().delete()
+    LiquidacionComercio.objects.all().delete()
 
     # Resetea el contador autoincremental del campo `id`
     with connection.cursor() as cursor:

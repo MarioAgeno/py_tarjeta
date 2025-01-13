@@ -81,7 +81,7 @@ class Comercio(ModeloBaseGenerico):
         ordering = ['razon_social_comercio']
 
 
-class LiqudacionComercio(ModeloBaseGenerico):
+class LiquidacionComercio(ModeloBaseGenerico):
     id_liquidacion_comercio = models.AutoField(primary_key=True)
     liquidacion_comercio = models.IntegerField("Numero Liquidacion", db_column="liquidacion")
     id_comercio = models.ForeignKey(Comercio, on_delete=models.PROTECT, verbose_name="Comercio*")
@@ -96,8 +96,8 @@ class LiqudacionComercio(ModeloBaseGenerico):
     total_liquidacion = models.DecimalField("Total", db_column="total", max_digits=14, decimal_places=2, blank=True)
 
     def __str__(self):
-        return self.id_comercio
-    
+        return f"Liquidación {self.id_liquidacion_comercio} - Comercio: {self.id_comercio.razon_social_comercio}"
+
     class Meta:
         db_table = 'liquidacion_comercio'
         verbose_name = ('Liquidacio Comercio')

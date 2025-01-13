@@ -18,7 +18,7 @@ django.setup()
 
 import pyodbc
 from django.db import transaction
-from apps.maestros.models.comercio_models import LiqudacionComercio, Comercio
+from apps.maestros.models.comercio_models import LiquidacionComercio, Comercio
 
 # Obtén los valores de las variables de entorno
 server = os.getenv("SQL_SERVER")
@@ -38,7 +38,7 @@ cursor.execute("select tjLiqComercios.*, tjComercios.nombre  from tjLiqComercios
 
 def reset_modelo():
     # Elimina todos los registros del modelo `liquidacion_comercio` en Django
-    LiqudacionComercio.objects.all().delete()
+    LiquidacionComercio.objects.all().delete()
 
     # Resetea el contador autoincremental del campo `id`
     with connection.cursor() as cursor:
@@ -63,7 +63,7 @@ with transaction.atomic():
             continue
 
         # Ajusta estos nombres de campo para que coincidan con tu modelo `liquidacion_comercio` y la consulta SQL
-        LiqudacionComercio.objects.create(
+        LiquidacionComercio.objects.create(
             liquidacion_comercio=row[1],
             id_comercio=comercio,
             fecha_liquidacion=row[3],
